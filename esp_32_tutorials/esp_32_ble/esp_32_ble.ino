@@ -1,13 +1,13 @@
 #include <BLEDevice.h>
 #include <BLE2902.h>
+#include <BLE2904.h>
 
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-// define service uuid
-#define SERVICE_UUID "4625933e-0443-4a8d-a75f-e2d9ac3cf2c9"
-// define characteristic uuid
-#define CHARACTERISTIC_UUID "eeb784c6-723f-4a70-9e57-f9c5e0ca20c0"
+// Default UUID for Environmental Sensing Service
+// https://www.bluetooth.com/specifications/assigned-numbers/
+#define SERVICE_UUID (BLEUUID((uint16_t)0x181A))
 
 // define the pin port where the temperature sensor is connected
 #define ONE_WIRE_BUS 4
@@ -34,14 +34,14 @@ class MyServerCallbacks : public BLEServerCallbacks
     void onConnect(BLEServer *pServer)
     {
         Serial.printf("New client connected.\n");
-        // do advertising again, that more clients could connect...
-        BLEDevice::startAdvertising();
     };
 
     // if a device is disconnecting from the server
     void onDisconnect(BLEServer *pServer)
     {
         Serial.printf("Client disconnected.\n");
+        // do advertising again, that the next client could connect...
+        BLEDevice::startAdvertising();
     }
 };
 
@@ -80,20 +80,21 @@ void setup()
     pServer->setCallbacks(new MyServerCallbacks());
     BLEService *pService = pServer->createService(SERVICE_UUID);
     pCharacteristic = pService->createCharacteristic(
-        CHARACTERISTIC_UUID,
+        BLEUUID((uint16_t)0x2A6E),
         BLECharacteristic::PROPERTY_READ |
             BLECharacteristic::PROPERTY_NOTIFY |
             BLECharacteristic::PROPERTY_INDICATE);
-
     pCharacteristic->addDescriptor(new BLE2902());
     pCharacteristic->setCallbacks(new MyCharacteristicCallbacks());
+
     pService->start();
     BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
     pAdvertising->addServiceUUID(SERVICE_UUID);
 
     //?? TODO: Check what this is doing...
-    pAdvertising->setScanResponse(false);
-    pAdvertising->setMinPreferred(0x0); // set value to 0x00 to not advertise this parameter
+    pAdvertising->setScanResponse(true);
+    pAdvertising->setMinPreferred(0x06);  // functions that help with iPhone connections issue
+    pAdvertising->setMinPreferred(0x12);
 
     BLEDevice::startAdvertising();
     Serial.printf("Waiting a client connection to notify...\n");
