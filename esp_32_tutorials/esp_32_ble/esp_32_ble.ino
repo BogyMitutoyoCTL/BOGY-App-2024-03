@@ -7,7 +7,10 @@
 
 // Default UUID for Environmental Sensing Service
 // https://www.bluetooth.com/specifications/assigned-numbers/
-#define SERVICE_UUID (BLEUUID((uint16_t)0x181A))
+#define SERVICE_ENVIRONMENTAL_SENSING_UUID (BLEUUID((uint16_t)0x181A))
+
+#define SERVICE_SWITCH_UUID "05811a0b-f418-488e-87b9-bf47ee64fda3"
+#define CHARACTERISTIC_SWITCH_UUID "a766ed81-3e5d-4503-af8e-25dbf9b90557"
 
 // define the pin port where the temperature sensor is connected
 #define ONE_WIRE_BUS 4
@@ -18,7 +21,8 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 BLEServer *pServer = NULL;
-BLECharacteristic *pCharacteristic = NULL;
+BLECharacteristic *pCharacteristicTemperature = NULL;
+BLECharacteristic *pCharacteristicSwitch = NULL;
 
 void status_led_blink()
 {
@@ -45,7 +49,7 @@ class MyServerCallbacks : public BLEServerCallbacks
     }
 };
 
-class MyCharacteristicCallbacks : public BLECharacteristicCallbacks
+class TemperatureCharacteristicCallbacks : public BLECharacteristicCallbacks
 {
     void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
     {
@@ -66,30 +70,80 @@ class MyCharacteristicCallbacks : public BLECharacteristicCallbacks
     }
 };
 
+class SwitchCharacteristicCallbacks : public BLECharacteristicCallbacks
+{
+    void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
+    {
+        Serial.printf("Callback function to support a read request.\n");
+        status_led_blink();
+    }
+
+    void onNotify(BLECharacteristic *pCharacteristic)
+    {
+        Serial.printf("Callback function to support a Notify request.\n");
+        status_led_blink();
+    }
+
+    void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
+    {
+        Serial.printf("Callback function to support a Notify/Indicate Status report.\n");
+        Serial.printf("Status: %d Code: %d\n", s, code);
+    }
+
+	void onWrite(BLECharacteristic* pCharacteristic, esp_ble_gatts_cb_param_t* param){
+        std::string rxValue = pCharacteristic->getValue();
+        if (rxValue.length() > 0){
+            Serial.printf("Received Value: ");
+            for (int i = 0; i < rxValue.length(); i++){
+                Serial.print(rxValue[i], HEX);
+            }
+            Serial.printf("\n");
+        }
+    }
+};
+
 void setup()
 {
     Serial.begin(115200);
 
     sensors.begin();
 
-    pinMode(2, OUTPUT);
+    pinMode(STATUS_LED, OUTPUT);
 
     BLEDevice::init("BOGY Temperature BLE");
 
     pServer = BLEDevice::createServer();
     pServer->setCallbacks(new MyServerCallbacks());
-    BLEService *pService = pServer->createService(SERVICE_UUID);
-    pCharacteristic = pService->createCharacteristic(
+
+    // #### Environmental Sensing Service
+    BLEService *pService = pServer->createService(SERVICE_ENVIRONMENTAL_SENSING_UUID);
+    pCharacteristicTemperature = pService->createCharacteristic(
         BLEUUID((uint16_t)0x2A6E),
         BLECharacteristic::PROPERTY_READ |
             BLECharacteristic::PROPERTY_NOTIFY |
             BLECharacteristic::PROPERTY_INDICATE);
-    pCharacteristic->addDescriptor(new BLE2902());
-    pCharacteristic->setCallbacks(new MyCharacteristicCallbacks());
+    pCharacteristicTemperature->addDescriptor(new BLE2902());
+    pCharacteristicTemperature->setCallbacks(new TemperatureCharacteristicCallbacks());
 
     pService->start();
+    // #### End Environmental Sensing Service
+
+    // #### Switch Service (for LED)
+    BLEService *pServiceSwitch = pServer->createService(SERVICE_SWITCH_UUID);
+    pCharacteristicSwitch = pServiceSwitch->createCharacteristic(
+        CHARACTERISTIC_SWITCH_UUID,
+        BLECharacteristic::PROPERTY_READ |
+            BLECharacteristic::PROPERTY_NOTIFY |
+            BLECharacteristic::PROPERTY_INDICATE |
+            BLECharacteristic::PROPERTY_WRITE);
+    pCharacteristicSwitch->addDescriptor(new BLE2902());
+    pCharacteristicSwitch->setCallbacks(new SwitchCharacteristicCallbacks());
+
+    pServiceSwitch->start();
+    // #### End Switch Service (for LED)
+
     BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
-    pAdvertising->addServiceUUID(SERVICE_UUID);
+    pAdvertising->addServiceUUID(SERVICE_ENVIRONMENTAL_SENSING_UUID);
 
     //?? TODO: Check what this is doing...
     pAdvertising->setScanResponse(true);
@@ -131,7 +185,7 @@ void loop()
     // notify changed value
     if (pServer->getConnectedCount() > 0)
     {
-        pCharacteristic->setValue((uint8_t *)&temperature, 4);
-        pCharacteristic->notify();
+        pCharacteristicTemperature->setValue((uint8_t *)&temperature, 4);
+        pCharacteristicTemperature->notify();
     }
 }
