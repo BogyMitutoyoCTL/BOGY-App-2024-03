@@ -7,3 +7,13 @@ Here the Datasheet:
 # ESP32 Pinout
 
 ![Alt-Text](./../assets/esp32_pinout.jpeg)
+
+# Tutorial
+
+[Tutorial](https://wolles-elektronikkiste.de/ds3231-echtzeituhr)
+
+# Libs
+
+```
+arduino-cli lib install RTClib
+```
