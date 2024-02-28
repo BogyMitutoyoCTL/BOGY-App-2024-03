@@ -1,4 +1,13 @@
 # Readme
+## Project goals
+* The current temperature would be transmitted via Notify to the subscriber.
+* We like to switch an output of the ESP32 on/off
+* We like to have a ring buffer to store temperature values on the ESP32
+* We have a real-time clock connected to the ESP32 to have DateTime points for each temperature measurement
+* We need to set the current DateTime & Timezone from a Master / Central (Smarthpone)
+* We need to have a characteristic where we can set the timeframe we are interestet to download (historic data)
+* We need a characteristic to get the data, that is inbetween this setted timeframe
+* We need a characteristic to set and get temperature measurement interval
 
 ## ESP32 Datasheet
 
