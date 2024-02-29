@@ -5,14 +5,18 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#include "DateTimeCharacteristicCallbacks.h"
 #include "SwitchCharacteristicCallbacks.h"
 
 // Default UUID for Environmental Sensing Service
 // https://www.bluetooth.com/specifications/assigned-numbers/
 #define SERVICE_ENVIRONMENTAL_SENSING_UUID (BLEUUID((uint16_t)0x181A))
+#define CHARACTERISTIC_TEMPERATURE_UUID (BLEUUID((uint16_t)0x2A6E))
+#define CHARACTERISTIC_DATETIME_UUID (BLEUUID((uint16_t)0x2A08))
 
 #define SERVICE_SWITCH_UUID "05811a0b-f418-488e-87b9-bf47ee64fda3"
 #define CHARACTERISTIC_SWITCH_UUID "a766ed81-3e5d-4503-af8e-25dbf9b90557"
+
 
 // define the pin port where the temperature sensor is connected
 #define ONE_WIRE_BUS 4
@@ -24,6 +28,7 @@ DallasTemperature sensors(&oneWire);
 
 BLEServer *pServer = NULL;
 BLECharacteristic *pCharacteristicTemperature = NULL;
+BLECharacteristic *pCharacteristicDateTime = NULL;
 BLECharacteristic *pCharacteristicSwitch = NULL;
 
 void status_led_blink()
@@ -88,12 +93,21 @@ void setup()
     // #### Environmental Sensing Service
     BLEService *pService = pServer->createService(SERVICE_ENVIRONMENTAL_SENSING_UUID);
     pCharacteristicTemperature = pService->createCharacteristic(
-        BLEUUID((uint16_t)0x2A6E),
+        CHARACTERISTIC_TEMPERATURE_UUID,
         BLECharacteristic::PROPERTY_READ |
             BLECharacteristic::PROPERTY_NOTIFY |
             BLECharacteristic::PROPERTY_INDICATE);
     pCharacteristicTemperature->addDescriptor(new BLE2902());
     pCharacteristicTemperature->setCallbacks(new TemperatureCharacteristicCallbacks());
+    
+    pCharacteristicDateTime = pService->createCharacteristic(
+        CHARACTERISTIC_DATETIME_UUID,
+        BLECharacteristic::PROPERTY_READ |
+            BLECharacteristic::PROPERTY_NOTIFY |
+            BLECharacteristic::PROPERTY_INDICATE |
+            BLECharacteristic::PROPERTY_WRITE);
+    pCharacteristicDateTime->addDescriptor(new BLE2902());
+    pCharacteristicDateTime->setCallbacks(new DateTimeCharacteristicCallbacks());
 
     pService->start();
     // #### End Environmental Sensing Service
