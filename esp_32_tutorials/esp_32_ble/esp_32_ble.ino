@@ -5,6 +5,8 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#include "SwitchCharacteristicCallbacks.h"
+
 // Default UUID for Environmental Sensing Service
 // https://www.bluetooth.com/specifications/assigned-numbers/
 #define SERVICE_ENVIRONMENTAL_SENSING_UUID (BLEUUID((uint16_t)0x181A))
@@ -67,38 +69,6 @@ class TemperatureCharacteristicCallbacks : public BLECharacteristicCallbacks
     {
         Serial.printf("Callback function to support a Notify/Indicate Status report.\n");
         Serial.printf("Status: %d Code: %d\n", s, code);
-    }
-};
-
-class SwitchCharacteristicCallbacks : public BLECharacteristicCallbacks
-{
-    void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
-    {
-        Serial.printf("Callback function to support a read request.\n");
-        status_led_blink();
-    }
-
-    void onNotify(BLECharacteristic *pCharacteristic)
-    {
-        Serial.printf("Callback function to support a Notify request.\n");
-        status_led_blink();
-    }
-
-    void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
-    {
-        Serial.printf("Callback function to support a Notify/Indicate Status report.\n");
-        Serial.printf("Status: %d Code: %d\n", s, code);
-    }
-
-	void onWrite(BLECharacteristic* pCharacteristic, esp_ble_gatts_cb_param_t* param){
-        std::string rxValue = pCharacteristic->getValue();
-        if (rxValue.length() > 0){
-            Serial.printf("Received Value: ");
-            for (int i = 0; i < rxValue.length(); i++){
-                Serial.print(rxValue[i], HEX);
-            }
-            Serial.printf("\n");
-        }
     }
 };
 
