@@ -14,6 +14,10 @@
 Here the Datasheet:
 [Datasheet ESP32](./../assets/esp32_datasheet_en.pdf)
 
+## Dallas Temperature Sensor 18B20
+
+Here the Datasheet:
+[Datasheet 18B20](./../assets/ds18B20.pdf)
 
 ## ESP32 Pinout
 
@@ -27,6 +31,10 @@ Install Libs:
 arduino-cli.exe lib install "OneWire"
 arduino-cli.exe lib install "DallasTemperature"
 ```
+
+## Circut
+
+![Circut](..\assets\esp32_rtc_temp.svg)
 
 ## BLE Lib Source Code
 
