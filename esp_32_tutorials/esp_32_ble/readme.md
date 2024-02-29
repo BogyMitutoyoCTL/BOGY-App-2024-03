@@ -34,7 +34,7 @@ arduino-cli.exe lib install "DallasTemperature"
 
 ## Circut
 
-![Circut](..\assets\esp32_rtc_temp.svg)
+![Circut](./../assets/esp32_rtc_temp.svg)
 
 ## BLE Lib Source Code
 
