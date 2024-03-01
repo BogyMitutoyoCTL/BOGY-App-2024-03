@@ -9,7 +9,7 @@ Wir haben mit der [Dart (Powerpoint)](doc/Dart.pptx) weitergemacht. Neu waren:
 
 - Strings
 - Templates
-- Schleifen (``` for``` und ```while```)
+- Schleifen (```for``` und ```while```)
 - Wahrheitswerte
 - Verzweigungen
 
