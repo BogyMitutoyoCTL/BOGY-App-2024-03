@@ -3,6 +3,18 @@ Dieses Repository enthält Informationen und Code aus dem BOGY (Berufsorientieru
 
 Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der üblichen Praktikums-Woche noch sechs vorbereitende Nachmittage gibt. An diesen Nachmittagen bringen wir den Schülern die Grundlagen bei, damit in der Praktikumswoche auch ein sichtbares Produkt entstehen kann.
 
+## Nachmittag 4, Mittwoch 28.2.2024
+
+Wir haben mit der [Dart (Powerpoint)](doc/Dart.pptx) weitergemacht. Neu waren:
+
+- Strings
+- Templates
+- Schleifen (``` for``` und ```while```)
+- Wahrheitswerte
+- Verzweigungen
+
+Die Idee von Listen haben wir am Ende noch kurz angesprochen und werden mit dem Thema Listen am nächsten Mittwoch wieder einsteigen. Wir kamen bis einschließlich Folie 40.
+
 ## Nachmittag 3, Mittwoch 21.2.2024
 
 Wir haben heute die Entwicklungsumgebung [Android Studio (Powerpoint)](doc/AndroidStudio.pptx) installiert. Das ist gar nicht so trivial, da es mehrere Komponenten gibt:
@@ -13,7 +25,7 @@ Wir haben heute die Entwicklungsumgebung [Android Studio (Powerpoint)](doc/Andro
 * den Emulator für Android-Geräte auf Windows
 * Flutter als Framework für plattformunabhängige Apps
 
-Nachdem uns diese Installation fast den gessamten Nachmittag gekostet hat, konnten wir noch mit [Dart (Powerpoint)](doc/Dart.pptx) beginnen und tatsächlich noch ein paar Befehle programmieren. Wir sind bis zur Aufgabe auf Folie 20 gekommen.
+Nachdem uns diese Installation fast den gesamten Nachmittag gekostet hat, konnten wir noch mit [Dart (Powerpoint)](doc/Dart.pptx) beginnen und tatsächlich noch ein paar Befehle programmieren. Wir sind bis zur Aufgabe auf Folie 20 gekommen.
 
 ## Nachmittag 2, Mittwoch 7.2.2024
 
