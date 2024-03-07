@@ -3,6 +3,19 @@ Dieses Repository enthält Informationen und Code aus dem BOGY (Berufsorientieru
 
 Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der üblichen Praktikums-Woche noch sechs vorbereitende Nachmittage gibt. An diesen Nachmittagen bringen wir den Schülern die Grundlagen bei, damit in der Praktikumswoche auch ein sichtbares Produkt entstehen kann.
 
+## Nachmittag 5, Mittwoch 7.2.2024
+Auch an diesem Nachmittag haben wir weiter mit der [Dart (Powerpoint)](doc/Dart.pptx) gearbeitet. Neu waren:
+
+- Listen
+- Maps
+- Methoden
+- Funktionen
+- Named Arguments
+- Scope
+- Callbacks
+
+Wir sind mit allen behandelten Themen fertig geworden und steigen nächste Woche mit Lambdas ein. Wir sind bis einschließlich Folie 70 gekommen.
+
 ## Nachmittag 4, Mittwoch 28.2.2024
 
 Wir haben mit der [Dart (Powerpoint)](doc/Dart.pptx) weitergemacht. Neu waren:
