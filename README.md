@@ -3,7 +3,7 @@ Dieses Repository enthält Informationen und Code aus dem BOGY (Berufsorientieru
 
 Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der üblichen Praktikums-Woche noch sechs vorbereitende Nachmittage gibt. An diesen Nachmittagen bringen wir den Schülern die Grundlagen bei, damit in der Praktikumswoche auch ein sichtbares Produkt entstehen kann.
 
-## Nachmittag 5, Mittwoch 7.2.2024
+## Nachmittag 5, Mittwoch 7.3.2024
 Auch an diesem Nachmittag haben wir weiter mit der [Dart (Powerpoint)](doc/Dart.pptx) gearbeitet. Neu waren:
 
 - Listen
