@@ -2,27 +2,18 @@
 #include <BLE2902.h>
 #include <BLE2904.h>
 
+#include <RTClib.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#include "TemperatureCharacteristicCallbacks.h"
 #include "DateTimeCharacteristicCallbacks.h"
 #include "SwitchCharacteristicCallbacks.h"
 
-// Default UUID for Environmental Sensing Service
-// https://www.bluetooth.com/specifications/assigned-numbers/
-#define SERVICE_ENVIRONMENTAL_SENSING_UUID (BLEUUID((uint16_t)0x181A))
-#define CHARACTERISTIC_TEMPERATURE_UUID (BLEUUID((uint16_t)0x2A6E))
-#define CHARACTERISTIC_DATETIME_UUID (BLEUUID((uint16_t)0x2A08))
+#include "Definitions.h"
+#include "Helpers.h"
 
-#define SERVICE_SWITCH_UUID "05811a0b-f418-488e-87b9-bf47ee64fda3"
-#define CHARACTERISTIC_SWITCH_UUID "a766ed81-3e5d-4503-af8e-25dbf9b90557"
-
-
-// define the pin port where the temperature sensor is connected
-#define ONE_WIRE_BUS 4
-
-#define STATUS_LED 2
-
+RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
@@ -30,13 +21,6 @@ BLEServer *pServer = NULL;
 BLECharacteristic *pCharacteristicTemperature = NULL;
 BLECharacteristic *pCharacteristicDateTime = NULL;
 BLECharacteristic *pCharacteristicSwitch = NULL;
-
-void status_led_blink()
-{
-    digitalWrite(STATUS_LED, true);
-    delay(20);
-    digitalWrite(STATUS_LED, false);
-}
 
 // create a callback class to support BLE callbacks
 class MyServerCallbacks : public BLEServerCallbacks
@@ -56,27 +40,6 @@ class MyServerCallbacks : public BLEServerCallbacks
     }
 };
 
-class TemperatureCharacteristicCallbacks : public BLECharacteristicCallbacks
-{
-    void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
-    {
-        Serial.printf("Callback function to support a read request.\n");
-        status_led_blink();
-    }
-
-    void onNotify(BLECharacteristic *pCharacteristic)
-    {
-        Serial.printf("Callback function to support a Notify request.\n");
-        status_led_blink();
-    }
-
-    void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
-    {
-        Serial.printf("Callback function to support a Notify/Indicate Status report.\n");
-        Serial.printf("Status: %d Code: %d\n", s, code);
-    }
-};
-
 void setup()
 {
     Serial.begin(115200);
@@ -84,6 +47,17 @@ void setup()
     sensors.begin();
 
     pinMode(STATUS_LED, OUTPUT);
+
+    if (!rtc.begin())
+    {
+        Serial.println("Couldn't find RTC");
+        Serial.flush();
+        abort();
+    }
+    else
+    {
+        Serial.println("RTC found... :-D");
+    }
 
     BLEDevice::init("BOGY Temperature BLE");
 
@@ -99,7 +73,7 @@ void setup()
             BLECharacteristic::PROPERTY_INDICATE);
     pCharacteristicTemperature->addDescriptor(new BLE2902());
     pCharacteristicTemperature->setCallbacks(new TemperatureCharacteristicCallbacks());
-    
+
     pCharacteristicDateTime = pService->createCharacteristic(
         CHARACTERISTIC_DATETIME_UUID,
         BLECharacteristic::PROPERTY_READ |
@@ -131,7 +105,7 @@ void setup()
 
     //?? TODO: Check what this is doing...
     pAdvertising->setScanResponse(true);
-    pAdvertising->setMinPreferred(0x06);  // functions that help with iPhone connections issue
+    pAdvertising->setMinPreferred(0x06); // functions that help with iPhone connections issue
     pAdvertising->setMinPreferred(0x12);
 
     BLEDevice::startAdvertising();
@@ -155,7 +129,8 @@ void loop()
     sensors.requestTemperatures();
     float temperature = sensors.getTempCByIndex(0);
 
-
+    DateTime now = rtc.now();
+    
     Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
     for (auto item : connectedDevices)
@@ -165,10 +140,14 @@ void loop()
         //?? TODO: Check for the device mac address
         Serial.printf("Peer device: %s\n", device);
     }
-    
+
     // notify changed value
     if (pServer->getConnectedCount() > 0)
     {
+
+        pCharacteristicDateTime->setValue(get_byte_array(now), 7);
+        pCharacteristicDateTime->notify();
+
         pCharacteristicTemperature->setValue((uint8_t *)&temperature, 4);
         pCharacteristicTemperature->notify();
     }

@@ -4,6 +4,8 @@
 void DateTimeCharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
 {
     Serial.printf("Callback function to support a read request.\n");
+    uint8_t* received_data = pCharacteristic->getData();
+    Serial.printf("Status: %s ", *received_data);
 }
 
 void DateTimeCharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteristic)
