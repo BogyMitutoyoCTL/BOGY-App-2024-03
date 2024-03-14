@@ -3,7 +3,12 @@ Dieses Repository enthält Informationen und Code aus dem BOGY (Berufsorientieru
 
 Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der üblichen Praktikums-Woche noch sechs vorbereitende Nachmittage gibt. An diesen Nachmittagen bringen wir den Schülern die Grundlagen bei, damit in der Praktikumswoche auch ein sichtbares Produkt entstehen kann.
 
-## Nachmittag 5, Mittwoch 7.3.2024
+## Nachmittag 6, Mittwoch 13.3.2024
+Wir haben die [Dart (Powerpoint)](doc/Dart.pptx) abgeschlossen.
+Da noch ein wenig Zeit übrig war, haben wir uns zudem noch ein wenig den Aufbau des Flutter Demo Projekts in Android Studio angeschaut, um eine bessere Vorstellung davon zu bekommen, wie sich eine Smartphone-App mit Flutter aufbauen lässt. 
+Zuletzt haben wir noch probiert, die gesehene Struktur anhand eines kleinen Beispiels selbst zu programmieren.
+
+## Nachmittag 5, Mittwoch 6.3.2024
 Auch an diesem Nachmittag haben wir weiter mit der [Dart (Powerpoint)](doc/Dart.pptx) gearbeitet. Neu waren:
 
 - Listen
