@@ -5,6 +5,7 @@ Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der ü
 
 ## Nachmittag 6, Mittwoch 13.3.2024
 Wir haben die [Dart (Powerpoint)](doc/Dart.pptx) abgeschlossen.
+
 Da noch ein wenig Zeit übrig war, haben wir uns zudem noch ein wenig den Aufbau des Flutter Demo Projekts in Android Studio angeschaut, um eine bessere Vorstellung davon zu bekommen, wie sich eine Smartphone-App mit Flutter aufbauen lässt. 
 Zuletzt haben wir noch probiert, die gesehene Struktur anhand eines kleinen Beispiels selbst zu programmieren.
 
