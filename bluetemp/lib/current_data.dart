@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'main.dart';
 
 class current_data extends StatefulWidget {
   const current_data({super.key});
@@ -27,7 +28,7 @@ class _current_dataState extends State<current_data> {
           Text("18.03.2024"), //TODO: Add date of last measurement
           Text("16:01:09"), //TODO: Add time of last measurement
           Text(
-            "24.7 °C", //TODO: Add value of last measurement
+            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}", //TODO: Add value of last measurement
             style: TextStyle(fontSize: 60),
           ),
           Countdown(

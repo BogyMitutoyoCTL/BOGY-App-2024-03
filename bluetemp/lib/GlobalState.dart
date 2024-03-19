@@ -23,7 +23,7 @@ class GlobalState {
   );
 
   var selectedTheme = ThemeMode.dark;
-
+  double Grad_Celsius = 24;
   String Einheit = "°C";
   double Temperaturumrechnen(double Grad_Celsius) {
     if (Einheit == "°F") {
