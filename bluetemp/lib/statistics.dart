@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -97,7 +98,7 @@ class _statisticState extends State<statistic> {
             ),
           ),
           ElevatedButton(
-            onPressed: delete_statistic,
+            onPressed: sure_to_delete_statistics,
             child: Text(AppLocalizations.of(context).deletestatistics),
           )
         ],
@@ -105,7 +106,44 @@ class _statisticState extends State<statistic> {
     );
   }
 
-  void delete_statistic() {
-    //TODO: DELETE STATISTIC Question
+  void sure_to_delete_statistics() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 200,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(AppLocalizations.of(context).sure_button_text),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        child: Text(AppLocalizations.of(context).sure_button),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red),
+                        onPressed: delete_all_statistics,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
+                        child: Text(AppLocalizations.of(context).close_button),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  void delete_all_statistics() {
+    //TODO: Delete all statistics
+    Navigator.pop(context);
   }
 }

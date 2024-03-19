@@ -17,9 +17,22 @@
     },
   "refresh": "Refresh now!",
   "@refresh": {
-    "description": "The Refresh Button in Current Datas.."
-  },
-  "welcome": "Welcome to\nBlueTemp",
+      "description": "The Refresh Button in Current Datas.."
+    },
+    "@current_data_last_measurement": {
+     "description": "The Refresh Button in Current Datas.."
+    },
+    "starttime": "Start time:",
+    "@starttime": {
+    "description": "The Text at statistics"
+    },
+    "endtime": "End time:",
+        "@starttime": {
+        "description": "The Text at statistics"
+        },
+
+
+"welcome": "Welcome to\nBlueTemp",
   "@welcome": {
     "description": "The welcome text on the Splashscreen"
   },
@@ -27,12 +40,16 @@
   "@getStarted": {
     "description": "Get started button on the Splashscreen"
   },
-  "starttime": "Start time:",
-  "@starttime": {
-    "description": "The Text at statistics"
-  },
-  "endtime": "End time:",
-  "@starttime": {
-    "description": "The Text at statistics"
-  }
-}
+"sure_button_text": "Are you sure? You will delete all Statistics!",
+     "@sure_button_text": {
+     "description": "Opens the modal at statistics page to delete the statistics"
+     },
+     "sure_button": "Sure!",
+     "@sure_button":{
+      "description": "Sure Button delete text"
+      },
+      "close_button": "Close!",
+           "@close_button":{
+            "description": "Close Button text"
+            }
+            }
