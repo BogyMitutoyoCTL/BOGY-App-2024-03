@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class Einheiten_Dialog extends StatefulWidget {
   const Einheiten_Dialog({super.key});
@@ -8,11 +9,10 @@ class Einheiten_Dialog extends StatefulWidget {
   State<Einheiten_Dialog> createState() => _Einheiten_DialogState();
 }
 
-String F = "°F";
-String C = "°C";
-String Einheit = C;
-
 class _Einheiten_DialogState extends State<Einheiten_Dialog> {
+  String F = "°F";
+  String C = "°C";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +22,13 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
       body: Column(children: [
         RadioListTile(
           value: C,
-          groupValue: Einheit,
+          groupValue: globalState.Einheit,
           onChanged: Einheit_aenderungV,
           title: Text("Celsius"),
         ),
         RadioListTile(
           value: F,
-          groupValue: Einheit,
+          groupValue: globalState.Einheit,
           onChanged: Einheit_aenderungF,
           title: Text("Fahrenheit"),
         ),
@@ -42,13 +42,13 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
 
   void Einheit_aenderungV(String) {
     setState(() {
-      Einheit = C;
+      globalState.Einheit = C;
     });
   }
 
   void Einheit_aenderungF(String) {
     setState(() {
-      Einheit = F;
+      globalState.Einheit = F;
     });
   }
 

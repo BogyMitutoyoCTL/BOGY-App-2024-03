@@ -23,4 +23,13 @@ class GlobalState {
   );
 
   var selectedTheme = ThemeMode.dark;
+
+  String Einheit = "°C";
+  double Temperaturumrechnen(double Grad_Celsius) {
+    if (Einheit == "°F") {
+      return Grad_Celsius * 1.8 + 32;
+    } else {
+      return Grad_Celsius;
+    }
+  }
 }

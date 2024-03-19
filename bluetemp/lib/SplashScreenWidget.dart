@@ -43,10 +43,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     );
   }
 
-  void do_nothing() {}
-
   void Main_Menue() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => MainMenu()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainMenu()));
   }
 }

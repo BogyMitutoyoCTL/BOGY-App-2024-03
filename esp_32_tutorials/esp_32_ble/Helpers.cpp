@@ -22,5 +22,26 @@ uint8_t* get_byte_array(DateTime dt) //return type- address of integer array
 
 DateTime get_date_time(uint8_t* ptr, uint size)
 {
-    return DateTime();
+    if (size == 7)
+    {
+        auto year_lsb = static_cast<uint16_t>(ptr[0]);
+        auto year_msb = ptr[1];
+        auto year = static_cast<int>(year_lsb | year_msb << 8);
+        auto month = static_cast<int>(ptr[2]);
+        auto day = static_cast<int>(ptr[3]);
+        auto hour = static_cast<int>(ptr[4]);
+        auto minute = static_cast<int>(ptr[5]);
+        auto second = static_cast<int>(ptr[6]);
+        return DateTime(year, month, day, hour, minute, second);
+    }
+    else
+    {
+        return DateTime();
+    }
+}
+
+void print_date_time(DateTime dt, String prefix)
+{
+    Serial.printf("%s DateTime: %.4u/%.2u/%.2u %.2u:%.2u:%.2u\n", prefix, dt.year(), dt.month(), dt.day(), dt.hour(), dt.minute(), dt.second());
+    Serial.flush();
 }
