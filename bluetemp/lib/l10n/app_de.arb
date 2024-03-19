@@ -14,5 +14,13 @@
   "settings": "Einstellungen",
   "syncTime": "Zeit synchronisieren",
   "nextRefresh": "Nächste Aktualisierung in {seconds} Sekunden.",
-  "languageSetting": "Spracheinstellungen"
+  "languageSetting": "Spracheinstellungen",
+  "deletestatistics":  "Statistik löschen",
+  "starttime":  "Startzeit:",
+  "endtime":  "Endzeit:",
+  "sure_button_text":  "Bist Du sicher? Du wirst die ganzen Daten löschen!",
+  "sure_button":  "Sicher!",
+  "close_button":  "Schließen",
+  "current_phone_time" :  "Aktuelle Uhrzeit des Telefons:",
+  "current_sensor_time": "Aktuelle Uhrzeit des Sensors:"
 }

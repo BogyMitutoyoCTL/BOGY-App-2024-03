@@ -6,7 +6,6 @@ class LocaleChanger extends ChangeNotifier {
   Locale? get locale => _locale;
 
   void set(String language) {
-    print("Changing the language to " + language);
     _locale = Locale(language);
     notifyListeners();
   }

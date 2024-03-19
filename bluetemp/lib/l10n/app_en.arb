@@ -43,7 +43,7 @@
   "@sure_button": {
     "description": "Sure Button delete text"
   },
-  "close_button": "Close!",
+  "close_button": "Close",
   "@close_button": {
     "description": "Close Button text"
   },
