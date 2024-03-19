@@ -1,6 +1,7 @@
 import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 
+import 'About_Dialog.dart';
 import 'SplashScreenWidget.dart';
 import 'discover.dart';
 
@@ -14,7 +15,7 @@ class BlueTempApp extends StatelessWidget {
       theme: globalState.theme,
       darkTheme: globalState.darkTheme,
       themeMode: globalState.selectedTheme,
-      home: const MainMenu(),
+      home: const About_Dialog(),
     );
   }
 }
