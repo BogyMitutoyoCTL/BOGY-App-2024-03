@@ -1,3 +1,4 @@
+import 'package:bluetemp/Setting_Sprachen.dart';
 import 'package:flutter/material.dart';
 import 'Setting_Einheiten.dart';
 
@@ -57,7 +58,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 children: [
                   Icon(Icons.send_rounded),
                   Text(
-                    "Einheitet",
+                    "Einheiten",
                   ),
                   Container(
                     width: 145,
@@ -71,8 +72,8 @@ class _Setting_dialogState extends State<Setting_dialog> {
   }
 
   void Sprachen_Settings() {
-    // Navigator.of(context)
-    //     .push(MaterialPageRoute(builder: (context) =>Sprachen_Settings ()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
   }
 
   void Theme_Setting() {

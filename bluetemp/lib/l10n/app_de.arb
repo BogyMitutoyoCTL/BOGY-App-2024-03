@@ -2,7 +2,7 @@
   "appname": "BlauTemp",
   "apptitle": "BlauTemp - die Bluetooth Temperatur Überwachungs-App",
   "refresh": "Jetzt aktualisieren!",
-  "current_data_last_measurement": "Die letzte messung vom:",
+  "current_data_last_measurement": "Die letzte Messung vom:",
   "welcome": "Willkommen bei\nBlauTemp",
   "getStarted": "Loslegen",
   "connect": "Verbindung herstellen",
@@ -12,5 +12,15 @@
   "showGraph": "Graph anzeigen",
   "aboutUs": "Über uns",
   "settings": "Einstellungen",
-  "syncTime": "Zeit synchronisieren"
+  "syncTime": "Zeit synchronisieren",
+  "nextRefresh": "Nächste Aktualisierung in {seconds} Sekunden.",
+  "languageSetting": "Spracheinstellungen",
+  "deletestatistics":  "Statistik löschen",
+  "starttime":  "Startzeit:",
+  "endtime":  "Endzeit:",
+  "sure_button_text":  "Bist Du sicher? Du wirst die ganzen Daten löschen!",
+  "sure_button":  "Sicher!",
+  "close_button":  "Schließen",
+  "current_phone_time" :  "Aktuelle Uhrzeit des Telefons:",
+  "current_sensor_time": "Aktuelle Uhrzeit des Sensors:"
 }

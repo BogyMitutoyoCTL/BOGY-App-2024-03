@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
@@ -25,19 +27,19 @@ class _current_dataState extends State<current_data> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(AppLocalizations.of(context).current_data_last_measurement),
-          Text("18.03.2024"), //TODO: Add date of last measurement
-          Text("16:01:09"), //TODO: Add time of last measurement
+          Text(globalState.DateOfLastMeasurement),
+          Text(globalState.TimeOfLastMeasurement),
           Text(
-            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}", //TODO: Add value of last measurement into grad Celsius double in Global state
+            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius).toString().substring(0, 5)} ${globalState.Einheit}",
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
             controller: _controller,
             seconds: 60,
             build: (BuildContext context, double time) =>
-                Text("Next refresh in ${time.toInt()} secounds"),
+                Text(AppLocalizations.of(context).nextRefresh(time.toInt())),
             interval: Duration(milliseconds: 1000),
-            onFinished: timer_end,
+            onFinished: refresh,
           ),
           Center(
               child: Padding(
@@ -51,14 +53,16 @@ class _current_dataState extends State<current_data> {
     );
   }
 
+  var rng = Random();
   void refresh() {
     setState(() {
+      // TODO: replace fake data by real data
+      DateTime now = new DateTime.now();
+      globalState.DateOfLastMeasurement = "${now.day}.${now.month}.${now.year}";
+      globalState.TimeOfLastMeasurement =
+          "${now.hour}:${now.minute}:${now.second}";
+      globalState.Grad_Celsius += rng.nextDouble() * 6 - 3;
       _controller.restart();
     });
-  }
-
-  void timer_end() {
-    //TODO: Reload Temp
-    _controller.restart(); //Restarts the Countdwon
   }
 }

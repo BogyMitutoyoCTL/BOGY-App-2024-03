@@ -24,7 +24,7 @@ class _About_DialogState extends State<About_Dialog> {
         title: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('About')],
+            children: [Center(child: Text('About'))],
           ),
         ),
       ),

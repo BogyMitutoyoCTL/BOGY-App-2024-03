@@ -12,11 +12,21 @@ class _alarmsState extends State<alarms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Alarme")),
+      appBar: AppBar(title: Text("BlueTemp - Alarme verwalten")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        //TODO: Implement alarms
-        children: [ElevatedButton(onPressed: goBack, child: Text("Zurück"))],
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Alarme verwalten",
+                style: TextStyle(fontSize: 30),
+              ),
+            ],
+          ),
+          ElevatedButton(onPressed: goBack, child: Text("Zurück"))
+        ],
       ),
     );
   }
