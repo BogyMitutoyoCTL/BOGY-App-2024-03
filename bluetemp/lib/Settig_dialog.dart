@@ -18,6 +18,17 @@ class _Setting_dialogState extends State<Setting_dialog> {
           child: Text("Einstellungen"),
         ),
       ),
+      body: Column(
+        children: [
+          ElevatedButton(
+              onPressed: nothing,
+              child: Row(
+                children: [],
+              ))
+        ],
+      ),
     );
   }
+
+  void nothing() {}
 }
