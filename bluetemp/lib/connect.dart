@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -108,16 +107,13 @@ class _connectState extends State<connect> {
       for (r in results) {
         deviceDataList.add(DeviceData(
             isConnected: false, deviceName: r.advertisementData.advName));
-        r.device.connect()
       }
       setState(() {});
     } else
       print("no devices found");
   }
 
-  void connect() {
-
-  }
+  void connect() {}
 
   void goBack() {
     Navigator.of(context).pop();
