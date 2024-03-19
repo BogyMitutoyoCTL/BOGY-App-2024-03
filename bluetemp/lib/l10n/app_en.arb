@@ -14,5 +14,13 @@
   "refresh": "Refresh now!",
     "@current_data_last_measurement": {
      "description": "The Refresh Button in Current Datas.."
-    }
+    },
+    "starttime": "Start time:",
+    "@starttime": {
+    "description": "The Text at statistics"
+    },
+    "endtime": "End time:",
+        "@starttime": {
+        "description": "The Text at statistics"
+        }
 }
