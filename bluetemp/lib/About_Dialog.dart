@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -20,7 +22,7 @@ class _About_DialogState extends State<About_Dialog> {
       appBar: AppBar(
         title: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [Icon(Icons.menu), Text('About'), Icon(Icons.person)],
           ),
         ),
@@ -31,10 +33,9 @@ class _About_DialogState extends State<About_Dialog> {
             Container(
               height: 30,
             ),
-            Image.asset(
-                height: 450, scale: 2, 'assets/Images/BlueTempAppIco.png'),
+            Image.asset(height: 450, scale: 2, 'assets/Images/BlueTempAppIco.png'),
             Text(
-              "BlueTemp",
+              AppLocalizations.of(context).appname,
               style: TextStyle(fontSize: 25),
             ),
             Text(

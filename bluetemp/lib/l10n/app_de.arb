@@ -1,4 +1,8 @@
 {
   "appname": "BlauTemp",
-  "apptitle": "BlauTemp - die Bluetooth Temperatur Überwachungs-App"
+  "apptitle": "BlauTemp - die Bluetooth Temperatur Überwachungs-App",
+  "refresh": "Jetzt aktualisieren!",
+  "current_data_last_measurement": "Die letzte messung vom:",
+  "welcome": "Willkommen bei\nBlauTemp",
+  "getStarted": "Loslegen"
 }
