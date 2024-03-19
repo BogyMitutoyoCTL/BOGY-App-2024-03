@@ -19,3 +19,8 @@ uint8_t* get_byte_array(DateTime dt) //return type- address of integer array
     DateTimeCharArray[6] = dt.second();
     return DateTimeCharArray;
 }
+
+DateTime get_date_time(uint8_t* ptr, uint size)
+{
+    return DateTime();
+}
