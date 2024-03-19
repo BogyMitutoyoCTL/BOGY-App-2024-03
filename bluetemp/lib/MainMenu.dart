@@ -4,6 +4,7 @@ import 'package:bluetemp/current_data.dart';
 import 'package:bluetemp/statistics.dart';
 import 'package:bluetemp/alarms.dart';
 import 'package:bluetemp/graph.dart';
+import 'package:bluetemp/About_Dialog.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -78,6 +79,16 @@ class _MainMenuState extends State<MainMenu> {
                 children: [Text("Graph anzeiegen"), Icon(Icons.auto_graph)],
               ),
             ),
+          ),
+          Container(
+            margin: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: about,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text("Über Uns"), Icon(Icons.info)],
+              ),
+            ),
           )
         ],
       ),
@@ -107,5 +118,10 @@ class _MainMenuState extends State<MainMenu> {
   void graph() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => graphs()));
+  }
+
+  void about() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => About_Dialog()));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'MainMenu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashScreenWidget extends StatefulWidget {
   const SplashScreenWidget({super.key});
@@ -15,8 +14,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 84, 152, 215),
       appBar: AppBar(
-        title: Text(""),
-        backgroundColor: Color.fromARGB(255, 83, 151, 213),
+        title: Text(AppLocalizations.of(context)!.appname),
         centerTitle: true,
       ),
       body: Center(
@@ -34,7 +32,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
               height: 40,
             ),
             ElevatedButton(
-                onPressed: Main_Menu,
+                onPressed: Main_Menue,
                 child: Text("Get Started"),
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Color.fromARGB(255, 3, 4, 8),
@@ -47,8 +45,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     );
   }
 
-  void Main_Menu() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => MainMenu()));
-  }
+  void do_nothing() {}
+
+  void Main_Menue() {}
 }
