@@ -9,21 +9,21 @@
   },
   "current_data_last_measurement": "Last measurement from:",
   "@current_data_last_measurement": {
-    "description": "The text in Current Data."
+   "description": "The text in Current Data."
   },
   "deletestatistics": "Delete Statistics!",
-  "@starttime": {
-    "description": "The Button at Statistics Page"
-  },
+   "@starttime": {
+     "description": "The Button at Statistics Page"
+    },
   "refresh": "Refresh now!",
   "@refresh": {
-    "description": "The Refresh Button in Current Datas.."
-  },
-  "@current_data_last_measurement": {
-    "description": "The Refresh Button in Current Datas.."
-  },
-  "starttime": "Start time:",
-  "@starttime": {
+      "description": "The Refresh Button in Current Datas.."
+    },
+    "@current_data_last_measurement": {
+     "description": "The Refresh Button in Current Datas.."
+    },
+    "starttime": "Start time:",
+    "@starttime": {
     "description": "The Text at statistics"
   },
   "endtime": "End time:",
@@ -77,5 +77,13 @@
   "settings": "Settings",
   "@settings": {
     "description": "Main menu: go to settings"
+  },
+  "current_phone_time": "Current phone time:",
+  "@current_phone_time": {
+    "description": "Text for the current phone time"
+  },
+  "current_sensor_time": "Current sensor time:",
+  "@current_phone_time": {
+    "description": "Text for the current sensor time"
   }
 }
