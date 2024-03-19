@@ -11,5 +11,6 @@
   "manageAlarms": "Alarme verwalten",
   "showGraph": "Graph anzeigen",
   "aboutUs": "Über uns",
-  "settings": "Einstellungen"
+  "settings": "Einstellungen",
+  "syncTime": "Zeit synchronisieren"
 }
