@@ -55,9 +55,8 @@ class _sync_timeState extends State<sync_time> {
             color: Colors.lightBlue[50],
             child: Column(
               children: [
-                Text(
-                    "${DateFormat('dd.mm.yyyy').format(now)}"), //TODO: Implement current sensor time
-                Text("${DateFormat('kk:mm:ss').format(now)}"),
+                Text("${dayformatted}"), //TODO: Implement current sensor time
+                Text("${hourformatted}"),
               ],
             ),
           ),
@@ -83,17 +82,20 @@ class _sync_timeState extends State<sync_time> {
     );
   }
 
-  void goBack() {
-    Navigator.of(context).pop();
-  }
-
   void sync_time_data() {
     //TODO: Implement Sync Time fetaure
+    setState(() {
+      dayformatted = DateFormat('dd.mm.yyyy').format(DateTime.now());
+      hourformatted = DateFormat('hh:mm:ss').format(DateTime.now());
+    });
     _controller.restart();
   }
 
   timer_end() {
-    setState(() {});
+    setState(() {
+      dayformatted = DateFormat('dd.mm.yyyy').format(DateTime.now());
+      hourformatted = DateFormat('hh:mm:ss').format(DateTime.now());
+    });
 
     _controller.restart();
   }
