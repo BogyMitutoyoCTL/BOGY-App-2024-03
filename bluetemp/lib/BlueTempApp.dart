@@ -2,6 +2,7 @@ import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 
 import 'SplashScreenWidget.dart';
+import 'discover.dart';
 
 class BlueTempApp extends StatelessWidget {
   const BlueTempApp({super.key});
@@ -13,7 +14,7 @@ class BlueTempApp extends StatelessWidget {
       theme: globalState.theme,
       darkTheme: globalState.darkTheme,
       themeMode: globalState.selectedTheme,
-      home: const SplashScreenWidget(title: 'BlueTemp'),
+      home: const MainMenu(),
     );
   }
 }
