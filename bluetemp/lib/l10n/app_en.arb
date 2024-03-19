@@ -6,5 +6,13 @@
   "apptitle": "BlueTemp - the Bluetooth temperature monitoring app",
   "@apptitle": {
     "description": "Long name of the application including slogan."
-  }
+  },
+  "current_data_last_measurement": "Last measurement from:",
+  "@current_data_last_measurement": {
+   "description": "The text in Current Data."
+  },
+  "refresh": "Refresh now!",
+    "@current_data_last_measurement": {
+     "description": "The Refresh Button in Current Datas.."
+    }
 }

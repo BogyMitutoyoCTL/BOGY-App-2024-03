@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class current_data extends StatefulWidget {
   const current_data({super.key});
@@ -15,22 +16,25 @@ class _current_dataState extends State<current_data> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Aktuelle Daten")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).appname),
+        centerTitle: true,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Letzte Messung vom:"),
-          Text("18.03.2024"),
-          Text("16:01:09"),
+          Text(AppLocalizations.of(context).current_data_last_measurement),
+          Text("18.03.2024"), //TODO: Add date of last measurement
+          Text("16:01:09"), //TODO: Add time of last measurement
           Text(
-            "24.7 °C",
+            "24.7 °C", //TODO: Add value of last measurement
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
             controller: _controller,
             seconds: 60,
             build: (BuildContext context, double time) =>
-                Text("Nächste Aktualisierung in ${time.toInt()} Sekunden"),
+                Text("Next refresh in ${time.toInt()} secounds"),
             interval: Duration(milliseconds: 1000),
             onFinished: timer_end,
           ),
@@ -38,7 +42,8 @@ class _current_dataState extends State<current_data> {
               child: Padding(
             padding: const EdgeInsets.all(80.0),
             child: ElevatedButton(
-                onPressed: refresh, child: Text("Jetzt aktualisieren")),
+                onPressed: refresh,
+                child: Text(AppLocalizations.of(context).refresh)),
           ))
         ],
       ),
