@@ -9,7 +9,6 @@ class Setting_Sprache extends StatefulWidget {
   State<Setting_Sprache> createState() => _Setting_SpracheState();
 }
 
-String Sprache = "de";
 String en = "en";
 String de = "de";
 
@@ -24,14 +23,14 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
         children: [
           RadioListTile(
               value: de,
-              groupValue: Sprache,
+              groupValue: globalState.Sprache,
               onChanged: zudeutsch,
               title: Text("Deutsch")),
           RadioListTile(
               value: en,
-              groupValue: Sprache,
+              groupValue: globalState.Sprache,
               onChanged: zuenglisch,
-              title: Text("Englisch")),
+              title: Text("Englisch"))
         ],
       ),
     );
@@ -39,13 +38,13 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
 
   void zudeutsch(String) {
     setState(() {
-      Sprache = de;
+      globalState.Sprache = de;
     });
   }
 
   void zuenglisch(String) {
     setState(() {
-      Sprache = en;
+      globalState.Sprache = en;
     });
   }
 }

@@ -15,7 +15,7 @@ class BlueTempApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale("de"),
+      locale: Locale(globalState.Sprache),
       title: "BlueTemp - the Bluetooth temperature monitoring app",
       theme: globalState.theme,
       darkTheme: globalState.darkTheme,
