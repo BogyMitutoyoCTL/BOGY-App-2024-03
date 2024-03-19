@@ -15,7 +15,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 84, 152, 215),
       appBar: AppBar(
-        title: Text("hallo"),
+        title: Text(""),
+        backgroundColor: Color.fromARGB(255, 83, 151, 213),
         centerTitle: true,
       ),
       body: Center(
