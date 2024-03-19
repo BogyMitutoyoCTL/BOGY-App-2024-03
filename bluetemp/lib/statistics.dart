@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class statistic extends StatefulWidget {
   const statistic({super.key});
@@ -96,7 +97,9 @@ class _statisticState extends State<statistic> {
             ),
           ),
           ElevatedButton(
-              onPressed: delete_statistic, child: Text("Delete Statistic")),
+            onPressed: delete_statistic,
+            child: Text(AppLocalizations.of(context).deletestatistics),
+          )
         ],
       ),
     );

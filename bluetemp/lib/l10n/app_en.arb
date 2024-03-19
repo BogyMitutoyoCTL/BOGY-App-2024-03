@@ -11,6 +11,10 @@
   "@current_data_last_measurement": {
    "description": "The text in Current Data."
   },
+  "deletestatistics": "Delete Statistics!",
+   "@starttime": {
+     "description": "The Button at Statistics Page"
+    },
   "refresh": "Refresh now!",
     "@current_data_last_measurement": {
      "description": "The Refresh Button in Current Datas.."
@@ -23,4 +27,5 @@
         "@starttime": {
         "description": "The Text at statistics"
         }
+
 }
