@@ -15,7 +15,7 @@ class BlueTempApp extends StatelessWidget {
       theme: globalState.theme,
       darkTheme: globalState.darkTheme,
       themeMode: globalState.selectedTheme,
-      home: const About_Dialog(),
+      home: const MainMenu(),
     );
   }
 }
