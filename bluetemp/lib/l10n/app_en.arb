@@ -25,14 +25,12 @@
     "starttime": "Start time:",
     "@starttime": {
     "description": "The Text at statistics"
-    },
-    "endtime": "End time:",
-        "@starttime": {
-        "description": "The Text at statistics"
-        },
-
-
-"welcome": "Welcome to\nBlueTemp",
+  },
+  "endtime": "End time:",
+  "@starttime": {
+    "description": "The Text at statistics"
+  },
+  "welcome": "Welcome to\nBlueTemp",
   "@welcome": {
     "description": "The welcome text on the Splashscreen"
   },
@@ -40,25 +38,52 @@
   "@getStarted": {
     "description": "Get started button on the Splashscreen"
   },
-"sure_button_text": "Are you sure? You will delete all Statistics!",
-     "@sure_button_text": {
-     "description": "Opens the modal at statistics page to delete the statistics"
-     },
-     "sure_button": "Sure!",
-     "@sure_button":{
-      "description": "Sure Button delete text"
-      },
-      "close_button": "Close!",
-           "@close_button":{
-            "description": "Close Button text"
-      },
-   "current_phone_time": "Current phone time:",
-      "@current_phone_time": {
-      "description": "Text for the current phone time"
-      },
-      "current_sensor_time": "Current sensor time:",
-         "@current_phone_time": {
-         "description": "Text for the current sensor time"
-         }
-
+  "sure_button_text": "Are you sure? You will delete all Statistics!",
+  "@sure_button_text": {
+    "description": "Opens the modal at statistics page to delete the statistics"
+  },
+  "sure_button": "Sure!",
+  "@sure_button": {
+    "description": "Sure Button delete text"
+  },
+  "close_button": "Close!",
+  "@close_button": {
+    "description": "Close Button text"
+  },
+  "connect": "Establish connection",
+  "@connect": {
+    "description": "Main menu: connect to bluetooth devices"
+  },
+  "showCurrentData": "Show current data",
+  "@showCurrentData": {
+    "description": "Main menu: show current measurement values"
+  },
+  "showStatistics": "Show statistics",
+  "@showStatistics": {
+    "description": "Main menu: show statistics"
+  },
+  "manageAlarms": "Manage alarms",
+  "@manageAlarms": {
+    "description": "Main menu: manage alarms"
+  },
+  "showGraph": "Show graph",
+  "@showGraph": {
+    "description": "Main menu: show graphical diagram of measurement values"
+  },
+  "aboutUs": "About us",
+  "@aboutUs": {
+    "description": "Main menu: go to about dialog"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Main menu: go to settings"
+  },
+  "current_phone_time": "Current phone time:",
+  "@current_phone_time": {
+    "description": "Text for the current phone time"
+  },
+  "current_sensor_time": "Current sensor time:",
+  "@current_phone_time": {
+    "description": "Text for the current sensor time"
+  }
 }

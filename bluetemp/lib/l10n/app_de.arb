@@ -4,5 +4,12 @@
   "refresh": "Jetzt aktualisieren!",
   "current_data_last_measurement": "Die letzte messung vom:",
   "welcome": "Willkommen bei\nBlauTemp",
-  "getStarted": "Loslegen"
+  "getStarted": "Loslegen",
+  "connect": "Verbindung herstellen",
+  "showCurrentData": "Aktuelle Daten anzeigen",
+  "showStatistics": "Statistik anzeigen",
+  "manageAlarms": "Alarme verwalten",
+  "showGraph": "Graph anzeigen",
+  "aboutUs": "Über uns",
+  "settings": "Einstellungen"
 }

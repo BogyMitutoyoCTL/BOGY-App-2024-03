@@ -28,7 +28,7 @@ class _current_dataState extends State<current_data> {
           Text("18.03.2024"), //TODO: Add date of last measurement
           Text("16:01:09"), //TODO: Add time of last measurement
           Text(
-            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}", //TODO: Add value of last measurement
+            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}", //TODO: Add value of last measurement into grad Celsius double in Global state
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
