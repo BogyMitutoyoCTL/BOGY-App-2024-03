@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashScreenWidget extends StatefulWidget {
-  const SplashScreenWidget({super.key, required this.title});
-
-  final String title;
+  const SplashScreenWidget({super.key});
 
   @override
   State<SplashScreenWidget> createState() => _SplashScreenWidgetState();
@@ -15,7 +14,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 84, 152, 215),
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context)!.appname),
         centerTitle: true,
       ),
       body: Center(
