@@ -20,12 +20,28 @@ class _About_DialogState extends State<About_Dialog> {
       appBar: AppBar(
         title: Center(
           child: Row(
-            children: [
-              Icon(Icons.menu_book),
-              Text('About'),
-              Icon(Icons.colorize_sharp)
-            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [Icon(Icons.menu), Text('About'), Icon(Icons.person)],
           ),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              height: 30,
+            ),
+            Image.asset(
+                height: 450, scale: 2, 'assets/Images/BlueTempAppIco.png'),
+            Text(
+              "BlueTemp",
+              style: TextStyle(fontSize: 25),
+            ),
+            Text(
+              "Version 1.0",
+              style: TextStyle(fontSize: 25),
+            )
+          ],
         ),
       ),
     );
