@@ -23,11 +23,17 @@ class GlobalState {
   );
 
   var selectedTheme = ThemeMode.dark;
+
   double Grad_Celsius = 24;
+
   double Minimum = 10;
+
   double Maximum = 30;
+
   double Durchschnitt = 20;
+
   String Einheit = "°C";
+
   double Temperaturumrechnen(double Grad_Celsius) {
     if (Einheit == "°F") {
       return Grad_Celsius * 1.8 + 32;
