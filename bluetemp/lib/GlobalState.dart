@@ -1,5 +1,4 @@
 import 'package:bluetemp/LocaleChanger.dart';
-import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 
 class GlobalState {
@@ -28,7 +27,7 @@ class GlobalState {
     useMaterial3: true,
   );
   var Theme_Mode = ThemeMode.system;
-  ThemeMode selectedTheme = globalState.Theme_Mode;
+  ThemeMode selectedTheme = ThemeMode.system;
   String DateOfLastMeasurement = "18.03.2024";
   String TimeOfLastMeasurement = "16:01:09";
   double Grad_Celsius = 24;

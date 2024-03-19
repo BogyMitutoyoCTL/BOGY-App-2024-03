@@ -36,9 +36,11 @@ class _Setting_ThemeState extends State<Setting_Theme> {
             title: Text("Lightmode"),
           ),
           RadioListTile(
-              value: ThemeMode.system,
-              groupValue: globalState.Theme_Mode,
-              onChanged: ThemeMode_System)
+            value: ThemeMode.system,
+            groupValue: globalState.Theme_Mode,
+            onChanged: ThemeMode_System,
+            title: Text("Systemstandard"),
+          )
         ],
       ),
     );
