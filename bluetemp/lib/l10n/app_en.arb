@@ -1,0 +1,10 @@
+{
+  "appname": "BlueTemp",
+  "@appname": {
+    "description": "Name of the application."
+  },
+  "apptitle": "BlueTemp - the Bluetooth temperature monitoring app",
+  "@apptitle": {
+    "description": "Long name of the application including slogan."
+  }
+}
