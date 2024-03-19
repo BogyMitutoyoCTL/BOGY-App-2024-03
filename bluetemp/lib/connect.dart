@@ -36,10 +36,8 @@ class _connectState extends State<connect> {
     super.dispose();
   }
 
-  var deviceDataList = [
-    DeviceData(isConnected: false, deviceName: "deviceName"),
-    DeviceData(isConnected: true, deviceName: "hilgsafgarjhdf"),
-    DeviceData(isConnected: true, deviceName: "Das ist ein device")
+  List<DeviceData> deviceDataList = [
+    DeviceData(isConnected: true, deviceName: "test")
   ];
 
   Row createListEntry(BuildContext context, List<DeviceData> list, int index) {
@@ -95,7 +93,10 @@ class _connectState extends State<connect> {
       onError: (e) => print(e),
     );
 
-    await FlutterBluePlus.startScan(timeout: Duration(seconds: 15));
+    await FlutterBluePlus.startScan(
+      withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
+      timeout: Duration(seconds: 15),
+    );
 
     FlutterBluePlus.cancelWhenScanComplete(subscription);
   }
@@ -103,12 +104,20 @@ class _connectState extends State<connect> {
   void scanCallback(results) {
     if (results.isNotEmpty) {
       ScanResult r = results.last; // the most recently found device
-      print('${r.device.remoteId}: "${r.advertisementData.advName}" found!');
+
+      for (r in results) {
+        deviceDataList.add(DeviceData(
+            isConnected: false, deviceName: r.advertisementData.advName));
+        r.device.connect()
+      }
+      setState(() {});
     } else
       print("no devices found");
   }
 
-  void connect() {}
+  void connect() {
+
+  }
 
   void goBack() {
     Navigator.of(context).pop();
