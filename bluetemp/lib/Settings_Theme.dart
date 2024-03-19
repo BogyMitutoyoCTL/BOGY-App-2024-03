@@ -10,9 +10,11 @@ class Setting_Theme extends StatefulWidget {
   State<Setting_Theme> createState() => _Setting_ThemeState();
 }
 
-class _Setting_ThemeState extends State<Setting_Theme> {
-  var qqq;
+var Darkmode = ThemeMode.dark;
+var Lightmode = ThemeMode.light;
+var Systemmode = ThemeMode.system;
 
+class _Setting_ThemeState extends State<Setting_Theme> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,19 +24,41 @@ class _Setting_ThemeState extends State<Setting_Theme> {
       body: Column(
         children: [
           RadioListTile(
-            value: qqq,
-            groupValue: qqq,
-            onChanged: qqq,
+            value: ThemeMode.dark,
+            groupValue: globalState.Theme_Mode,
+            onChanged: Theme_Mode_dark,
             title: Text("Darkmode"),
           ),
           RadioListTile(
-            value: qqq,
-            groupValue: qqq,
-            onChanged: qqq,
-            title: Text("Brightmode"),
-          )
+            value: ThemeMode.light,
+            groupValue: globalState.Theme_Mode,
+            onChanged: Theme_Mode_light,
+            title: Text("Lightmode"),
+          ),
+          RadioListTile(
+              value: ThemeMode.system,
+              groupValue: globalState.Theme_Mode,
+              onChanged: ThemeMode_System)
         ],
       ),
     );
+  }
+
+  void Theme_Mode_dark(ThemeMode) {
+    setState(() {
+      globalState.Theme_Mode = Darkmode;
+    });
+  }
+
+  void Theme_Mode_light(ThemeMode) {
+    setState(() {
+      globalState.Theme_Mode = Lightmode;
+    });
+  }
+
+  void ThemeMode_System(ThemeMode) {
+    setState(() {
+      globalState.Theme_Mode = Systemmode;
+    });
   }
 }
