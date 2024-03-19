@@ -18,7 +18,7 @@ class BlueTempApp extends StatelessWidget {
       theme: globalState.theme,
       darkTheme: globalState.darkTheme,
       themeMode: globalState.selectedTheme,
-      home: const SplashScreenWidget(),
+      home: const Setting_dialog(),
     );
   }
 }
