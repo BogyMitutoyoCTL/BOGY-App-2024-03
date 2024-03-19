@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SplashScreenWidget extends StatefulWidget {
-  const SplashScreenWidget({super.key, required this.title});
+import 'MainMenu.dart';
 
-  final String title;
+class SplashScreenWidget extends StatefulWidget {
+  const SplashScreenWidget({super.key});
 
   @override
   State<SplashScreenWidget> createState() => _SplashScreenWidgetState();
@@ -15,7 +15,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 84, 152, 215),
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("hallo"),
         centerTitle: true,
       ),
       body: Center(
@@ -33,7 +33,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
               height: 40,
             ),
             ElevatedButton(
-                onPressed: Main_Menue,
+                onPressed: Main_Menu,
                 child: Text("Get Started"),
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Color.fromARGB(255, 3, 4, 8),
@@ -46,7 +46,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     );
   }
 
-  void do_nothing() {}
-
-  void Main_Menue() {}
+  void Main_Menu() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MainMenu()));
+  }
 }
