@@ -4,11 +4,11 @@
 
 class SwitchCharacteristicCallbacks : public BLECharacteristicCallbacks
 {
-    void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param);
+    void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param) override;
 
-    void onNotify(BLECharacteristic *pCharacteristic);
+    void onNotify(BLECharacteristic *pCharacteristic) override;
 
-    void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code);
+    void onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code) override;
 
-    void onWrite(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param);
+    void onWrite(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param) override;
 };
