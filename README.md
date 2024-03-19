@@ -3,6 +3,12 @@ Dieses Repository enthält Informationen und Code aus dem BOGY (Berufsorientieru
 
 Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der üblichen Praktikums-Woche noch sechs vorbereitende Nachmittage gibt. An diesen Nachmittagen bringen wir den Schülern die Grundlagen bei, damit in der Praktikumswoche auch ein sichtbares Produkt entstehen kann.
 
+## BOGY Woche, Dienstag 19.3.2024
+Hier der Link zum Beispielcode (C++) wie man die DateTime Werte umrechnen kann:
+https://godbolt.org/z/K453oPdov
+
+Bluetooth Gatt-XML: https://github.com/oesmith/gatt-xml/blob/master/org.bluetooth.characteristic.date_time.xml
+
 ## BOGY Woche, Montag 18.3.2024
 
 Wir haben nochmal das Thema Objektorientierung wiederholt, weil es bei Flutter so wichtig ist.
