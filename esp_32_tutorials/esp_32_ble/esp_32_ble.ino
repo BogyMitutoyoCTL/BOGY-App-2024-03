@@ -81,7 +81,7 @@ void setup()
             BLECharacteristic::PROPERTY_INDICATE |
             BLECharacteristic::PROPERTY_WRITE);
     pCharacteristicDateTime->addDescriptor(new BLE2902());
-    pCharacteristicDateTime->setCallbacks(new DateTimeCharacteristicCallbacks());
+    pCharacteristicDateTime->setCallbacks(new DateTimeCharacteristicCallbacks(rtc));
 
     pService->start();
     // #### End Environmental Sensing Service
@@ -130,15 +130,15 @@ void loop()
     float temperature = sensors.getTempCByIndex(0);
 
     DateTime now = rtc.now();
-    
-    Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
+    print_date_time(now, "Now -> ");
+    //Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
     for (auto item : connectedDevices)
     {
         auto conn_status = item.second;
         auto device = conn_status.peer_device;
         //?? TODO: Check for the device mac address
-        Serial.printf("Peer device: %s\n", device);
+        //Serial.printf("Peer device: %s\n", device);
     }
 
     // notify changed value

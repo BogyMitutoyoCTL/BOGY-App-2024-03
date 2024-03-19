@@ -7,7 +7,7 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(115200);
 
 #ifndef ESP8266
     while (!Serial)
@@ -33,23 +33,7 @@ void setup()
 void loop()
 {
     DateTime now = rtc.now();
-
-    Serial.print(now.year(), DEC);
-    Serial.print('/');
-    Serial.print(now.month(), DEC);
-    Serial.print('/');
-    Serial.print(now.day(), DEC);
-    Serial.print(" (");
-    Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
-    Serial.print(") ");
-    Serial.print(now.hour(), DEC);
-    Serial.print(':');
-    Serial.print(now.minute(), DEC);
-    Serial.print(':');
-    Serial.print(now.second(), DEC);
-    Serial.println();
-
-    Serial.print(now.unixtime(), DEC);
-    Serial.println();
+    Serial.printf("DateTime: %.4u/%.2u/%.2u %.2u:%.2u:%.2u\n", now.year(), now.month(), now.day(), now.hour(), now.minute(), now.second());
+    Serial.flush();
     delay(3000);
 }
