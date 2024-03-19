@@ -96,5 +96,9 @@
         "example": "20"
       }
     }
+  },
+  "languageSetting": "Language settings",
+  "@languageSetting": {
+    "description": "Language setting: title"
   }
 }
