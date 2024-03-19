@@ -25,7 +25,6 @@ class _MainMenuState extends State<MainMenu> {
         children: [
           Container(
             margin: EdgeInsets.all(16),
-            width: double.infinity,
             child: ElevatedButton(
               onPressed: verbindung,
               child: Row(
@@ -36,48 +35,47 @@ class _MainMenuState extends State<MainMenu> {
           ),
           Container(
             margin: EdgeInsets.all(16),
-            width: double.infinity,
             child: ElevatedButton(
               onPressed: aktuelle_daten,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("Aktuelle Daten anzeigen"), Icon(Icons.abc)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: statistik,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("Statistik anzeigen"), Icon(Icons.co2)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: alarme,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Alarme verwalten"),
-                  Icon(Icons.ac_unit_outlined)
+                  Text("Aktuelle Daten anzeigen"),
+                  Icon(Icons.bar_chart)
                 ],
               ),
             ),
           ),
           Container(
             margin: EdgeInsets.all(16),
-            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: statistik,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Statistik anzeigen"),
+                  Icon(Icons.moving_sharp)
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: alarme,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text("Alarme verwalten"), Icon(Icons.alarm)],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(16),
             child: ElevatedButton(
               onPressed: graph,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("Graph anzeiegen"), Icon(Icons.abc_rounded)],
+                children: [Text("Graph anzeiegen"), Icon(Icons.auto_graph)],
               ),
             ),
           )
