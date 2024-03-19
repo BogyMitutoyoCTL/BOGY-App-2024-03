@@ -9,8 +9,12 @@
   },
   "current_data_last_measurement": "Last measurement from:",
   "@current_data_last_measurement": {
-    "description": "The text in Current Data."
+   "description": "The text in Current Data."
   },
+  "deletestatistics": "Delete Statistics!",
+   "@starttime": {
+     "description": "The Button at Statistics Page"
+    },
   "refresh": "Refresh now!",
   "@refresh": {
     "description": "The Refresh Button in Current Datas.."
@@ -22,5 +26,13 @@
   "getStarted": "Get started",
   "@getStarted": {
     "description": "Get started button on the Splashscreen"
+  },
+  "starttime": "Start time:",
+  "@starttime": {
+    "description": "The Text at statistics"
+  },
+  "endtime": "End time:",
+  "@starttime": {
+    "description": "The Text at statistics"
   }
 }

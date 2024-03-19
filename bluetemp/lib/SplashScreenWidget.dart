@@ -1,3 +1,4 @@
+import 'package:bluetemp/MainMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -44,5 +45,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
 
   void do_nothing() {}
 
-  void Main_Menue() {}
+  void Main_Menue() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MainMenu()));
+  }
 }

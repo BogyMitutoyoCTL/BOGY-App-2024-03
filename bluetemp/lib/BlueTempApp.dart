@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'About_Dialog.dart';
+import 'Settig_dialog.dart';
 import 'SplashScreenWidget.dart';
-import 'discover.dart';
+import 'MainMenu.dart';
 
 class BlueTempApp extends StatelessWidget {
   const BlueTempApp({super.key});
