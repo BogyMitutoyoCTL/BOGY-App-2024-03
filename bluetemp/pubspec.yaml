@@ -73,6 +73,7 @@ flutter:
   assets:
 
      - assets/Images/BlueTempAppIco.png
+     - assets/Images/Mitutoyo_Logo_1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
