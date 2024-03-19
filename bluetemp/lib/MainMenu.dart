@@ -1,5 +1,5 @@
-import 'package:bluetemp/sync_time.dart';
 import 'package:flutter/material.dart';
+import 'package:bluetemp/sync_time.dart';
 import 'package:bluetemp/connect.dart';
 import 'package:bluetemp/current_data.dart';
 import 'package:bluetemp/statistics.dart';
@@ -8,6 +8,8 @@ import 'package:bluetemp/graph.dart';
 import 'package:bluetemp/About_Dialog.dart';
 import 'package:bluetemp/Settig_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'MainMenuButton.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -27,86 +29,14 @@ class _MainMenuState extends State<MainMenu> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: verbindung,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).connect), Icon(Icons.wifi)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: aktuelle_daten,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).showCurrentData), Icon(Icons.bar_chart)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: statistik,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).showStatistics), Icon(Icons.moving_sharp)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: alarme,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).manageAlarms), Icon(Icons.alarm)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: graph,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).showGraph), Icon(Icons.auto_graph)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: about,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).aboutUs), Icon(Icons.info)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: settings,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(AppLocalizations.of(context).settings), Icon(Icons.settings)],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: time_sync,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("Zeit Synchronisieren"), Icon(Icons.hourglass_top)],
-              ),
-            ),
-          ),
+          MainMenuButton(callback: verbindung, text: AppLocalizations.of(context).connect, iconData: Icons.wifi),
+          MainMenuButton(callback: aktuelle_daten, text: AppLocalizations.of(context).showCurrentData, iconData: Icons.bar_chart),
+          MainMenuButton(callback: statistik, text: AppLocalizations.of(context).showStatistics, iconData: Icons.moving_sharp),
+          MainMenuButton(callback: alarme, text: AppLocalizations.of(context).manageAlarms, iconData: Icons.alarm),
+          MainMenuButton(callback: graph, text: AppLocalizations.of(context).showGraph, iconData: Icons.auto_graph),
+          MainMenuButton(callback: about, text: AppLocalizations.of(context).aboutUs, iconData: Icons.info),
+          MainMenuButton(callback: settings, text: AppLocalizations.of(context).settings, iconData: Icons.settings),
+          MainMenuButton(callback: time_sync, text: AppLocalizations.of(context).syncTime, iconData: Icons.hourglass_top),
         ],
       ),
     );
