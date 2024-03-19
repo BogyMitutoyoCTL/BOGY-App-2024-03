@@ -1,3 +1,4 @@
+import 'package:bluetemp/sync_time.dart';
 import 'package:flutter/material.dart';
 import 'package:bluetemp/connect.dart';
 import 'package:bluetemp/current_data.dart';
@@ -95,10 +96,24 @@ class _MainMenuState extends State<MainMenu> {
                 children: [Text(AppLocalizations.of(context).settings), Icon(Icons.settings)],
               ),
             ),
-          )
+          ),
+          Container(
+            margin: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: time_sync,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text("Zeit Synchronisieren"), Icon(Icons.hourglass_top)],
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void time_sync() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => sync_time()));
   }
 
   void verbindung() {
