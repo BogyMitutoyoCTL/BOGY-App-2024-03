@@ -29,9 +29,9 @@
     "endtime": "End time:",
         "@starttime": {
         "description": "The Text at statistics"
-        }
+        },
 
-},
+
 "welcome": "Welcome to\nBlueTemp",
   "@welcome": {
     "description": "The welcome text on the Splashscreen"
@@ -51,4 +51,5 @@
       "close_button": "Close!",
            "@close_button":{
             "description": "Close Button text"
+            }
             }
