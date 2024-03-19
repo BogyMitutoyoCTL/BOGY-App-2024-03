@@ -5,6 +5,7 @@ import 'package:bluetemp/statistics.dart';
 import 'package:bluetemp/alarms.dart';
 import 'package:bluetemp/graph.dart';
 import 'package:bluetemp/About_Dialog.dart';
+import 'package:bluetemp/Settig_dialog.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -89,6 +90,16 @@ class _MainMenuState extends State<MainMenu> {
                 children: [Text("Über Uns"), Icon(Icons.info)],
               ),
             ),
+          ),
+          Container(
+            margin: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: settings,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text("Einstellungen"), Icon(Icons.settings)],
+              ),
+            ),
           )
         ],
       ),
@@ -123,5 +134,10 @@ class _MainMenuState extends State<MainMenu> {
   void about() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => About_Dialog()));
+  }
+
+  void settings() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Setting_dialog()));
   }
 }
