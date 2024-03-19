@@ -56,13 +56,53 @@ class _statisticState extends State<statistic> {
               ),
             ],
           ), //TODO: Impelemnt real End Time
-          ElevatedButton(onPressed: goBack, child: Text("Zurück")),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Maximum:",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text("32.3 °C", style: TextStyle(fontSize: 25))
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Minimum:",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text("18.2 °C", style: TextStyle(fontSize: 25))
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Minimum:",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text("15.2 °C", style: TextStyle(fontSize: 25))
+              ],
+            ),
+          ),
+          ElevatedButton(
+              onPressed: delete_statistic, child: Text("Delete Statistic")),
         ],
       ),
     );
   }
 
-  void goBack() {
-    Navigator.of(context).pop();
+  void delete_statistic() {
+    //TODO: DELETE STATISTIC Question
   }
 }
