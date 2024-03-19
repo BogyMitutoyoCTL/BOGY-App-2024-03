@@ -13,5 +13,6 @@
   "aboutUs": "Über uns",
   "settings": "Einstellungen",
   "syncTime": "Zeit synchronisieren",
-  "nextRefresh": "Nächste Aktualisierung in {seconds} Sekunden."
+  "nextRefresh": "Nächste Aktualisierung in {seconds} Sekunden.",
+  "languageSetting": "Spracheinstellungen"
 }
