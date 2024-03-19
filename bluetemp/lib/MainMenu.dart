@@ -6,6 +6,7 @@ import 'package:bluetemp/alarms.dart';
 import 'package:bluetemp/graph.dart';
 import 'package:bluetemp/About_Dialog.dart';
 import 'package:bluetemp/Settig_dialog.dart';
+import 'package:bluetemp/sync_time.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -68,6 +69,19 @@ class _MainMenuState extends State<MainMenu> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [Text("Alarme verwalten"), Icon(Icons.alarm)],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: time_sync,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Zeit Synchronisieren"),
+                  Icon(Icons.hourglass_top)
+                ],
               ),
             ),
           ),
@@ -139,5 +153,10 @@ class _MainMenuState extends State<MainMenu> {
   void settings() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => Setting_dialog()));
+  }
+
+  void time_sync() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => sync_time()));
   }
 }

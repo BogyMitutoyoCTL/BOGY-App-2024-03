@@ -51,5 +51,14 @@
       "close_button": "Close!",
            "@close_button":{
             "description": "Close Button text"
-            }
-            }
+      },
+   "current_phone_time": "Current phone time:",
+      "@current_phone_time": {
+      "description": "Text for the current phone time"
+      },
+      "current_sensor_time": "Current sensor time:",
+         "@current_phone_time": {
+         "description": "Text for the current sensor time"
+         }
+
+}
