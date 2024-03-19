@@ -16,6 +16,9 @@
      "description": "The Button at Statistics Page"
     },
   "refresh": "Refresh now!",
+  "@refresh": {
+      "description": "The Refresh Button in Current Datas.."
+    },
     "@current_data_last_measurement": {
      "description": "The Refresh Button in Current Datas.."
     },
@@ -26,8 +29,18 @@
     "endtime": "End time:",
         "@starttime": {
         "description": "The Text at statistics"
-        },
-     "sure_button_text": "Are you sure? You will delete all Statistics!",
+        }
+
+},
+"welcome": "Welcome to\nBlueTemp",
+  "@welcome": {
+    "description": "The welcome text on the Splashscreen"
+  },
+  "getStarted": "Get started",
+  "@getStarted": {
+    "description": "Get started button on the Splashscreen"
+  },
+"sure_button_text": "Are you sure? You will delete all Statistics!",
      "@sure_button_text": {
      "description": "Opens the modal at statistics page to delete the statistics"
      },
@@ -39,5 +52,3 @@
            "@close_button":{
             "description": "Close Button text"
             }
-
-}
