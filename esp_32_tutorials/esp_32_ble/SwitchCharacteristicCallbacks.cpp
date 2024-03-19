@@ -8,6 +8,8 @@ void SwitchCharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic, e
 void SwitchCharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteristic)
 {
     //Serial.printf("Callback function to support a Notify request.\n");
+    auto val = binary_value_.value;
+    pCharacteristic->setValue((uint8_t *)&val, 1);
 }
 
 void SwitchCharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
@@ -18,15 +20,12 @@ void SwitchCharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic,
 
 void SwitchCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
 {
-    /*std::string rxValue = pCharacteristic->getValue();
-    if (rxValue.length() > 0)
-    {
-        Serial.printf("Received Value: ");
-        for (int i = 0; i < rxValue.length(); i++)
-        {
-            Serial.print(rxValue[i], HEX);
-        }
-        Serial.printf("\n");
-    }
-    */
+    uint8_t* dataPtr = pCharacteristic->getData();
+    size_t data_lenght = pCharacteristic->getLength();
+    Serial.printf("DataLenght: %d\n", data_lenght );
+    bool value = static_cast<bool>(dataPtr[0]);
+    binary_value_.value = value;
+    digitalWrite(SWITCH_LED, binary_value_.value);
+    Serial.printf("SwitchValue: %s\n", value ? "true" : "false" );
+    Serial.flush();
 }

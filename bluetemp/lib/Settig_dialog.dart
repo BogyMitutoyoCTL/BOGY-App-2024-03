@@ -1,4 +1,5 @@
 import 'package:bluetemp/Setting_Sprachen.dart';
+import 'package:bluetemp/Settings_Theme.dart';
 import 'package:flutter/material.dart';
 import 'Setting_Einheiten.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -36,8 +37,8 @@ class _Setting_dialogState extends State<Setting_dialog> {
   }
 
   void Theme_Setting() {
-//   Navigator.of(context)
-//     .push(MaterialPageRoute(builder: (context) =>Theme_Setting ()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Setting_Theme()));
   }
 
   void Einheiten_Settings() {

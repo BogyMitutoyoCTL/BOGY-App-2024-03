@@ -8,3 +8,7 @@ void status_led_blink();
 uint8_t* get_byte_array(DateTime dt);
 DateTime get_date_time(uint8_t* ptr, uint size);
 void print_date_time(DateTime dt, String prefix = "");
+
+struct BinaryValue {
+  bool value;
+};
