@@ -1,3 +1,4 @@
+import 'package:bluetemp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -67,7 +68,8 @@ class _statisticState extends State<statistic> {
                   "Maximum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text("32.3 °C", style: TextStyle(fontSize: 25))
+                Text("32.3 ${globalState.Einheit}",
+                    style: TextStyle(fontSize: 25))
               ],
             ),
           ),
@@ -80,7 +82,8 @@ class _statisticState extends State<statistic> {
                   "Minimum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text("18.2 °C", style: TextStyle(fontSize: 25))
+                Text("18.2 ${globalState.Einheit}",
+                    style: TextStyle(fontSize: 25))
               ],
             ),
           ),
@@ -93,7 +96,8 @@ class _statisticState extends State<statistic> {
                   "Minimum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text("15.2 °C", style: TextStyle(fontSize: 25))
+                Text("15.2 ${globalState.Einheit}",
+                    style: TextStyle(fontSize: 25))
               ],
             ),
           ),
