@@ -21,7 +21,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
       body: Column(
         children: [
           ElevatedButton(
-              onPressed: nothing,
+              onPressed: Sprachen_Settings,
               child: Row(
                 children: [
                   Icon(Icons.language),
@@ -32,8 +32,11 @@ class _Setting_dialogState extends State<Setting_dialog> {
                   Icon(Icons.arrow_forward_ios)
                 ],
               )),
+          Container(
+            height: 5,
+          ),
           ElevatedButton(
-              onPressed: nothing_2,
+              onPressed: Theme_Setting,
               child: Row(
                 children: [
                   Icon(Icons.info_outline),
@@ -44,8 +47,11 @@ class _Setting_dialogState extends State<Setting_dialog> {
                   Icon(Icons.arrow_forward_ios)
                 ],
               )),
+          Container(
+            height: 5,
+          ),
           ElevatedButton(
-              onPressed: nothing_3,
+              onPressed: Einheiten_Settings,
               child: Row(
                 children: [
                   Icon(Icons.send_rounded),
@@ -63,9 +69,18 @@ class _Setting_dialogState extends State<Setting_dialog> {
     );
   }
 
-  void nothing() {}
+  void Sprachen_Settings() {
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (context) =>Sprachen_Settings ()));
+  }
 
-  void nothing_2() {}
+  void Theme_Setting() {
+    //   Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (context) =>Theme_Setting ()));
+  }
 
-  void nothing_3() {}
+  void Einheiten_Settings() {
+    //  Navigator.of(context)
+    //    .push(MaterialPageRoute(builder: (context) => Einheiten_Settings()));
+  }
 }
