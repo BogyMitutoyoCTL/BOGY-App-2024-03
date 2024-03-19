@@ -8,6 +8,10 @@ class GlobalState {
   static var darkColor =
       ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 35, 41, 64));
 
+  GlobalState() {
+    languageChanger.set(Sprache);
+  }
+
   var theme = ThemeData(
     colorScheme: lightColor,
     appBarTheme: AppBarTheme(

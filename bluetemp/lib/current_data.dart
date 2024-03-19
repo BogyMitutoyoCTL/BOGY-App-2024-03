@@ -14,7 +14,8 @@ class current_data extends StatefulWidget {
 }
 
 class _current_dataState extends State<current_data> {
-  final CountdownController _controller = new CountdownController(autoStart: true);
+  final CountdownController _controller =
+      new CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +30,23 @@ class _current_dataState extends State<current_data> {
           Text(globalState.DateOfLastMeasurement),
           Text(globalState.TimeOfLastMeasurement),
           Text(
-            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}",
+            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius).toString().substring(0, 5)} ${globalState.Einheit}",
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
             controller: _controller,
             seconds: 60,
-            build: (BuildContext context, double time) => Text(AppLocalizations.of(context).nextRefresh(time.toInt())),
+            build: (BuildContext context, double time) =>
+                Text(AppLocalizations.of(context).nextRefresh(time.toInt())),
             interval: Duration(milliseconds: 1000),
             onFinished: refresh,
           ),
           Center(
               child: Padding(
             padding: const EdgeInsets.all(80.0),
-            child: ElevatedButton(onPressed: refresh, child: Text(AppLocalizations.of(context).refresh)),
+            child: ElevatedButton(
+                onPressed: refresh,
+                child: Text(AppLocalizations.of(context).refresh)),
           ))
         ],
       ),
@@ -55,7 +59,8 @@ class _current_dataState extends State<current_data> {
       // TODO: replace fake data by real data
       DateTime now = new DateTime.now();
       globalState.DateOfLastMeasurement = "${now.day}.${now.month}.${now.year}";
-      globalState.TimeOfLastMeasurement = "${now.hour}:${now.minute}:${now.second}";
+      globalState.TimeOfLastMeasurement =
+          "${now.hour}:${now.minute}:${now.second}";
       globalState.Grad_Celsius += rng.nextDouble() * 6 - 3;
       _controller.restart();
     });

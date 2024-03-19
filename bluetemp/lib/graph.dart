@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class graphs extends StatefulWidget {
   const graphs({super.key});
@@ -30,7 +31,7 @@ class _graphsState extends State<graphs> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Temperature graph:",
+            AppLocalizations.of(context).temperature_graph,
             style: TextStyle(fontSize: 35),
           ),
           Row(
@@ -38,7 +39,7 @@ class _graphsState extends State<graphs> {
             children: [
               Container(
                 padding: const EdgeInsets.all(20.0),
-                child: Text("Temperatur in °C"),
+                child: Text(AppLocalizations.of(context).temp_scale),
               ),
             ],
           ),
@@ -59,7 +60,7 @@ class _graphsState extends State<graphs> {
             children: [
               Container(
                 margin: const EdgeInsets.all(10.0),
-                child: Text("Zeit in min"),
+                child: Text(AppLocalizations.of(context).time_scale),
               ),
             ],
           )

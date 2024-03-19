@@ -43,7 +43,7 @@
   "@sure_button": {
     "description": "Sure Button delete text"
   },
-  "close_button": "Close!",
+  "close_button": "Close",
   "@close_button": {
     "description": "Close Button text"
   },
@@ -86,6 +86,18 @@
   "syncTime": "Synchronize time",
   "@syncTime": {
     "description": "Main menu: navigate to time synchronization"
+  },
+  "temperature_graph": "Temperature Graph",
+  "@temperature_graph": {
+    "description": "In the Graph Menu the headline"
+  },
+  "temp_scale": "Temperatur in °C",
+  "@temp_scale": {
+    "description": "Temp Scala for the Graph"
+  },
+  "time_scale": "Time in °C",
+  "@time_scale": {
+   "description": "Time Scala for the Graph"
   },
   "nextRefresh": "Next refresh in {seconds} seconds.",
   "@nextRefresh":{
