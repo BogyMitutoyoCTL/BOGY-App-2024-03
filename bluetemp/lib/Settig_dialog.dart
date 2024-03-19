@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Setting_Einheiten.dart';
 
 void main() {}
 
@@ -80,7 +81,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
   }
 
   void Einheiten_Settings() {
-    //  Navigator.of(context)
-    //    .push(MaterialPageRoute(builder: (context) => Einheiten_Settings()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
   }
 }
