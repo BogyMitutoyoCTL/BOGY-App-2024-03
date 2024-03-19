@@ -103,7 +103,7 @@ class _MainMenuState extends State<MainMenu> {
               onPressed: time_sync,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("Zeit Synchronisieren"), Icon(Icons.hourglass_top)],
+                children: [Text(AppLocalizations.of(context).syncTime), Icon(Icons.hourglass_top)],
               ),
             ),
           ),
