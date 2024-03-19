@@ -58,7 +58,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 children: [
                   Icon(Icons.send_rounded),
                   Text(
-                    "Einheitet",
+                    "Einheiten",
                   ),
                   Container(
                     width: 145,
