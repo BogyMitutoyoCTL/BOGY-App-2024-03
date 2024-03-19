@@ -30,9 +30,9 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             Center(
                 child: Image.asset(
                     height: 450, scale: 3, 'assets/Images/BlueTempAppIco.png')),
-            Container(
+            /*Container(
               height: 40,
-            ),
+            ),*/
             ElevatedButton(
                 onPressed: Main_Menue,
                 child: Text(AppLocalizations.of(context).getStarted),

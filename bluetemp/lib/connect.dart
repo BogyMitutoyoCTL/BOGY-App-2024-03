@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class connect extends StatefulWidget {
   const connect({super.key});
@@ -10,6 +14,28 @@ class connect extends StatefulWidget {
 }
 
 class _connectState extends State<connect> {
+  BluetoothAdapterState adapterState = BluetoothAdapterState.unknown;
+
+  late StreamSubscription<BluetoothAdapterState> adapterStateStateSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    adapterStateStateSubscription =
+        FlutterBluePlus.adapterState.listen((state) {
+      adapterState = state;
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    adapterStateStateSubscription.cancel();
+    super.dispose();
+  }
+
   var deviceDataList = [
     DeviceData(isConnected: false, deviceName: "deviceName"),
     DeviceData(isConnected: true, deviceName: "hilgsafgarjhdf"),
@@ -23,7 +49,6 @@ class _connectState extends State<connect> {
     } else {
       iconShowConnected = Icon(Icons.bluetooth_disabled_rounded);
     }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -64,7 +89,24 @@ class _connectState extends State<connect> {
     );
   }
 
-  void fetch() {}
+  fetch() async {
+    var subscription = FlutterBluePlus.onScanResults.listen(
+      scanCallback,
+      onError: (e) => print(e),
+    );
+
+    await FlutterBluePlus.startScan(timeout: Duration(seconds: 15));
+
+    FlutterBluePlus.cancelWhenScanComplete(subscription);
+  }
+
+  void scanCallback(results) {
+    if (results.isNotEmpty) {
+      ScanResult r = results.last; // the most recently found device
+      print('${r.device.remoteId}: "${r.advertisementData.advName}" found!');
+    } else
+      print("no devices found");
+  }
 
   void connect() {}
 
