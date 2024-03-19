@@ -68,7 +68,8 @@ class _statisticState extends State<statistic> {
                   "Maximum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text("32.3 ${globalState.Einheit}",
+                Text(
+                    "${globalState.Temperaturumrechner_Maximum(globalState.Maximum)}${globalState.Einheit}",
                     style: TextStyle(fontSize: 25))
               ],
             ),
@@ -82,7 +83,8 @@ class _statisticState extends State<statistic> {
                   "Minimum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text("18.2 ${globalState.Einheit}",
+                Text(
+                    "${globalState.Temperaturumrechner_Minimum(globalState.Minimum)}${globalState.Einheit}",
                     style: TextStyle(fontSize: 25))
               ],
             ),
@@ -93,10 +95,11 @@ class _statisticState extends State<statistic> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Minimum:",
+                  "Durchschnitt:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text("15.2 ${globalState.Einheit}",
+                Text(
+                    "${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)}${globalState.Einheit}",
                     style: TextStyle(fontSize: 25))
               ],
             ),
