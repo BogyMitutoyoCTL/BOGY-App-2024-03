@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 
 class GlobalState {
-  static var lightColor =
-      ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
-  static var darkColor =
-      ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 35, 41, 64));
+  static var lightColor = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
+  static var darkColor = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 35, 41, 64));
 
   var theme = ThemeData(
     colorScheme: lightColor,
-    appBarTheme: AppBarTheme(
-        backgroundColor: lightColor.primary,
-        foregroundColor: lightColor.onPrimary),
+    appBarTheme: AppBarTheme(backgroundColor: lightColor.primary, foregroundColor: lightColor.onPrimary),
     useMaterial3: true,
   );
 
   var darkTheme = ThemeData(
     colorScheme: darkColor,
-    appBarTheme: AppBarTheme(
-        backgroundColor: darkColor.primary,
-        foregroundColor: darkColor.onPrimary),
+    appBarTheme: AppBarTheme(backgroundColor: darkColor.primary, foregroundColor: darkColor.onPrimary),
     useMaterial3: true,
   );
 
   var selectedTheme = ThemeMode.dark;
+  String DateOfLastMeasurement = "18.03.2024";
+  String TimeOfLastMeasurement = "16:01:09";
   double Grad_Celsius = 24;
   double Minimum = 10;
   double Maximum = 30;
   double Durchschnitt = 20;
   String Einheit = "°C";
+
   double Temperaturumrechnen(double Grad_Celsius) {
     if (Einheit == "°F") {
       return Grad_Celsius * 1.8 + 32;

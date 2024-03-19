@@ -12,8 +12,7 @@ class current_data extends StatefulWidget {
 }
 
 class _current_dataState extends State<current_data> {
-  final CountdownController _controller =
-      new CountdownController(autoStart: true);
+  final CountdownController _controller = new CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,26 +24,23 @@ class _current_dataState extends State<current_data> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(AppLocalizations.of(context).current_data_last_measurement),
-          Text("18.03.2024"), //TODO: Add date of last measurement
-          Text("16:01:09"), //TODO: Add time of last measurement
+          Text(globalState.DateOfLastMeasurement),
+          Text(globalState.TimeOfLastMeasurement),
           Text(
-            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}", //TODO: Add value of last measurement into grad Celsius double in Global state
+            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius)} ${globalState.Einheit}",
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
             controller: _controller,
             seconds: 60,
-            build: (BuildContext context, double time) =>
-                Text("Next refresh in ${time.toInt()} secounds"),
+            build: (BuildContext context, double time) => Text(AppLocalizations.of(context).nextRefresh(time.toInt())),
             interval: Duration(milliseconds: 1000),
             onFinished: timer_end,
           ),
           Center(
               child: Padding(
             padding: const EdgeInsets.all(80.0),
-            child: ElevatedButton(
-                onPressed: refresh,
-                child: Text(AppLocalizations.of(context).refresh)),
+            child: ElevatedButton(onPressed: refresh, child: Text(AppLocalizations.of(context).refresh)),
           ))
         ],
       ),

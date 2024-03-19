@@ -86,5 +86,15 @@
   "syncTime": "Synchronize time",
   "@syncTime": {
     "description": "Main menu: navigate to time synchronization"
+  },
+  "nextRefresh": "Next refresh in {seconds} seconds.",
+  "@nextRefresh":{
+    "description": "Current values: next refresh time",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "20"
+      }
+    }
   }
 }
