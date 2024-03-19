@@ -14,26 +14,23 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 84, 152, 215),
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appname),
+        title: Text(AppLocalizations.of(context).appname),
         centerTitle: true,
       ),
       body: Center(
         child: Column(
           children: [
-            Text(style: TextStyle(fontSize: 30), "Welcome to"),
-            Text(style: TextStyle(fontSize: 30), "BlueTemp"),
+            Text(style: TextStyle(fontSize: 30), AppLocalizations.of(context).welcome),
             Container(
               height: 50,
             ),
-            Center(
-                child: Image.asset(
-                    height: 450, scale: 3, 'assets/Images/BlueTempAppIco.png')),
+            Center(child: Image.asset(height: 450, scale: 3, 'assets/Images/BlueTempAppIco.png')),
             Container(
               height: 40,
             ),
             ElevatedButton(
                 onPressed: Main_Menue,
-                child: Text("Get Started"),
+                child: Text(AppLocalizations.of(context).getStarted),
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Color.fromARGB(255, 3, 4, 8),
                     backgroundColor: Color.fromARGB(255, 135, 175, 224),

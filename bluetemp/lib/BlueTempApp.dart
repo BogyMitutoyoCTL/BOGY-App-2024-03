@@ -14,11 +14,12 @@ class BlueTempApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale("de"),
       title: "BlueTemp - the Bluetooth temperature monitoring app",
       theme: globalState.theme,
       darkTheme: globalState.darkTheme,
       themeMode: globalState.selectedTheme,
-      home: const MainMenu(),
+      home: const SplashScreenWidget(),
     );
   }
 }

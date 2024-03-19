@@ -9,10 +9,18 @@
   },
   "current_data_last_measurement": "Last measurement from:",
   "@current_data_last_measurement": {
-   "description": "The text in Current Data."
+    "description": "The text in Current Data."
   },
   "refresh": "Refresh now!",
-    "@current_data_last_measurement": {
-     "description": "The Refresh Button in Current Datas.."
-    }
+  "@refresh": {
+    "description": "The Refresh Button in Current Datas.."
+  },
+  "welcome": "Welcome to\nBlueTemp",
+  "@welcome": {
+    "description": "The welcome text on the Splashscreen"
+  },
+  "getStarted": "Get started",
+  "@getStarted": {
+    "description": "Get started button on the Splashscreen"
+  }
 }
