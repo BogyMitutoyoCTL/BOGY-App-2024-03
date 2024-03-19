@@ -9,6 +9,9 @@ https://godbolt.org/z/K453oPdov
 
 Bluetooth Gatt-XML: https://github.com/oesmith/gatt-xml/blob/master/org.bluetooth.characteristic.date_time.xml
 
+[Ergebnis nach dem heutigem Tag:](https://github.com/BogyMitutoyoCTL/BOGY-App-2024-03/assets/140964926/b2b780a1-3034-4ab4-b11e-b5a0183cd706)
+
+
 ## BOGY Woche, Montag 18.3.2024
 
 Wir haben nochmal das Thema Objektorientierung wiederholt, weil es bei Flutter so wichtig ist.
