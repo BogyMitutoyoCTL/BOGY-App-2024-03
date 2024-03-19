@@ -1,6 +1,7 @@
 import 'package:bluetemp/Setting_Sprachen.dart';
 import 'package:flutter/material.dart';
 import 'Setting_Einheiten.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {}
 
@@ -17,7 +18,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Einstellungen"),
+          child: Text(AppLocalizations.of(context).settings_title),
         ),
       ),
       body: Column(
@@ -27,7 +28,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
               child: Row(
                 children: [
                   Icon(Icons.language),
-                  Text("Sprache"),
+                  Text(AppLocalizations.of(context).settings_item_language),
                   Container(
                     width: 150,
                   ),
@@ -42,7 +43,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
               child: Row(
                 children: [
                   Icon(Icons.info_outline),
-                  Text("Theme"),
+                  Text(AppLocalizations.of(context).settings_item_theme),
                   Container(
                     width: 160,
                   ),
@@ -58,7 +59,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 children: [
                   Icon(Icons.send_rounded),
                   Text(
-                    "Einheiten",
+                    AppLocalizations.of(context).settings_item_units,
                   ),
                   Container(
                     width: 145,
@@ -72,8 +73,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
   }
 
   void Sprachen_Settings() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
   }
 
   void Theme_Setting() {
@@ -82,7 +82,6 @@ class _Setting_dialogState extends State<Setting_dialog> {
   }
 
   void Einheiten_Settings() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
   }
 }
