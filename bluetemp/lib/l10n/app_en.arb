@@ -7,11 +7,15 @@
   "@apptitle": {
     "description": "Long name of the application including slogan."
   },
+"statistics_title":  "Statistics",
+  "statistics_maximum": "Maximum",
+  "statistics_minimum": "Minimum",
+  "statistics_average": "Average",
   "current_data_last_measurement": "Last measurement from:",
   "@current_data_last_measurement": {
     "description": "The text in Current Data."
   },
-  "deletestatistics": "Delete Statistics!",
+  "deletestatistics": "Delete statistics",
   "@deletestatistics": {
     "description": "The Button at Statistics Page"
   },
@@ -35,15 +39,15 @@
   "@getStarted": {
     "description": "Get started button on the Splashscreen"
   },
-  "sure_button_text": "Are you sure? You will delete all Statistics!",
+  "sure_button_text": "Are you sure? You will delete all measurement values!",
   "@sure_button_text": {
     "description": "Opens the modal at statistics page to delete the statistics"
   },
-  "sure_button": "Sure!",
+  "sure_button": "Delete",
   "@sure_button": {
     "description": "Sure Button delete text"
   },
-  "close_button": "Close",
+  "close_button": "Cancel",
   "@close_button": {
     "description": "Close Button text"
   },
