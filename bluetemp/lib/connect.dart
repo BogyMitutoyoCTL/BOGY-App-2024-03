@@ -37,7 +37,7 @@ class ConnectState extends State<Connect> {
     super.dispose();
   }
 
-  List<DeviceData> deviceDataList = [
+  List<BluetoothDevice> bluetoothDeviceList = [
     /*
     DeviceData(
         bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
@@ -54,9 +54,10 @@ class ConnectState extends State<Connect> {
   */
   ];
 
-  Row createListEntry(BuildContext context, List<DeviceData> list, int index) {
+  Row createListEntry(
+      BuildContext context, List<BluetoothDevice> list, int index) {
     Icon iconShowConnected;
-    if (list[index].connected) {
+    if (list[index].isConnected) {
       iconShowConnected = Icon(Icons.bluetooth_connected_rounded);
     } else {
       iconShowConnected = Icon(Icons.bluetooth_disabled_rounded);
@@ -65,7 +66,7 @@ class ConnectState extends State<Connect> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ElevatedButton(
-            onPressed: () => connect(index), child: Text(list[index].name)),
+            onPressed: () => connect(index), child: Text(list[index].advName)),
         iconShowConnected
       ],
     );
@@ -75,9 +76,9 @@ class ConnectState extends State<Connect> {
   Widget build(BuildContext context) {
     var deviceListWidgets = ListView.builder(
         physics: NeverScrollableScrollPhysics(),
-        itemCount: deviceDataList.length,
+        itemCount: bluetoothDeviceList.length,
         itemBuilder: (context, index) {
-          return createListEntry(context, deviceDataList, index);
+          return createListEntry(context, bluetoothDeviceList, index);
         });
 
     return Scaffold(
@@ -102,7 +103,7 @@ class ConnectState extends State<Connect> {
   }
 
   fetch() async {
-    deviceDataList.clear();
+    bluetoothDeviceList.clear();
 
     var subscription = FlutterBluePlus.onScanResults.listen(
       scanCallback,
@@ -120,10 +121,7 @@ class ConnectState extends State<Connect> {
   void scanCallback(results) {
     if (results.isNotEmpty) {
       for (ScanResult r in results) {
-        deviceDataList.add(DeviceData(
-            bluetoothDevice: r.device,
-            isConnected: false,
-            deviceName: r.advertisementData.advName));
+        bluetoothDeviceList.add(r.device);
       }
       setState(() {});
     } else {
@@ -134,7 +132,7 @@ class ConnectState extends State<Connect> {
   connect(int btnIndex) async {
     print("Button $btnIndex was pressed");
 
-    BluetoothDevice device = deviceDataList[btnIndex].device;
+    BluetoothDevice device = bluetoothDeviceList[btnIndex];
 
     // Connect to device if disconnected
     var subscription =
@@ -148,11 +146,8 @@ class ConnectState extends State<Connect> {
     await device.connect();
 
     if (device.isConnected) {
-      deviceDataList[btnIndex].connected = true;
-
       print("device connected");
     } else {
-      deviceDataList[btnIndex].connected = false;
       print("device not connected");
     }
 
@@ -161,20 +156,5 @@ class ConnectState extends State<Connect> {
     //TODO create option to disconnect from the device
 
     subscription.cancel();
-  }
-}
-
-class DeviceData {
-  late bool connected;
-  late String name;
-  late BluetoothDevice device;
-
-  DeviceData(
-      {required BluetoothDevice bluetoothDevice,
-      required bool isConnected,
-      required String deviceName}) {
-    device = bluetoothDevice;
-    connected = isConnected;
-    name = deviceName;
   }
 }
