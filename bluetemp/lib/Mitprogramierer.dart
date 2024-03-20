@@ -17,8 +17,7 @@ class _MitprogramiererState extends State<Mitprogramierer> {
       ),
       body: Column(
         children: [
-          Image.asset(
-              height: 450, scale: 0.75, 'assets/Images/Mitutoyo_Logo_1.png'),
+          Image.asset(height: 450, scale: 0.75, 'assets/Images/Picture_2.png'),
           Text("Name"),
 
           /// TODO NAME EINTRAGEN
