@@ -180,6 +180,18 @@ class GlobalState {
     }
     if (Einheit == "°°Rø") {
       return (Durchschnitt * 21 / 40) + 7.5;
+    }
+    if (Einheit == "°Hr") {
+      return (Durchschnitt + 273.15) * 1.8;
+    }
+    if (Einheit == "°RD") {
+      return (Durchschnitt + 273.15) * 0.02;
+    }
+    if (Einheit == "°T_RS") {
+      return (Durchschnitt + 273.15) * 2.61217 * m.pow(10, 30);
+    }
+    if (Einheit == "°T_c") {
+      return (Durchschnitt + 273.15) * 1.081 * m.pow(10, 30);
     } else {
       return Durchschnitt;
     }
