@@ -112,5 +112,12 @@
   "languageSetting": "Language settings",
   "@languageSetting": {
     "description": "Language setting: title"
-  }
+  },
+  "settings_title": "Settings",
+  "@settings_title": {
+    "description": "Title of the settings page"
+  },
+  "settings_item_language": "Language",
+  "settings_item_theme": "Theme",
+  "settings_item_units": "Units"
 }

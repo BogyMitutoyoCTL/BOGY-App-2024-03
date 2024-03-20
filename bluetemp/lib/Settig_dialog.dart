@@ -1,8 +1,10 @@
 import 'package:bluetemp/Setting_Sprachen.dart';
+import 'package:bluetemp/Settings_Theme.dart';
 import 'package:flutter/material.dart';
 import 'Setting_Einheiten.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {}
+import 'SettingsButton.dart';
 
 class Setting_dialog extends StatefulWidget {
   const Setting_dialog({super.key});
@@ -17,72 +19,29 @@ class _Setting_dialogState extends State<Setting_dialog> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Einstellungen"),
+          child: Text(AppLocalizations.of(context).settings_title),
         ),
       ),
       body: Column(
         children: [
-          ElevatedButton(
-              onPressed: Sprachen_Settings,
-              child: Row(
-                children: [
-                  Icon(Icons.language),
-                  Text("Sprache"),
-                  Container(
-                    width: 150,
-                  ),
-                  Icon(Icons.arrow_forward_ios)
-                ],
-              )),
-          Container(
-            height: 5,
-          ),
-          ElevatedButton(
-              onPressed: Theme_Setting,
-              child: Row(
-                children: [
-                  Icon(Icons.info_outline),
-                  Text("Theme"),
-                  Container(
-                    width: 160,
-                  ),
-                  Icon(Icons.arrow_forward_ios)
-                ],
-              )),
-          Container(
-            height: 5,
-          ),
-          ElevatedButton(
-              onPressed: Einheiten_Settings,
-              child: Row(
-                children: [
-                  Icon(Icons.send_rounded),
-                  Text(
-                    "Einheiten",
-                  ),
-                  Container(
-                    width: 145,
-                  ),
-                  Icon(Icons.arrow_forward_ios)
-                ],
-              ))
+          SettingsButton(callback: Sprachen_Settings, title: AppLocalizations.of(context).settings_item_language, iconData: Icons.language),
+          SettingsButton(callback: Theme_Setting, title: AppLocalizations.of(context).settings_item_theme, iconData: Icons.info_outline),
+          SettingsButton(callback: Einheiten_Settings, title: AppLocalizations.of(context).settings_item_units, iconData: Icons.send_rounded),
         ],
       ),
     );
   }
 
   void Sprachen_Settings() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
   }
 
   void Theme_Setting() {
-    //   Navigator.of(context)
-    //     .push(MaterialPageRoute(builder: (context) =>Theme_Setting ()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Setting_Theme()));
   }
 
   void Einheiten_Settings() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
   }
 }

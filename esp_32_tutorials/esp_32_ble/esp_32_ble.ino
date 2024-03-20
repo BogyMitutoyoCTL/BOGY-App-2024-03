@@ -16,6 +16,8 @@
 RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
+BinaryValue status;
+
 
 BLEServer *pServer = NULL;
 BLECharacteristic *pCharacteristicTemperature = NULL;
@@ -43,6 +45,9 @@ class MyServerCallbacks : public BLEServerCallbacks
 void setup()
 {
     Serial.begin(115200);
+    pinMode(SWITCH_LED, OUTPUT);
+    status.value = false;
+    digitalWrite(SWITCH_LED, status.value);
 
     sensors.begin();
 
@@ -59,7 +64,7 @@ void setup()
         Serial.println("RTC found... :-D");
     }
 
-    BLEDevice::init("BOGY Temperature BLE");
+    BLEDevice::init(DEVICE_NAME);
 
     pServer = BLEDevice::createServer();
     pServer->setCallbacks(new MyServerCallbacks());
@@ -95,13 +100,14 @@ void setup()
             BLECharacteristic::PROPERTY_INDICATE |
             BLECharacteristic::PROPERTY_WRITE);
     pCharacteristicSwitch->addDescriptor(new BLE2902());
-    pCharacteristicSwitch->setCallbacks(new SwitchCharacteristicCallbacks());
+    pCharacteristicSwitch->setCallbacks(new SwitchCharacteristicCallbacks(status));
 
     pServiceSwitch->start();
     // #### End Switch Service (for LED)
 
     BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
     pAdvertising->addServiceUUID(SERVICE_ENVIRONMENTAL_SENSING_UUID);
+    pAdvertising->addServiceUUID(SERVICE_SWITCH_UUID);
 
     //?? TODO: Check what this is doing...
     pAdvertising->setScanResponse(true);
@@ -131,14 +137,14 @@ void loop()
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");
-    //Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
+    // Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
     for (auto item : connectedDevices)
     {
         auto conn_status = item.second;
         auto device = conn_status.peer_device;
         //?? TODO: Check for the device mac address
-        //Serial.printf("Peer device: %s\n", device);
+        // Serial.printf("Peer device: %s\n", device);
     }
 
     // notify changed value
@@ -150,5 +156,7 @@ void loop()
 
         pCharacteristicTemperature->setValue((uint8_t *)&temperature, 4);
         pCharacteristicTemperature->notify();
+
+        pCharacteristicSwitch->notify();
     }
 }
