@@ -30,5 +30,7 @@
   "alarms_text": "Alarme verwalten",
   "back_button": "Zurück",
   "current_alarms": "Hier ist eine Liste mit deinen Alarmen:",
-  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!"
+  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!",
+  "device_list": "Geräteliste",
+  "connect_title": "Verbinden"
 }

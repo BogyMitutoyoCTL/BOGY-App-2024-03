@@ -97,10 +97,10 @@
   },
   "time_scale": "Time in °C",
   "@time_scale": {
-   "description": "Time Scala for the Graph"
+    "description": "Time Scala for the Graph"
   },
   "nextRefresh": "Next refresh in {seconds} seconds.",
-  "@nextRefresh":{
+  "@nextRefresh": {
     "description": "Current values: next refresh time",
     "placeholders": {
       "seconds": {
@@ -133,7 +133,15 @@
     "description": "Text in manage alarms menu"
   },
   "delete_alarm_message": "Your alarm has been deleted!",
-    "@delete_alarm_message": {
-      "description": "Message after deleting an alarm"
-    }
+  "@delete_alarm_message": {
+    "description": "Message after deleting an alarm"
+  },
+  "device_list": "Device list",
+  "@device_list": {
+    "description": "Bluetooth connection: device list"
+  },
+  "connect_title": "Connect",
+  "@connect_title": {
+    "description": "Title of the connect screen"
+  }
 }

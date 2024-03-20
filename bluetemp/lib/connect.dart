@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Connect extends StatefulWidget {
   const Connect({super.key});
@@ -22,8 +23,7 @@ class ConnectState extends State<Connect> {
   @override
   void initState() {
     super.initState();
-    adapterStateStateSubscription =
-        FlutterBluePlus.adapterState.listen((state) {
+    adapterStateStateSubscription = FlutterBluePlus.adapterState.listen((state) {
       adapterState = state;
       if (mounted) {
         setState(() {});
@@ -38,18 +38,9 @@ class ConnectState extends State<Connect> {
   }
 
   List<DeviceData> deviceDataList = [
-    DeviceData(
-        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
-        isConnected: true,
-        deviceName: "0"),
-    DeviceData(
-        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
-        isConnected: true,
-        deviceName: "1"),
-    DeviceData(
-        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
-        isConnected: true,
-        deviceName: "2")
+    DeviceData(bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")), isConnected: true, deviceName: "0"),
+    DeviceData(bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")), isConnected: false, deviceName: "1"),
+    DeviceData(bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")), isConnected: true, deviceName: "2")
   ];
 
   Row createListEntry(BuildContext context, List<DeviceData> list, int index) {
@@ -61,11 +52,7 @@ class ConnectState extends State<Connect> {
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-            onPressed: () => connect(index), child: Text(list[index].name)),
-        iconShowConnected
-      ],
+      children: [ElevatedButton(onPressed: () => connect(index), child: Text(list[index].name)), iconShowConnected],
     );
   }
 
@@ -79,7 +66,7 @@ class ConnectState extends State<Connect> {
         });
 
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Connect")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).connect_title)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -87,10 +74,7 @@ class ConnectState extends State<Connect> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Geräteliste"),
-                IconButton(onPressed: fetch, icon: Icon(Icons.refresh_rounded))
-              ],
+              children: [Text(AppLocalizations.of(context).device_list), IconButton(onPressed: fetch, icon: Icon(Icons.refresh_rounded))],
             ),
             Expanded(child: deviceListWidgets),
           ],
@@ -116,10 +100,7 @@ class ConnectState extends State<Connect> {
   void scanCallback(results) {
     if (results.isNotEmpty) {
       for (ScanResult r in results) {
-        deviceDataList.add(DeviceData(
-            bluetoothDevice: r.device,
-            isConnected: false,
-            deviceName: r.advertisementData.advName));
+        deviceDataList.add(DeviceData(bluetoothDevice: r.device, isConnected: false, deviceName: r.advertisementData.advName));
       }
       setState(() {});
     } else {
@@ -133,8 +114,7 @@ class ConnectState extends State<Connect> {
     BluetoothDevice device = deviceDataList[btnIndex].device;
 
     // Connect to device if disconnected
-    var subscription =
-        device.connectionState.listen((BluetoothConnectionState state) async {
+    var subscription = device.connectionState.listen((BluetoothConnectionState state) async {
       if (state == BluetoothConnectionState.disconnected) {
         device.connect();
         print("${device.disconnectReason}");
@@ -158,10 +138,7 @@ class DeviceData {
   late String name;
   late BluetoothDevice device;
 
-  DeviceData(
-      {required BluetoothDevice bluetoothDevice,
-      required bool isConnected,
-      required String deviceName}) {
+  DeviceData({required BluetoothDevice bluetoothDevice, required bool isConnected, required String deviceName}) {
     device = bluetoothDevice;
     connected = isConnected;
     name = deviceName;
