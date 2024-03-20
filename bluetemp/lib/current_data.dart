@@ -30,7 +30,7 @@ class _current_dataState extends State<current_data> {
           Text(globalState.DateOfLastMeasurement),
           Text(globalState.TimeOfLastMeasurement),
           Text(
-            "${globalState.Temperaturumrechnen(globalState.Grad_Celsius).toString().substring(0, 5)} ${globalState.Einheit}",
+            "${double.parse((globalState.Temperaturumrechnen(globalState.Grad_Celsius)).toStringAsFixed(2))} ${globalState.Einheit}",
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
