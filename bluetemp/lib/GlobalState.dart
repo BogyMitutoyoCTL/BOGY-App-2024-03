@@ -6,15 +6,27 @@ import 'package:flutter/material.dart';
 import 'dart:math' as m;
 
 class GlobalState {
-  static var lightColor =
-      ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
+  static var lightColor = ColorScheme(
+    brightness: Brightness.light,
+    background: Colors.black45,
+    onBackground: Colors.white70,
+    error: Color.fromARGB(255, 180, 0, 0),
+    onError: Colors.white70,
+    primary: Color.fromARGB(255, 98, 195, 255),
+    onPrimary: Colors.black,
+    secondary: Color.fromARGB(255, 45, 141, 68),
+    onSecondary: Colors.white70,
+    surface: Color.fromARGB(255, 149, 177, 183),
+    onSurface: Colors.black,
+  );
+  // ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
   static var darkColor = ColorScheme(
     brightness: Brightness.dark,
     background: Colors.black45,
     onBackground: Colors.white70,
     error: Color.fromARGB(255, 180, 0, 0),
     onError: Colors.white70,
-    primary: Color.fromARGB(255, 0, 25, 195),
+    primary: Color.fromARGB(255, 0, 106, 173),
     onPrimary: Colors.white70,
     secondary: Color.fromARGB(255, 45, 141, 68),
     onSecondary: Colors.white70,
@@ -28,19 +40,21 @@ class GlobalState {
 
   var theme = ThemeData(
     colorScheme: lightColor,
-    appBarTheme: AppBarTheme(
-        backgroundColor: lightColor.primary,
-        foregroundColor: lightColor.onPrimary),
+    brightness: Brightness.light,
+    radioTheme: RadioThemeData(fillColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 7, 66, 234))),
+    appBarTheme: AppBarTheme(backgroundColor: lightColor.primary, foregroundColor: lightColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Color.fromARGB(255, 0, 0, 0))),
+    scaffoldBackgroundColor: Color.fromARGB(255, 232, 244, 255),
     useMaterial3: true,
   );
 
   var darkTheme = ThemeData(
     colorScheme: darkColor,
-    appBarTheme: AppBarTheme(
-        backgroundColor: darkColor.primary,
-        foregroundColor: darkColor.onPrimary),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
+    brightness: Brightness.dark,
+    radioTheme: RadioThemeData(fillColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 7, 66, 234))),
+    appBarTheme: AppBarTheme(backgroundColor: darkColor.primary, foregroundColor: darkColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
+    scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 78),
     useMaterial3: true,
   );
 

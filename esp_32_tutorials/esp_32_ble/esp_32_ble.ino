@@ -18,7 +18,7 @@ auto unique_device_name = get_unique_device_name(deviveName);
 
 RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
+DallasTemperature temperature_sensors(&oneWire);
 BinaryValue status;
 
 BLEServer *pServer = NULL;
@@ -50,11 +50,12 @@ void setup()
     pinMode(SWITCH_LED, OUTPUT);
     status.value = false;
     digitalWrite(SWITCH_LED, status.value);
-
-    sensors.begin();
-
+    
     pinMode(STATUS_LED, OUTPUT);
-
+    
+    temperature_sensors.begin();
+    Serial.printf("Found %d temperature sensor devices\n", temperature_sensors.getDeviceCount());
+    
     if (!rtc.begin())
     {
         Serial.printf("Couldn't find RTC\n");
@@ -138,8 +139,8 @@ void loop()
     previousMillis = currentMillis;
 
     // read the sensor values
-    sensors.requestTemperatures();
-    float temperature = sensors.getTempCByIndex(0);
+    temperature_sensors.requestTemperatures();
+    float temperature = temperature_sensors.getTempCByIndex(0);
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");

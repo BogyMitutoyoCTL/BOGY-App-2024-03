@@ -1,6 +1,10 @@
 {
   "appname": "BlauTemp",
   "apptitle": "BlauTemp - die Bluetooth Temperatur Überwachungs-App",
+  "statistics_title":  "Statistik",
+  "statistics_maximum": "Maximum",
+  "statistics_minimum": "Minimum",
+  "statistics_average": "Durchschnitt",
   "refresh": "Jetzt aktualisieren!",
   "current_data_last_measurement": "Die letzte Messung vom:",
   "welcome": "Willkommen bei\nBlauTemp",
@@ -29,6 +33,10 @@
   "settings_item_units": "Einheiten",
   "alarms_text": "Alarme verwalten",
   "back_button": "Zurück",
-  "current_alarms": "Hier ist eine Liste mit deinen Alarmen:",
-  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!"
+  "current_alarms": "Hier ist eine Liste mit deinen Alarmen. Um einen Alarm zu löschen, klicke ihn einfach an!",
+  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!",
+  "add_alarm_button": "Alarm hinzufügen",
+  "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus.",
+  "device_list": "Geräteliste",
+  "connect_title": "Verbinden"
 }

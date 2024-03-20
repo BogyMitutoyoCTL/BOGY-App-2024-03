@@ -7,11 +7,15 @@
   "@apptitle": {
     "description": "Long name of the application including slogan."
   },
+"statistics_title":  "Statistics",
+  "statistics_maximum": "Maximum",
+  "statistics_minimum": "Minimum",
+  "statistics_average": "Average",
   "current_data_last_measurement": "Last measurement from:",
   "@current_data_last_measurement": {
     "description": "The text in Current Data."
   },
-  "deletestatistics": "Delete Statistics!",
+  "deletestatistics": "Delete statistics",
   "@deletestatistics": {
     "description": "The Button at Statistics Page"
   },
@@ -35,15 +39,15 @@
   "@getStarted": {
     "description": "Get started button on the Splashscreen"
   },
-  "sure_button_text": "Are you sure? You will delete all Statistics!",
+  "sure_button_text": "Are you sure? You will delete all measurement values!",
   "@sure_button_text": {
     "description": "Opens the modal at statistics page to delete the statistics"
   },
-  "sure_button": "Sure!",
+  "sure_button": "Delete",
   "@sure_button": {
     "description": "Sure Button delete text"
   },
-  "close_button": "Close",
+  "close_button": "Cancel",
   "@close_button": {
     "description": "Close Button text"
   },
@@ -97,10 +101,10 @@
   },
   "time_scale": "Time in °C",
   "@time_scale": {
-   "description": "Time Scala for the Graph"
+    "description": "Time Scala for the Graph"
   },
   "nextRefresh": "Next refresh in {seconds} seconds.",
-  "@nextRefresh":{
+  "@nextRefresh": {
     "description": "Current values: next refresh time",
     "placeholders": {
       "seconds": {
@@ -133,7 +137,23 @@
     "description": "Text in manage alarms menu"
   },
   "delete_alarm_message": "Your alarm has been deleted!",
-    "@delete_alarm_message": {
-      "description": "Message after deleting an alarm"
-    }
+  "@delete_alarm_message": {
+   "description": "Message after deleting an alarm"
+  },
+  "add_alarm_button": "Add an alarm",
+  "@add_alarm_button": {
+   "description": "Button to add an alarm"
+  },
+ "add_alarm_modal_text": "Please select the value and the typ for your alarm.",
+   "@add_alarm_modal_text": {
+    "description": "Text in the add an alarm Modal"
+   },
+  "device_list": "Device list",
+  "@device_list": {
+    "description": "Bluetooth connection: device list"
+  },
+  "connect_title": "Connect",
+  "@connect_title": {
+    "description": "Title of the connect screen"
+  }
 }
