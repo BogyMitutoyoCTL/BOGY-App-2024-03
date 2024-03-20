@@ -39,6 +39,18 @@ class GlobalState {
   double Temperaturumrechnen(double Grad_Celsius) {
     if (Einheit == "°F") {
       return Grad_Celsius * 1.8 + 32;
+    }
+    if (Einheit == "°Ra") {
+      return Grad_Celsius * 1.8 + 491.67;
+    }
+    if (Einheit == "°Ré") {
+      return Grad_Celsius * 0.8;
+    }
+    if (Einheit == "°K") {
+      return Grad_Celsius + 273.15;
+    }
+    if (Einheit == "°N") {
+      return Grad_Celsius * 33 / 100;
     } else {
       return Grad_Celsius;
     }

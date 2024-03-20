@@ -49,18 +49,21 @@ class _Setting_ThemeState extends State<Setting_Theme> {
   void Theme_Mode_dark(ThemeMode) {
     setState(() {
       globalState.selectedTheme = Darkmode;
+      print(globalState.selectedTheme);
     });
   }
 
   void Theme_Mode_light(ThemeMode) {
     setState(() {
       globalState.selectedTheme = Lightmode;
+      print(globalState.selectedTheme);
     });
   }
 
   void ThemeMode_System(ThemeMode) {
     setState(() {
       globalState.selectedTheme = Systemmode;
+      print(globalState.selectedTheme);
     });
   }
 }
