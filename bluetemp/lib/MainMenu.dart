@@ -29,80 +29,48 @@ class _MainMenuState extends State<MainMenu> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          MainMenuButton(
-              callback: verbindung,
-              text: AppLocalizations.of(context).connect,
-              iconData: Icons.wifi),
-          MainMenuButton(
-              callback: aktuelle_daten,
-              text: AppLocalizations.of(context).showCurrentData,
-              iconData: Icons.bar_chart),
-          MainMenuButton(
-              callback: statistik,
-              text: AppLocalizations.of(context).showStatistics,
-              iconData: Icons.moving_sharp),
-          MainMenuButton(
-              callback: alarme,
-              text: AppLocalizations.of(context).manageAlarms,
-              iconData: Icons.alarm),
-          MainMenuButton(
-              callback: time_sync,
-              text: AppLocalizations.of(context).syncTime,
-              iconData: Icons.hourglass_top),
-          MainMenuButton(
-              callback: graph,
-              text: AppLocalizations.of(context).showGraph,
-              iconData: Icons.auto_graph),
-          MainMenuButton(
-              callback: about,
-              text: AppLocalizations.of(context).aboutUs,
-              iconData: Icons.info),
-          MainMenuButton(
-              callback: settings,
-              text: AppLocalizations.of(context).settings,
-              iconData: Icons.settings)
+          MainMenuButton(callback: verbindung, text: AppLocalizations.of(context).connect, iconData: Icons.wifi),
+          MainMenuButton(callback: aktuelle_daten, text: AppLocalizations.of(context).showCurrentData, iconData: Icons.bar_chart),
+          MainMenuButton(callback: statistik, text: AppLocalizations.of(context).showStatistics, iconData: Icons.moving_sharp),
+          MainMenuButton(callback: alarme, text: AppLocalizations.of(context).manageAlarms, iconData: Icons.alarm),
+          MainMenuButton(callback: time_sync, text: AppLocalizations.of(context).syncTime, iconData: Icons.hourglass_top),
+          MainMenuButton(callback: graph, text: AppLocalizations.of(context).showGraph, iconData: Icons.auto_graph),
+          MainMenuButton(callback: about, text: AppLocalizations.of(context).aboutUs, iconData: Icons.info),
+          MainMenuButton(callback: settings, text: AppLocalizations.of(context).settings, iconData: Icons.settings)
         ],
       ),
     );
   }
 
   void time_sync() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => sync_time()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => sync_time()));
   }
 
   void verbindung() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Connect()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Connect()));
   }
 
   void aktuelle_daten() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => current_data()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => current_data()));
   }
 
   void statistik() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => statistic()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => StatisticPage()));
   }
 
   void alarme() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => alarms()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => alarms()));
   }
 
   void graph() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => graphs()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => graphs()));
   }
 
   void about() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => About_Dialog()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => About_Dialog()));
   }
 
   void settings() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Setting_dialog()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Setting_dialog()));
   }
 }

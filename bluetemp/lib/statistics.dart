@@ -2,14 +2,14 @@ import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class statistic extends StatefulWidget {
-  const statistic({super.key});
+class StatisticPage extends StatefulWidget {
+  const StatisticPage({super.key});
 
   @override
-  State<statistic> createState() => _statisticState();
+  State<StatisticPage> createState() => _StatisticPageState();
 }
 
-class _statisticState extends State<statistic> {
+class _StatisticPageState extends State<StatisticPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +30,10 @@ class _statisticState extends State<statistic> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                child: Center(child: Text("16.03.2024 14:00 Uhr")),
                 color: Colors.lightBlue[50],
                 height: 30,
                 width: 150,
+                child: Center(child: Text("16.03.2024 14:00 Uhr")),
               ),
             ],
           ), //TODO: Implement real Start Time
@@ -50,10 +50,10 @@ class _statisticState extends State<statistic> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                child: Center(child: Text("18.03.2024 14:25 Uhr")),
                 color: Colors.lightBlue[50],
                 height: 30,
                 width: 150,
+                child: Center(child: Text("18.03.2024 14:25 Uhr")),
               ),
             ],
           ), //TODO: Implement real End Time
@@ -118,9 +118,9 @@ class _statisticState extends State<statistic> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          child: Text(AppLocalizations.of(context).sure_button),
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                           onPressed: delete_all_statistics,
+                          child: Text(AppLocalizations.of(context).sure_button),
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
