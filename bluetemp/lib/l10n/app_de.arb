@@ -1,6 +1,10 @@
 {
   "appname": "BlauTemp",
   "apptitle": "BlauTemp - die Bluetooth Temperatur Überwachungs-App",
+  "statistics_title":  "Statistik",
+  "statistics_maximum": "Maximum",
+  "statistics_minimum": "Minimum",
+  "statistics_average": "Durchschnitt",
   "refresh": "Jetzt aktualisieren!",
   "current_data_last_measurement": "Die letzte Messung vom:",
   "welcome": "Willkommen bei\nBlauTemp",
