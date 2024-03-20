@@ -95,7 +95,6 @@ class ConnectState extends State<Connect> {
               ],
             ),
             Expanded(child: deviceListWidgets),
-            ElevatedButton(onPressed: goBack, child: Text("Zurück"))
           ],
         ),
       ),
@@ -162,10 +161,6 @@ class ConnectState extends State<Connect> {
     //TODO create option to disconnect from the device
 
     subscription.cancel();
-  }
-
-  void goBack() {
-    Navigator.of(context).pop();
   }
 }
 

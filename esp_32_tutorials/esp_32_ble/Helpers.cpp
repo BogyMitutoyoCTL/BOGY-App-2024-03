@@ -40,9 +40,21 @@ DateTime get_date_time(uint8_t *ptr, uint size)
     }
 }
 
-void print_date_time(DateTime dt, String prefix)
+void print_date_time(const DateTime dt, const String prefix)
 {
     Serial.printf("%s DateTime: %.4u/%.2u/%.2u %.2u:%.2u:%.2u\n", prefix, dt.year(), dt.month(), dt.day(), dt.hour(), dt.minute(), dt.second());
+    Serial.flush();
+}
+
+void print_temperature(const float temp, const String prefix)
+{
+    Serial.printf("%s Temperature: %.2f°C\n", prefix, temp);
+    Serial.flush();
+}
+
+void print_status_value(const BinaryValue &bv, const String prefix)
+{
+    Serial.printf("%s Binary Value: %s\n", prefix, bv.value ? "true" : "false");
     Serial.flush();
 }
 

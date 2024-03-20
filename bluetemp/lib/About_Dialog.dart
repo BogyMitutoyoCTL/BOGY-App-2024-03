@@ -44,7 +44,8 @@ class _About_DialogState extends State<About_Dialog> {
               "Version 1.0",
               style: TextStyle(fontSize: 25),
             ),
-            IconButton(onPressed: Mitprogramierende, icon: Icon(Icons.person))
+            ElevatedButton(
+                onPressed: Mitprogramierende, child: Icon(Icons.person))
           ],
         ),
       ),

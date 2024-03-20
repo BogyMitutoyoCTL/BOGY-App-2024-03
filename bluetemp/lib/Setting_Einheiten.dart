@@ -14,15 +14,15 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   String C = "°C";
   String Ra = "°Ra";
   String Re = "°Ré";
-  String K = "°K";
+  String K = "K";
   String De = "°De";
   String N = "°N";
   String O = "°Rø";
-  String Hr = "°Hr";
+  /* String Hr = "°Hr";
   String RD = "°RD";
   String T_RS = "°T_RS";
   String T_c = "°T_c";
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +78,7 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
           onChanged: Einheit_aenderungO,
           title: Text("Rømer"),
         ),
-        RadioListTile(
+        /*RadioListTile(
           value: Hr,
           groupValue: globalState.Einheit,
           onChanged: Einheit_aenderungHr,
@@ -101,7 +101,7 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
           groupValue: globalState.Einheit,
           onChanged: Einheit_aenderungT_c,
           title: Text("Einheit der kosmologischen Temperatur"),
-        )
+        )*/
         // ElevatedButton(
         //   onPressed: nothing,  //--> Test für Einheiten (// bei void nothing auch entfernen
         //    child: Text("hhh"),
@@ -166,9 +166,9 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
     });
   }
 
-  void Einheit_aenderungHr(String) {
+/* void Einheit_aenderungHr(String) {
     setState(() {
-      globalState.Einheit = O;
+      globalState.Einheit = Hr;
       print(globalState.Einheit);
     });
   }
@@ -194,7 +194,5 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
     });
   }
 
-  //void nothing() {
-  //print("ccc ${Einheit}");
+*/
 }
-//}

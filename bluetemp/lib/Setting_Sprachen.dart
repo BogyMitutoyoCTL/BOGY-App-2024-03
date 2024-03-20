@@ -22,16 +22,8 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
       ),
       body: Column(
         children: [
-          RadioListTile(
-              value: de,
-              groupValue: globalState.Sprache,
-              onChanged: zudeutsch,
-              title: Text("🇩🇪 Deutsch")),
-          RadioListTile(
-              value: en,
-              groupValue: globalState.Sprache,
-              onChanged: zuenglisch,
-              title: Text("🇺🇸 English"))
+          RadioListTile(value: de, groupValue: globalState.Sprache, onChanged: zudeutsch, title: Text("🇩🇪 Deutsch")),
+          RadioListTile(value: en, groupValue: globalState.Sprache, onChanged: zuenglisch, title: Text("🇺🇸 English"))
         ],
       ),
     );
@@ -40,7 +32,7 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
   void zudeutsch(String) {
     setState(() {
       globalState.Sprache = de;
-      globalState.languageChanger.set(de);
+      globalState.appSettingsChanger.setLanguage(de);
       print("${globalState.Sprache}utsch");
     });
   }
@@ -48,7 +40,7 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
   void zuenglisch(String) {
     setState(() {
       globalState.Sprache = en;
-      globalState.languageChanger.set(en);
+      globalState.appSettingsChanger.setLanguage(en);
       print("${globalState.Sprache}glisch");
     });
   }
