@@ -6,7 +6,7 @@
 class SwitchCharacteristicCallbacks : public BLECharacteristicCallbacks
 {
 private:
-    BinaryValue binary_value_;
+    BinaryValue& binary_value_;
 
 public:
     SwitchCharacteristicCallbacks(BinaryValue &bv) : binary_value_(bv){};

@@ -22,10 +22,7 @@ void SwitchCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, 
 {
     uint8_t *dataPtr = pCharacteristic->getData();
     size_t data_lenght = pCharacteristic->getLength();
-    Serial.printf("DataLenght: %d\n", data_lenght);
     bool value = static_cast<bool>(dataPtr[0]);
     binary_value_.value = value;
     digitalWrite(SWITCH_LED, binary_value_.value);
-    Serial.printf("SwitchValue: %s\n", value ? "true" : "false");
-    Serial.flush();
 }
