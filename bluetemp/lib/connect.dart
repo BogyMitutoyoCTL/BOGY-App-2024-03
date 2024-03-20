@@ -75,7 +75,7 @@ class ConnectState extends State<Connect> {
   @override
   Widget build(BuildContext context) {
     var deviceListWidgets = ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        physics: ScrollPhysics(),
         itemCount: bluetoothDeviceList.length,
         itemBuilder: (context, index) {
           return createListEntry(context, bluetoothDeviceList, index);
@@ -121,7 +121,9 @@ class ConnectState extends State<Connect> {
   void scanCallback(results) {
     if (results.isNotEmpty) {
       for (ScanResult r in results) {
-        bluetoothDeviceList.add(r.device);
+        if (!bluetoothDeviceList.contains(r.device)) {
+          bluetoothDeviceList.add(r.device);
+        }
       }
       setState(() {});
     } else {
@@ -143,17 +145,13 @@ class ConnectState extends State<Connect> {
       }
     });
 
-    await device.connect();
-
     if (device.isConnected) {
-      print("device connected");
+      await device.disconnect();
     } else {
-      print("device not connected");
+      await device.connect();
     }
 
     setState(() {});
-
-    //TODO create option to disconnect from the device
 
     subscription.cancel();
   }
