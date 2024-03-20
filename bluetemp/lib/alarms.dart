@@ -13,20 +13,26 @@ class alarms extends StatefulWidget {
 }
 
 class _alarmsState extends State<alarms> {
-  var message = "";
-  Row createListEntry(BuildContext context, List<dynamic> list, int index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-            onPressed: () => manage_alarms(list[index]),
-            child: Row(
-              children: [
-                Text(list[index].value.toString()),
-                Text(list[index].typ.toString()),
-              ],
-            )),
-      ],
+  var text = "";
+  var icon;
+  Container createListEntry(
+      BuildContext context, List<dynamic> list, int index) {
+    if (list[index].typ == AlarmType.lower) {
+      text = "Alarm < ${list[index].value}°C";
+      icon = Icons.brightness_7;
+    } else {
+      text = "Alarm > ${list[index].value}°C";
+      icon = Icons.severe_cold;
+    }
+    return Container(
+      margin: EdgeInsets.all(16),
+      child: ElevatedButton(
+        onPressed: () => manage_alarms(list[index]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text(text), Icon(icon)],
+        ),
+      ),
     );
   }
 
@@ -45,7 +51,7 @@ class _alarmsState extends State<alarms> {
               " - " +
               AppLocalizations.of(context).alarms_text)),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,17 +62,26 @@ class _alarmsState extends State<alarms> {
               )
             ],
           ),
-          Text(AppLocalizations.of(context).current_alarms),
-          Text(
-            message,
-            style: TextStyle(fontSize: 18, color: Colors.red),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(AppLocalizations.of(context).current_alarms),
           ),
           Expanded(child: alarmListWidgets),
-          Padding(
-            padding: const EdgeInsets.all(120.0),
-            child: ElevatedButton(
-                onPressed: goBack,
-                child: Text(AppLocalizations.of(context).back_button)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: goBack,
+                  child: Text(AppLocalizations.of(context).back_button)),
+              ElevatedButton(
+                  onPressed: add_alarm,
+                  child: Row(
+                    children: [
+                      Icon(Icons.add),
+                      Text(AppLocalizations.of(context).add_alarm_button)
+                    ],
+                  ))
+            ],
           )
         ],
       ),
@@ -102,6 +117,46 @@ class _alarmsState extends State<alarms> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green),
                         child: Text(AppLocalizations.of(context).close_button),
+                        onPressed: () => setState(() {
+                          Navigator.pop(context);
+                        }),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  void add_alarm() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 200,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.all(12),
+                      child: Text(
+                          AppLocalizations.of(context).add_alarm_modal_text)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
+                        child: Row(
+                          children: [
+                            Icon(Icons.add),
+                            Text(AppLocalizations.of(context).add_alarm_button),
+                          ],
+                        ),
                         onPressed: () => setState(() {
                           Navigator.pop(context);
                         }),

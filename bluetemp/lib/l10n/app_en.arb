@@ -128,12 +128,20 @@
   "@back_button": {
     "description": "A simple Back Button Text"
   },
-  "current_alarms": "Here is a list with your current alarms:",
+  "current_alarms": "Here is a list with your current alarms. To delete an Alarm just click on it!",
   "@current_alarms": {
     "description": "Text in manage alarms menu"
   },
   "delete_alarm_message": "Your alarm has been deleted!",
-    "@delete_alarm_message": {
-      "description": "Message after deleting an alarm"
-    }
+  "@delete_alarm_message": {
+   "description": "Message after deleting an alarm"
+  },
+  "add_alarm_button": "Add an alarm",
+  "@add_alarm_button": {
+   "description": "Button to add an alarm"
+  },
+ "add_alarm_modal_text": "Please select the value and the typ for your alarm.",
+   "@add_alarm_modal_text": {
+    "description": "Text in the add an alarm Modal"
+   }
 }

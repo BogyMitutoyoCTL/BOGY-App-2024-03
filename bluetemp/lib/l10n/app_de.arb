@@ -29,6 +29,9 @@
   "settings_item_units": "Einheiten",
   "alarms_text": "Alarme verwalten",
   "back_button": "Zurück",
-  "current_alarms": "Hier ist eine Liste mit deinen Alarmen:",
-  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!"
+  "current_alarms": "Hier ist eine Liste mit deinen Alarmen. Um einen Alarm zu löschen, klicke ihn einfach an!",
+  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!",
+  "add_alarm_button": "Alarm hinzufügen",
+  "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus."
+
 }
