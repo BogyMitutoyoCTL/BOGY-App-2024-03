@@ -134,8 +134,16 @@
   },
   "delete_alarm_message": "Your alarm has been deleted!",
   "@delete_alarm_message": {
-    "description": "Message after deleting an alarm"
+   "description": "Message after deleting an alarm"
   },
+  "add_alarm_button": "Add an alarm",
+  "@add_alarm_button": {
+   "description": "Button to add an alarm"
+  },
+ "add_alarm_modal_text": "Please select the value and the typ for your alarm.",
+   "@add_alarm_modal_text": {
+    "description": "Text in the add an alarm Modal"
+   },
   "device_list": "Device list",
   "@device_list": {
     "description": "Bluetooth connection: device list"
