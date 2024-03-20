@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'main.dart';
 
@@ -21,48 +22,35 @@ class _Setting_ThemeState extends State<Setting_Theme> {
       appBar: AppBar(
         title: Text("Themeeinstellungen"),
       ),
-      body: Column(
-        children: [
-          RadioListTile(
-            value: ThemeMode.dark,
-            groupValue: globalState.selectedTheme,
-            onChanged: Theme_Mode_dark,
-            title: Text("Darkmode"),
-          ),
-          RadioListTile(
-            value: ThemeMode.light,
-            groupValue: globalState.selectedTheme,
-            onChanged: Theme_Mode_light,
-            title: Text("Lightmode"),
-          ),
-          RadioListTile(
-            value: ThemeMode.system,
-            groupValue: globalState.selectedTheme,
-            onChanged: ThemeMode_System,
-            title: Text("Systemstandard"),
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+        child: DropdownButton(
+            isExpanded: true,
+            items: dropdownItems(),
+            onChanged: Theme_Mode,
+            value: globalState.selectedTheme),
       ),
     );
   }
 
-  void Theme_Mode_dark(ThemeMode) {
-    setState(() {
-      globalState.selectedTheme = Darkmode;
-      globalState.appSettingsChanger.refreshApp();
-    });
+  List<DropdownMenuItem<ThemeMode>> dropdownItems() {
+    List<DropdownMenuItem<ThemeMode>> menuItems = [
+      DropdownMenuItem(child: Text("Darkomde"), value: ThemeMode.dark),
+      DropdownMenuItem(
+        child: Text("Lightmode"),
+        value: ThemeMode.light,
+      ),
+      DropdownMenuItem(
+        child: Text("Systemstandard"),
+        value: ThemeMode.system,
+      ),
+    ];
+    return menuItems;
   }
 
-  void Theme_Mode_light(ThemeMode) {
+  void Theme_Mode(ThemeMode? value) {
     setState(() {
-      globalState.selectedTheme = Lightmode;
-      globalState.appSettingsChanger.refreshApp();
-    });
-  }
-
-  void ThemeMode_System(ThemeMode) {
-    setState(() {
-      globalState.selectedTheme = Systemmode;
+      globalState.selectedTheme = value!;
       globalState.appSettingsChanger.refreshApp();
     });
   }

@@ -22,19 +22,17 @@ class _MitprogramiererState extends State<Mitprogramierer> {
           children: [
             Image.asset(
                 height: 450, scale: 0.75, 'assets/Images/Picture_2.png'),
-            Text("Name"),
+            Text("Dieter Blocher"),
 
-            /// TODO NAME EINTRAGEN
             Container(
               height: 40,
             ),
-            Text("Name"),
+            Text("Thomas Weller"),
 
-            /// TODO NAME EINTRAGEN
             Container(
               height: 40,
             ),
-            Text("Name"),
+            Text("Simon Schlegel"),
 
             /// TODO NAME EINTRAGEN
             Container(
@@ -44,9 +42,7 @@ class _MitprogramiererState extends State<Mitprogramierer> {
             Container(
               height: 40,
             ),
-            Text("Name")
-
-            /// TODO NAME EINTRAGEN
+            Text("Tim ...")
           ],
         ),
       ),

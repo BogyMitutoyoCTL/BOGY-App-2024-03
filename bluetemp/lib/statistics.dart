@@ -1,5 +1,4 @@
 import 'package:bluetemp/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,7 +13,7 @@ class _statisticState extends State<statistic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Statistiken")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).statistics_title)),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -37,7 +36,7 @@ class _statisticState extends State<statistic> {
                 width: 150,
               ),
             ],
-          ), //TODO: Impelemnt real Start Time
+          ), //TODO: Implement real Start Time
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -57,46 +56,41 @@ class _statisticState extends State<statistic> {
                 width: 150,
               ),
             ],
-          ), //TODO: Impelemnt real End Time
+          ), //TODO: Implement real End Time
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  "Maximum:",
-                  style: TextStyle(fontSize: 25),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).statistics_maximum,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Text(
+                      AppLocalizations.of(context).statistics_average,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Text(
+                      AppLocalizations.of(context).statistics_minimum,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ],
                 ),
-                Text("${globalState.Temperaturumrechner_Maximum(globalState.Maximum)}${globalState.Einheit}", style: TextStyle(fontSize: 25))
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text("${globalState.Temperaturumrechner_Maximum(globalState.Maximum)} ${globalState.Einheit}", style: TextStyle(fontSize: 25)),
+                    Text("${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)} ${globalState.Einheit}", style: TextStyle(fontSize: 25)),
+                    Text("${globalState.Temperaturumrechner_Minimum(globalState.Minimum)} ${globalState.Einheit}", style: TextStyle(fontSize: 25))
+                  ],
+                )
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Minimum:",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text("${globalState.Temperaturumrechner_Minimum(globalState.Minimum)}${globalState.Einheit}", style: TextStyle(fontSize: 25))
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Durchschnitt:",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text("${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)}${globalState.Einheit}", style: TextStyle(fontSize: 25))
-              ],
-            ),
-          ),
+
           ElevatedButton(
             onPressed: sure_to_delete_statistics,
             child: Text(AppLocalizations.of(context).deletestatistics),
@@ -118,20 +112,23 @@ class _statisticState extends State<statistic> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(AppLocalizations.of(context).sure_button_text),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        child: Text(AppLocalizations.of(context).sure_button),
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                        onPressed: delete_all_statistics,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                        child: Text(AppLocalizations.of(context).close_button),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          child: Text(AppLocalizations.of(context).sure_button),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          onPressed: delete_all_statistics,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                          child: Text(AppLocalizations.of(context).close_button),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
