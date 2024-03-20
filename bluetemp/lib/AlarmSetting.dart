@@ -9,7 +9,7 @@ class AlarmSetting {
 }
 
 enum AlarmType {
-  minimum,
+  lower,
 
-  maximum,
+  higher,
 }
