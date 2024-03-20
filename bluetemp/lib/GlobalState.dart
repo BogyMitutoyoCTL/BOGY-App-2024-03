@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'dart:math' as m;
 
 class GlobalState {
-  static var lightColor = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
+  static var lightColor =
+      ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
   static var darkColor = ColorScheme(
     brightness: Brightness.dark,
     background: Colors.black45,
@@ -27,14 +28,19 @@ class GlobalState {
 
   var theme = ThemeData(
     colorScheme: lightColor,
-    appBarTheme: AppBarTheme(backgroundColor: lightColor.primary, foregroundColor: lightColor.onPrimary),
+    appBarTheme: AppBarTheme(
+        backgroundColor: lightColor.primary,
+        foregroundColor: lightColor.onPrimary),
     useMaterial3: true,
   );
 
   var darkTheme = ThemeData(
     colorScheme: darkColor,
-    appBarTheme: AppBarTheme(backgroundColor: darkColor.primary, foregroundColor: darkColor.onPrimary),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
+    appBarTheme: AppBarTheme(
+        backgroundColor: darkColor.primary,
+        foregroundColor: darkColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
     useMaterial3: true,
   );
 
@@ -178,7 +184,7 @@ class GlobalState {
     if (Einheit == "°Ré") {
       return Durchschnitt * 0.8;
     }
-    if (Einheit == "°K") {
+    if (Einheit == "K") {
       return Durchschnitt + 273.15;
     }
     if (Einheit == "°N") {
