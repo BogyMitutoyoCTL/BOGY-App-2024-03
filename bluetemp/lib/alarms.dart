@@ -15,6 +15,8 @@ class alarms extends StatefulWidget {
 class _alarmsState extends State<alarms> {
   var text = "";
   var icon;
+
+  AlarmType? selectedValue;
   Container createListEntry(
       BuildContext context, List<dynamic> list, int index) {
     if (list[index].typ == AlarmType.lower) {
@@ -145,6 +147,14 @@ class _alarmsState extends State<alarms> {
                       margin: EdgeInsets.all(12),
                       child: Text(
                           AppLocalizations.of(context).add_alarm_modal_text)),
+                  DropdownButton(
+                      items: alarm_typ_item,
+                      onChanged: (AlarmType? newType) {
+                        setState(() {
+                          selectedValue = newType!;
+                        });
+                      },
+                      value: selectedValue),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -169,4 +179,12 @@ class _alarmsState extends State<alarms> {
           );
         });
   }
+}
+
+List<DropdownMenuItem<AlarmType>> get alarm_typ_item {
+  List<DropdownMenuItem<AlarmType>> menuItems = [
+    DropdownMenuItem(child: Text(">"), value: AlarmType.higher),
+    DropdownMenuItem(child: Text("<"), value: AlarmType.lower),
+  ];
+  return menuItems;
 }
