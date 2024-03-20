@@ -179,7 +179,9 @@ class _alarmsState extends State<alarms> {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               controller: textController,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(new RegExp("^-?\\d*"))
+              ],
               decoration: InputDecoration(
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
