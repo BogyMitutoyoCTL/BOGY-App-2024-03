@@ -37,8 +37,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
   }
 
   void Theme_Setting() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Setting_Theme()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Setting_Theme()));
   }
 
   void Einheiten_Settings() {
