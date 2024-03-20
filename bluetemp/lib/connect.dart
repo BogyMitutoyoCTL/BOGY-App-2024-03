@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -26,6 +25,7 @@ class ConnectState extends State<Connect> {
         FlutterBluePlus.adapterState.listen((state) {
       adapterState = state;
       if (mounted) {
+        fetch();
         setState(() {});
       }
     });
@@ -38,6 +38,7 @@ class ConnectState extends State<Connect> {
   }
 
   List<DeviceData> deviceDataList = [
+    /*
     DeviceData(
         bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
         isConnected: true,
@@ -50,6 +51,7 @@ class ConnectState extends State<Connect> {
         bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
         isConnected: true,
         deviceName: "2")
+  */
   ];
 
   Row createListEntry(BuildContext context, List<DeviceData> list, int index) {
@@ -101,6 +103,8 @@ class ConnectState extends State<Connect> {
   }
 
   fetch() async {
+    deviceDataList.clear();
+
     var subscription = FlutterBluePlus.onScanResults.listen(
       scanCallback,
       onError: (e) => print(e),
@@ -128,7 +132,7 @@ class ConnectState extends State<Connect> {
     }
   }
 
-  connect(int btnIndex) {
+  connect(int btnIndex) async {
     print("Button $btnIndex was pressed");
 
     BluetoothDevice device = deviceDataList[btnIndex].device;
@@ -142,11 +146,18 @@ class ConnectState extends State<Connect> {
       }
     });
 
+    await device.connect();
+
     if (device.isConnected) {
-      print(device.connectionState);
+      deviceDataList[btnIndex].connected = true;
+
+      print("device connected");
     } else {
+      deviceDataList[btnIndex].connected = false;
       print("device not connected");
     }
+
+    setState(() {});
 
     //TODO create option to disconnect from the device
 
