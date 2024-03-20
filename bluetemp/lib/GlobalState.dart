@@ -7,7 +7,19 @@ import 'dart:math' as m;
 
 class GlobalState {
   static var lightColor = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
-  static var darkColor = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 35, 41, 64));
+  static var darkColor = ColorScheme(
+    brightness: Brightness.dark,
+    background: Colors.black45,
+    onBackground: Colors.white70,
+    error: Color.fromARGB(255, 180, 0, 0),
+    onError: Colors.white70,
+    primary: Color.fromARGB(255, 0, 25, 195),
+    onPrimary: Colors.white70,
+    secondary: Color.fromARGB(255, 45, 141, 68),
+    onSecondary: Colors.white70,
+    surface: Color.fromARGB(255, 128, 128, 128),
+    onSurface: Colors.white70,
+  );
 
   GlobalState() {
     appSettingsChanger.setLanguage(Sprache);
@@ -22,6 +34,7 @@ class GlobalState {
   var darkTheme = ThemeData(
     colorScheme: darkColor,
     appBarTheme: AppBarTheme(backgroundColor: darkColor.primary, foregroundColor: darkColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
     useMaterial3: true,
   );
 
