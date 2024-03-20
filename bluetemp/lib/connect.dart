@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -5,14 +7,14 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-class connect extends StatefulWidget {
-  const connect({super.key});
+class Connect extends StatefulWidget {
+  const Connect({super.key});
 
   @override
-  State<connect> createState() => _connectState();
+  State<Connect> createState() => ConnectState();
 }
 
-class _connectState extends State<connect> {
+class ConnectState extends State<Connect> {
   BluetoothAdapterState adapterState = BluetoothAdapterState.unknown;
 
   late StreamSubscription<BluetoothAdapterState> adapterStateStateSubscription;
@@ -36,7 +38,18 @@ class _connectState extends State<connect> {
   }
 
   List<DeviceData> deviceDataList = [
-    DeviceData(isConnected: true, deviceName: "test")
+    DeviceData(
+        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
+        isConnected: true,
+        deviceName: "0"),
+    DeviceData(
+        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
+        isConnected: true,
+        deviceName: "1"),
+    DeviceData(
+        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
+        isConnected: true,
+        deviceName: "2")
   ];
 
   Row createListEntry(BuildContext context, List<DeviceData> list, int index) {
@@ -49,7 +62,8 @@ class _connectState extends State<connect> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ElevatedButton(onPressed: connect, child: Text(list[index].name)),
+        ElevatedButton(
+            onPressed: () => connect(index), child: Text(list[index].name)),
         iconShowConnected
       ],
     );
@@ -102,18 +116,42 @@ class _connectState extends State<connect> {
 
   void scanCallback(results) {
     if (results.isNotEmpty) {
-      ScanResult r = results.last; // the most recently found device
-
-      for (r in results) {
+      for (ScanResult r in results) {
         deviceDataList.add(DeviceData(
-            isConnected: false, deviceName: r.advertisementData.advName));
+            bluetoothDevice: r.device,
+            isConnected: false,
+            deviceName: r.advertisementData.advName));
       }
       setState(() {});
-    } else
+    } else {
       print("no devices found");
+    }
   }
 
-  void connect() {}
+  connect(int btnIndex) {
+    print("Button $btnIndex was pressed");
+
+    BluetoothDevice device = deviceDataList[btnIndex].device;
+
+    // Connect to device if disconnected
+    var subscription =
+        device.connectionState.listen((BluetoothConnectionState state) async {
+      if (state == BluetoothConnectionState.disconnected) {
+        device.connect();
+        print("${device.disconnectReason}");
+      }
+    });
+
+    if (device.isConnected) {
+      print(device.connectionState);
+    } else {
+      print("device not connected");
+    }
+
+    //TODO create option to disconnect from the device
+
+    subscription.cancel();
+  }
 
   void goBack() {
     Navigator.of(context).pop();
@@ -121,10 +159,15 @@ class _connectState extends State<connect> {
 }
 
 class DeviceData {
-  bool connected = false;
-  String name = "";
+  late bool connected;
+  late String name;
+  late BluetoothDevice device;
 
-  DeviceData({required bool isConnected, required String deviceName}) {
+  DeviceData(
+      {required BluetoothDevice bluetoothDevice,
+      required bool isConnected,
+      required String deviceName}) {
+    device = bluetoothDevice;
     connected = isConnected;
     name = deviceName;
   }
