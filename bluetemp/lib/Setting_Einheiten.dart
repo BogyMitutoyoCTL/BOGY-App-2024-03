@@ -14,7 +14,7 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   String C = "°C";
   String Ra = "°Ra";
   String Re = "°Ré";
-  String K = "°K";
+  String K = "K";
   String De = "°De";
   String N = "°N";
   String O = "°Rø";

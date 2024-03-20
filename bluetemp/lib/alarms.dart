@@ -64,10 +64,7 @@ class _alarmsState extends State<alarms> {
           Expanded(child: alarmListWidgets),
           Padding(
             padding: const EdgeInsets.all(120.0),
-            child: ElevatedButton(
-                onPressed: goBack,
-                child: Text(AppLocalizations.of(context).back_button)),
-          )
+          ),
         ],
       ),
     );

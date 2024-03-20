@@ -198,7 +198,7 @@ class GlobalState {
     if (Einheit == "°Ré") {
       return Durchschnitt * 0.8;
     }
-    if (Einheit == "°K") {
+    if (Einheit == "K") {
       return Durchschnitt + 273.15;
     }
     if (Einheit == "°N") {
