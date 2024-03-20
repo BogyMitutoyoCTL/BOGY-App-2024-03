@@ -1,5 +1,6 @@
 import 'package:bluetemp/LocaleChanger.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as m;
 
 class GlobalState {
   static var lightColor =
@@ -56,8 +57,20 @@ class GlobalState {
     if (Einheit == "°De") {
       return (100 - Grad_Celsius) * 3.2;
     }
-    if (Einheit == "°°Rø") {
+    if (Einheit == "°Rø") {
       return (Grad_Celsius * 21 / 40) + 7.5;
+    }
+    if (Einheit == "°Hr") {
+      return (Grad_Celsius + 273.15) * 1.8;
+    }
+    if (Einheit == "°RD") {
+      return (Grad_Celsius + 273.15) * 0.02;
+    }
+    if (Einheit == "°T_RS") {
+      return (Grad_Celsius + 273.15) * 2.61217 * m.pow(10, 30);
+    }
+    if (Einheit == "°T_c") {
+      return (Grad_Celsius + 273.15) * 1.081 * m.pow(10, 30);
     } else {
       return Grad_Celsius;
     }
@@ -85,6 +98,18 @@ class GlobalState {
     }
     if (Einheit == "°°Rø") {
       return (Minimum * 21 / 40) + 7.5;
+    }
+    if (Einheit == "°Hr") {
+      return (Minimum + 273.15) * 1.8;
+    }
+    if (Einheit == "°RD") {
+      return (Minimum + 273.15) * 0.02;
+    }
+    if (Einheit == "°T_RS") {
+      return (Minimum + 273.15) * 2.61217 * m.pow(10, 30);
+    }
+    if (Einheit == "°T_c") {
+      return (Minimum + 273.15) * 1.081 * m.pow(10, 30);
     } else {
       return Minimum;
     }
@@ -112,6 +137,18 @@ class GlobalState {
     }
     if (Einheit == "°°Rø") {
       return (Maximum * 21 / 40) + 7.5;
+    }
+    if (Einheit == "°Hr") {
+      return (Maximum + 273.15) * 1.8;
+    }
+    if (Einheit == "°RD") {
+      return (Maximum + 273.15) * 0.02;
+    }
+    if (Einheit == "°T_RS") {
+      return (Maximum + 273.15) * 2.61217 * m.pow(10, 30);
+    }
+    if (Einheit == "°T_c") {
+      return (Maximum + 273.15) * 1.081 * m.pow(10, 30);
     } else {
       return Maximum;
     }

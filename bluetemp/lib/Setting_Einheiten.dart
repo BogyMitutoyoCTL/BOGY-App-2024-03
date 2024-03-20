@@ -18,6 +18,10 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   String De = "°De";
   String N = "°N";
   String O = "°Rø";
+  String Hr = "°Hr";
+  String RD = "°RD";
+  String T_RS = "°T_RS";
+  String T_c = "°T_c";
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,30 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
           groupValue: globalState.Einheit,
           onChanged: Einheit_aenderungO,
           title: Text("Rømer"),
+        ),
+        RadioListTile(
+          value: Hr,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungHr,
+          title: Text("Stufe des Hotchkiss-Reaktors"),
+        ),
+        RadioListTile(
+          value: RD,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungRD,
+          title: Text("Temperatureinheit der Röntgen-Dosis"),
+        ),
+        RadioListTile(
+          value: T_RS,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungT_RS,
+          title: Text("Raumzeit-Temperatur"),
+        ),
+        RadioListTile(
+          value: T_c,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungT_c,
+          title: Text("Einheit der kosmologischen Temperatur"),
         )
         // ElevatedButton(
         //   onPressed: nothing,  //--> Test für Einheiten (// bei void nothing auch entfernen
@@ -134,6 +162,34 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   void Einheit_aenderungO(String) {
     setState(() {
       globalState.Einheit = O;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungHr(String) {
+    setState(() {
+      globalState.Einheit = O;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungRD(String) {
+    setState(() {
+      globalState.Einheit = RD;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungT_RS(String) {
+    setState(() {
+      globalState.Einheit = T_RS;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungT_c(String) {
+    setState(() {
+      globalState.Einheit = T_c;
       print(globalState.Einheit);
     });
   }
