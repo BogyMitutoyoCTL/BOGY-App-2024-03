@@ -57,13 +57,14 @@ void setup()
 
     if (!rtc.begin())
     {
-        Serial.println("Couldn't find RTC");
+        Serial.printf("Couldn't find RTC\n");
         Serial.flush();
         abort();
     }
     else
     {
-        Serial.println("RTC found... :-D");
+        Serial.printf("RTC found... :-D\n");
+        Serial.flush();
     }
 
     BLEDevice::init(unique_device_name);
@@ -142,6 +143,8 @@ void loop()
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");
+    print_temperature(temperature);
+    print_status_value(status);
 
     // Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
