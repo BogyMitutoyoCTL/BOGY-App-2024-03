@@ -155,7 +155,6 @@
   "connect_title": "Connect",
   "@connect_title": {
     "description": "Title of the connect screen"
-  }
    },
  "enter_temp_placeholder": "Enter the temperature here",
  "@enter_temp_placeholder": {
