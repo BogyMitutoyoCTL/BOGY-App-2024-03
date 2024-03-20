@@ -73,7 +73,7 @@ class _MainMenuState extends State<MainMenu> {
 
   void verbindung() {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => connect()));
+        .push(MaterialPageRoute(builder: (context) => Connect()));
   }
 
   void aktuelle_daten() {

@@ -26,5 +26,8 @@
   "settings_title": "Einstellungen",
   "settings_item_language": "Sprache",
   "settings_item_theme": "Theme",
-  "settings_item_units": "Einheiten"
+  "settings_item_units": "Einheiten",
+  "alarms_text": "Alarme verwalten",
+  "back_button": "Zurück",
+  "current_alarms": "Hier ist eine Liste mit deinen Alarmen:"
 }

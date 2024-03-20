@@ -119,5 +119,17 @@
   },
   "settings_item_language": "Language",
   "settings_item_theme": "Theme",
-  "settings_item_units": "Units"
+  "settings_item_units": "Units",
+  "alarms_text": "Manage alarms",
+  "@alarms_text": {
+    "description": "Manage Alarm text in Alarm menu"
+  },
+  "back_button": "Back",
+  "@back_button": {
+    "description": "A simple Back Button Text"
+  },
+  "current_alarms": "Here is a list with your current alarms:",
+  "@current_alarms": {
+    "description": "Text in manage alarms menu"
+  }
 }

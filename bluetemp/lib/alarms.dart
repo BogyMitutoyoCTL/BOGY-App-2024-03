@@ -12,20 +12,29 @@ class _alarmsState extends State<alarms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Alarme verwalten")),
+      appBar: AppBar(
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).alarms_text)),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Alarme verwalten",
+                AppLocalizations.of(context).alarms_text,
                 style: TextStyle(fontSize: 30),
-              ),
+              )
             ],
           ),
-          ElevatedButton(onPressed: goBack, child: Text("Zurück"))
+          Text(AppLocalizations.of(context).current_alarms),
+          Padding(
+            padding: const EdgeInsets.all(120.0),
+            child: ElevatedButton(
+                onPressed: goBack,
+                child: Text(AppLocalizations.of(context).back_button)),
+          )
         ],
       ),
     );
