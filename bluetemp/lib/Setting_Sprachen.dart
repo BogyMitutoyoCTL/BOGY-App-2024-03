@@ -11,37 +11,39 @@ class Setting_Sprache extends StatefulWidget {
 }
 
 class _Setting_SpracheState extends State<Setting_Sprache> {
-  String en = "en";
-  String de = "de";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).languageSetting),
       ),
-      body: Column(
-        children: [
-          RadioListTile(value: de, groupValue: globalState.Sprache, onChanged: zudeutsch, title: Text("🇩🇪 Deutsch")),
-          RadioListTile(value: en, groupValue: globalState.Sprache, onChanged: zuenglisch, title: Text("🇺🇸 English"))
-        ],
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+        child: DropdownButton(
+          isExpanded: true,
+          value: globalState.Sprache,
+          items: dropdownItems(),
+          onChanged: Sprachanederung,
+        ),
       ),
     );
   }
 
-  void zudeutsch(String) {
-    setState(() {
-      globalState.Sprache = de;
-      globalState.appSettingsChanger.setLanguage(de);
-      print("${globalState.Sprache}utsch");
-    });
+  List<DropdownMenuItem<String>> dropdownItems() {
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("Englisch"), value: "en"),
+      DropdownMenuItem(
+        child: Text("Deutsch"),
+        value: "de",
+      )
+    ];
+    return menuItems;
   }
 
-  void zuenglisch(String) {
+  void Sprachanederung(String? value) {
     setState(() {
-      globalState.Sprache = en;
-      globalState.appSettingsChanger.setLanguage(en);
-      print("${globalState.Sprache}glisch");
+      globalState.Sprache = value!;
+      globalState.appSettingsChanger.refreshApp();
     });
   }
 }
