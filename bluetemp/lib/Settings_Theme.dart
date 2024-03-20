@@ -25,19 +25,19 @@ class _Setting_ThemeState extends State<Setting_Theme> {
         children: [
           RadioListTile(
             value: ThemeMode.dark,
-            groupValue: globalState.Theme_Mode,
+            groupValue: globalState.selectedTheme,
             onChanged: Theme_Mode_dark,
             title: Text("Darkmode"),
           ),
           RadioListTile(
             value: ThemeMode.light,
-            groupValue: globalState.Theme_Mode,
+            groupValue: globalState.selectedTheme,
             onChanged: Theme_Mode_light,
             title: Text("Lightmode"),
           ),
           RadioListTile(
             value: ThemeMode.system,
-            groupValue: globalState.Theme_Mode,
+            groupValue: globalState.selectedTheme,
             onChanged: ThemeMode_System,
             title: Text("Systemstandard"),
           )
@@ -48,19 +48,19 @@ class _Setting_ThemeState extends State<Setting_Theme> {
 
   void Theme_Mode_dark(ThemeMode) {
     setState(() {
-      globalState.Theme_Mode = Darkmode;
+      globalState.selectedTheme = Darkmode;
     });
   }
 
   void Theme_Mode_light(ThemeMode) {
     setState(() {
-      globalState.Theme_Mode = Lightmode;
+      globalState.selectedTheme = Lightmode;
     });
   }
 
   void ThemeMode_System(ThemeMode) {
     setState(() {
-      globalState.Theme_Mode = Systemmode;
+      globalState.selectedTheme = Systemmode;
     });
   }
 }

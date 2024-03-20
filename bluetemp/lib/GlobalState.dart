@@ -26,7 +26,7 @@ class GlobalState {
         foregroundColor: darkColor.onPrimary),
     useMaterial3: true,
   );
-  var Theme_Mode = ThemeMode.system;
+
   ThemeMode selectedTheme = ThemeMode.system;
   String DateOfLastMeasurement = "18.03.2024";
   String TimeOfLastMeasurement = "16:01:09";
