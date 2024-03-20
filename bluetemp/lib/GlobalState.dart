@@ -51,6 +51,13 @@ class GlobalState {
     }
     if (Einheit == "°N") {
       return Grad_Celsius * 33 / 100;
+    }
+
+    if (Einheit == "°De") {
+      return (100 - Grad_Celsius) * 3.2;
+    }
+    if (Einheit == "°°Rø") {
+      return (Grad_Celsius * 21 / 40) + 7.5;
     } else {
       return Grad_Celsius;
     }
@@ -59,6 +66,25 @@ class GlobalState {
   double Temperaturumrechner_Minimum(double Minimum) {
     if (Einheit == "°F") {
       return Minimum * 1.8 + 32;
+    }
+    if (Einheit == "°Ra") {
+      return Minimum * 1.8 + 491.67;
+    }
+    if (Einheit == "°Ré") {
+      return Minimum * 0.8;
+    }
+    if (Einheit == "°K") {
+      return Minimum + 273.15;
+    }
+    if (Einheit == "°N") {
+      return Minimum * 33 / 100;
+    }
+
+    if (Einheit == "°De") {
+      return (100 - Minimum) * 3.2;
+    }
+    if (Einheit == "°°Rø") {
+      return (Minimum * 21 / 40) + 7.5;
     } else {
       return Minimum;
     }
@@ -67,6 +93,25 @@ class GlobalState {
   double Temperaturumrechner_Maximum(double Maximum) {
     if (Einheit == "°F") {
       return Maximum * 1.8 + 32;
+    }
+    if (Einheit == "°Ra") {
+      return Maximum * 1.8 + 491.67;
+    }
+    if (Einheit == "°Ré") {
+      return Maximum * 0.8;
+    }
+    if (Einheit == "°K") {
+      return Maximum + 273.15;
+    }
+    if (Einheit == "°N") {
+      return Maximum * 33 / 100;
+    }
+
+    if (Einheit == "°De") {
+      return (100 - Maximum) * 3.2;
+    }
+    if (Einheit == "°°Rø") {
+      return (Maximum * 21 / 40) + 7.5;
     } else {
       return Maximum;
     }
@@ -75,6 +120,25 @@ class GlobalState {
   double Temperaturumrechner_Durchschnitt(double Durchschnitt) {
     if (Einheit == "°F") {
       return Durchschnitt * 1.8 + 32;
+    }
+    if (Einheit == "°Ra") {
+      return Grad_Celsius * 1.8 + 491.67;
+    }
+    if (Einheit == "°Ré") {
+      return Durchschnitt * 0.8;
+    }
+    if (Einheit == "°K") {
+      return Durchschnitt + 273.15;
+    }
+    if (Einheit == "°N") {
+      return Durchschnitt * 33 / 100;
+    }
+
+    if (Einheit == "°De") {
+      return (100 - Durchschnitt) * 3.2;
+    }
+    if (Einheit == "°°Rø") {
+      return (Durchschnitt * 21 / 40) + 7.5;
     } else {
       return Durchschnitt;
     }

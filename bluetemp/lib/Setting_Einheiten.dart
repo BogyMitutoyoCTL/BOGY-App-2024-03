@@ -17,6 +17,7 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   String K = "°K";
   String De = "°De";
   String N = "°N";
+  String O = "°Rø";
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +61,18 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
           groupValue: globalState.Einheit,
           onChanged: Einheit_aenderungN,
           title: Text("Newton"),
+        ),
+        RadioListTile(
+          value: De,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungDe,
+          title: Text("Delisle"),
+        ),
+        RadioListTile(
+          value: O,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungO,
+          title: Text("Rømer"),
         )
         // ElevatedButton(
         //   onPressed: nothing,  //--> Test für Einheiten (// bei void nothing auch entfernen
@@ -107,6 +120,20 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   void Einheit_aenderungN(String) {
     setState(() {
       globalState.Einheit = N;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungDe(String) {
+    setState(() {
+      globalState.Einheit = De;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungO(String) {
+    setState(() {
+      globalState.Einheit = O;
       print(globalState.Einheit);
     });
   }
