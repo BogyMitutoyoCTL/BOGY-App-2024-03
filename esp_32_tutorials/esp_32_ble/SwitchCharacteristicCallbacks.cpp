@@ -2,30 +2,30 @@
 
 void SwitchCharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
 {
-    //Serial.printf("Callback function to support a read request.\n");
+    // Serial.printf("Callback function to support a read request.\n");
 }
 
 void SwitchCharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteristic)
 {
-    //Serial.printf("Callback function to support a Notify request.\n");
+    // Serial.printf("Callback function to support a Notify request.\n");
     auto val = binary_value_.value;
     pCharacteristic->setValue((uint8_t *)&val, 1);
 }
 
 void SwitchCharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristic, Status s, uint32_t code)
 {
-    //Serial.printf("Callback function to support a Notify/Indicate Status report.\n");
-    //Serial.printf("Status: %d Code: %d\n", s, code);
+    // Serial.printf("Callback function to support a Notify/Indicate Status report.\n");
+    // Serial.printf("Status: %d Code: %d\n", s, code);
 }
 
 void SwitchCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
 {
-    uint8_t* dataPtr = pCharacteristic->getData();
+    uint8_t *dataPtr = pCharacteristic->getData();
     size_t data_lenght = pCharacteristic->getLength();
-    Serial.printf("DataLenght: %d\n", data_lenght );
+    Serial.printf("DataLenght: %d\n", data_lenght);
     bool value = static_cast<bool>(dataPtr[0]);
     binary_value_.value = value;
     digitalWrite(SWITCH_LED, binary_value_.value);
-    Serial.printf("SwitchValue: %s\n", value ? "true" : "false" );
+    Serial.printf("SwitchValue: %s\n", value ? "true" : "false");
     Serial.flush();
 }

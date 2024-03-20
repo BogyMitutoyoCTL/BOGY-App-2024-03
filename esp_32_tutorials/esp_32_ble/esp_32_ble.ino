@@ -13,11 +13,13 @@
 #include "Definitions.h"
 #include "Helpers.h"
 
+const std::string deviveName{"BTBLE"};
+auto unique_device_name = get_unique_device_name(deviveName);
+
 RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 BinaryValue status;
-
 
 BLEServer *pServer = NULL;
 BLECharacteristic *pCharacteristicTemperature = NULL;
@@ -64,7 +66,7 @@ void setup()
         Serial.println("RTC found... :-D");
     }
 
-    BLEDevice::init(DEVICE_NAME);
+    BLEDevice::init(unique_device_name);
 
     pServer = BLEDevice::createServer();
     pServer->setCallbacks(new MyServerCallbacks());
@@ -115,7 +117,10 @@ void setup()
     pAdvertising->setMinPreferred(0x12);
 
     BLEDevice::startAdvertising();
+    Serial.printf("BT MAC Address: %s\n", get_bt_mac_address().c_str());
+    Serial.printf("BLE Device %s started up.\n", unique_device_name.c_str());
     Serial.printf("Waiting a client connection to notify...\n");
+    Serial.flush();
 }
 
 unsigned long previousMillis = 0;
@@ -137,6 +142,7 @@ void loop()
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");
+
     // Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
     for (auto item : connectedDevices)
