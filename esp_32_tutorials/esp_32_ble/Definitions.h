@@ -11,6 +11,12 @@
 #define SERVICE_SWITCH_UUID "05811a0b-f418-488e-87b9-bf47ee64fda3"
 #define CHARACTERISTIC_SWITCH_UUID "a766ed81-3e5d-4503-af8e-25dbf9b90557"
 
+#define SERVICE_GET_DATA_UUID "06e2d59b-8087-4338-b347-1b6322b5d8be"
+#define CHARACTERISTIC_GET_DATA_UUID "4df03e85-818b-4f41-b26c-71d68b24814f"
+
+#define SERVICE_DATA_UUID "6a7f7672-ef00-4e7c-bba1-46179b152ad9"
+#define CHARACTERISTIC_DATA_UUID "db919837-6ddb-42e0-afd5-f4a46ca99c8f"
+
 #define EPSILON 0.01
 #define BUFFER_SIZE 10 // 7000 possible
 // define the pin port where the temperature sensor is connected

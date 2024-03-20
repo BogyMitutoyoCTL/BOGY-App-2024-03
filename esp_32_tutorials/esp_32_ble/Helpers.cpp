@@ -71,6 +71,12 @@ void print_status_value(const BinaryValue &bv, const String prefix)
     Serial.flush();
 }
 
+void print_values_read_changed(const long read, const long changed, const String prefix)
+{
+    Serial.printf("%sValues Read/Changed %d/%d\n", prefix, read, changed);
+    Serial.flush();
+}
+
 void print_buffer_ratio(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String prefix)
 {
     printf("%sBuffer: %d/%d Used/Free Ratio\n", prefix, temperatures.size(), temperatures.available());

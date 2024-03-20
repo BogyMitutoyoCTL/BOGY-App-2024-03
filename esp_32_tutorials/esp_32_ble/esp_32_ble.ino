@@ -6,6 +6,7 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#include "MyServerCallbacks.h"
 #include "TemperatureCharacteristicCallbacks.h"
 #include "DateTimeCharacteristicCallbacks.h"
 #include "SwitchCharacteristicCallbacks.h"
@@ -22,34 +23,20 @@ auto unique_device_name = get_unique_device_name(deviveName);
 CircularBuffer<TemperatureData, BUFFER_SIZE> temperatures;
 
 float last_temperature{0.0};
+long values_read{0};
+long values_changed{0};
 
 RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature temperature_sensors(&oneWire);
-BinaryValue status;
+BinaryValue status{false};
+BinaryValue get_data{false};
 
 BLEServer *pServer = NULL;
 BLECharacteristic *pCharacteristicTemperature = NULL;
 BLECharacteristic *pCharacteristicDateTime = NULL;
 BLECharacteristic *pCharacteristicSwitch = NULL;
-
-// create a callback class to support BLE callbacks
-class MyServerCallbacks : public BLEServerCallbacks
-{
-    // if a new device connecting to the server
-    void onConnect(BLEServer *pServer)
-    {
-        Serial.printf("New client connected.\n");
-    };
-
-    // if a device is disconnecting from the server
-    void onDisconnect(BLEServer *pServer)
-    {
-        Serial.printf("Client disconnected.\n");
-        // do advertising again, that the next client could connect...
-        BLEDevice::startAdvertising();
-    }
-};
+BLECharacteristic *pCharacteristicGetData = NULL;
 
 void setup()
 {
@@ -116,6 +103,20 @@ void setup()
     pServiceSwitch->start();
     // #### End Switch Service (for LED)
 
+    // #### Get Data Service
+    BLEService *pServiceGetData = pServer->createService(SERVICE_GET_DATA_UUID);
+    pCharacteristicGetData = pServiceGetData->createCharacteristic(
+        CHARACTERISTIC_GET_DATA_UUID,
+        BLECharacteristic::PROPERTY_READ |
+            BLECharacteristic::PROPERTY_NOTIFY |
+            BLECharacteristic::PROPERTY_INDICATE |
+            BLECharacteristic::PROPERTY_WRITE);
+    pCharacteristicGetData->addDescriptor(new BLE2902());
+    pCharacteristicGetData->setCallbacks(new SwitchCharacteristicCallbacks(get_data));
+
+    pServiceGetData->start();
+    // #### End Get Data Service
+
     BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
     pAdvertising->addServiceUUID(SERVICE_ENVIRONMENTAL_SENSING_UUID);
     pAdvertising->addServiceUUID(SERVICE_SWITCH_UUID);
@@ -137,6 +138,7 @@ const long interval = 1000;
 
 void loop()
 {
+    digitalWrite(SWITCH_LED, status.value);
     //?? TODO: Check for overflow
     unsigned long currentMillis = millis();
     if (currentMillis - previousMillis < interval)
@@ -148,6 +150,7 @@ void loop()
     // read the sensor values
     temperature_sensors.requestTemperatures();
     float temperature = temperature_sensors.getTempCByIndex(0);
+    values_read++;
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");
@@ -155,11 +158,14 @@ void loop()
     if (!are_equal(last_temperature, temperature))
     {
         temperatures.push({temperature, now});
+        values_changed++;
     }
     last_temperature = temperature;
     print_buffer_ratio(temperatures, " ");
+    print_values_read_changed(values_read, values_changed, " ");
     print_buffer_values(temperatures, " ");
-    print_status_value(status, " ");
+    print_status_value(status, " IoPin? -> ");
+    print_status_value(get_data, " GetData? -> ");
 
     // Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
@@ -182,5 +188,7 @@ void loop()
         pCharacteristicTemperature->notify();
 
         pCharacteristicSwitch->notify();
+
+        pCharacteristicGetData->notify();
     }
 }

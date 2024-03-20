@@ -30,7 +30,7 @@ class _current_dataState extends State<current_data> {
           Text(globalState.DateOfLastMeasurement),
           Text(globalState.TimeOfLastMeasurement),
           Text(
-            "${double.parse((globalState.Temperaturumrechnen(globalState.Grad_Celsius)).toStringAsFixed(2))} ${globalState.Einheit}",
+            "${double.parse((globalState.Temperaturumrechnen(globalState.Temperature)).toStringAsFixed(2))} ${globalState.Einheit}",
             style: TextStyle(fontSize: 60),
           ),
           Countdown(
@@ -61,7 +61,7 @@ class _current_dataState extends State<current_data> {
       globalState.DateOfLastMeasurement = "${now.day}.${now.month}.${now.year}";
       globalState.TimeOfLastMeasurement =
           "${now.hour}:${now.minute}:${now.second}";
-      globalState.Grad_Celsius += rng.nextDouble() * 6 - 3;
+      globalState.Temperature += rng.nextDouble() * 6 - 3;
       _controller.restart();
     });
   }
