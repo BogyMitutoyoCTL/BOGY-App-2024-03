@@ -41,9 +41,15 @@ class GlobalState {
   var theme = ThemeData(
     colorScheme: lightColor,
     brightness: Brightness.light,
-    radioTheme: RadioThemeData(fillColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 7, 66, 234))),
-    appBarTheme: AppBarTheme(backgroundColor: lightColor.primary, foregroundColor: lightColor.onPrimary),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Color.fromARGB(255, 0, 0, 0))),
+    radioTheme: RadioThemeData(
+        fillColor: MaterialStateColor.resolveWith(
+            (states) => Color.fromARGB(255, 7, 66, 234))),
+    appBarTheme: AppBarTheme(
+        backgroundColor: lightColor.primary,
+        foregroundColor: lightColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            foregroundColor: Color.fromARGB(255, 0, 0, 0))),
     scaffoldBackgroundColor: Color.fromARGB(255, 232, 244, 255),
     useMaterial3: true,
   );
@@ -51,9 +57,14 @@ class GlobalState {
   var darkTheme = ThemeData(
     colorScheme: darkColor,
     brightness: Brightness.dark,
-    radioTheme: RadioThemeData(fillColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 7, 66, 234))),
-    appBarTheme: AppBarTheme(backgroundColor: darkColor.primary, foregroundColor: darkColor.onPrimary),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
+    radioTheme: RadioThemeData(
+        fillColor: MaterialStateColor.resolveWith(
+            (states) => Color.fromARGB(255, 7, 66, 234))),
+    appBarTheme: AppBarTheme(
+        backgroundColor: darkColor.primary,
+        foregroundColor: darkColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
     scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 78),
     useMaterial3: true,
   );
@@ -61,50 +72,50 @@ class GlobalState {
   ThemeMode selectedTheme = ThemeMode.system;
   String DateOfLastMeasurement = "18.03.2024";
   String TimeOfLastMeasurement = "16:01:09";
-  double Grad_Celsius = 24;
+  double Temperature = 24;
   double Minimum = 10;
   double Maximum = 30;
   double Durchschnitt = 20;
   String Einheit = "°C";
   var Alarms = []; //Usage Example: AlarmSetting(20, AlarmType.minimum)
 
-  double Temperaturumrechnen(double Grad_Celsius) {
+  double Temperaturumrechnen(double Temperature) {
     if (Einheit == "°F") {
-      return Grad_Celsius * 1.8 + 32;
+      return Temperature * 1.8 + 32;
     }
     if (Einheit == "°Ra") {
-      return Grad_Celsius * 1.8 + 491.67;
+      return Temperature * 1.8 + 491.67;
     }
     if (Einheit == "°Ré") {
-      return Grad_Celsius * 0.8;
+      return Temperature * 0.8;
     }
     if (Einheit == "°K") {
-      return Grad_Celsius + 273.15;
+      return Temperature + 273.15;
     }
-    if (Einheit == "°N") {
-      return Grad_Celsius * 33 / 100;
+    if (Einheit == "N") {
+      return Temperature * 33 / 100;
     }
 
     if (Einheit == "°De") {
-      return (100 - Grad_Celsius) * 3.2;
+      return (100 - Temperature) * 3.2;
     }
     if (Einheit == "°Rø") {
-      return (Grad_Celsius * 21 / 40) + 7.5;
+      return (Temperature * 21 / 40) + 7.5;
     }
     /* if (Einheit == "°Hr") {
-      return (Grad_Celsius + 273.15) * 1.8;
+      return (Temperature + 273.15) * 1.8;
     }
     if (Einheit == "°RD") {
-      return (Grad_Celsius + 273.15) * 0.02;
+      return (Temperature + 273.15) * 0.02;
     }
     if (Einheit == "°T_RS") {
-      return (Grad_Celsius + 273.15) * 2.61217 * m.pow(10, 30);
+      return (Temperature + 273.15) * 2.61217 * m.pow(10, 30);
     }
     if (Einheit == "°T_c") {
-      return (Grad_Celsius + 273.15) * 1.081 * m.pow(10, 30);
+      return (Temperature + 273.15) * 1.081 * m.pow(10, 30);
     }*/
     else {
-      return Grad_Celsius;
+      return Temperature;
     }
   }
 
@@ -121,7 +132,7 @@ class GlobalState {
     if (Einheit == "°K") {
       return Minimum + 273.15;
     }
-    if (Einheit == "°N") {
+    if (Einheit == "N") {
       return Minimum * 33 / 100;
     }
 
@@ -161,7 +172,7 @@ class GlobalState {
     if (Einheit == "°K") {
       return Maximum + 273.15;
     }
-    if (Einheit == "°N") {
+    if (Einheit == "N") {
       return Maximum * 33 / 100;
     }
 
@@ -193,7 +204,7 @@ class GlobalState {
       return Durchschnitt * 1.8 + 32;
     }
     if (Einheit == "°Ra") {
-      return Grad_Celsius * 1.8 + 491.67;
+      return Temperature * 1.8 + 491.67;
     }
     if (Einheit == "°Ré") {
       return Durchschnitt * 0.8;
