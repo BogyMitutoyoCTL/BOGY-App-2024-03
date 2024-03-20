@@ -168,7 +168,7 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
 
   void Einheit_aenderungHr(String) {
     setState(() {
-      globalState.Einheit = O;
+      globalState.Einheit = Hr;
       print(globalState.Einheit);
     });
   }
