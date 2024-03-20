@@ -31,6 +31,7 @@ Install Libs:
 arduino-cli.exe lib install "OneWire"
 arduino-cli.exe lib install "DallasTemperature"
 arduino-cli lib install "RTClib"
+arduino-cli lib install "CircularBuffer"
 ```
 
 ## Circut

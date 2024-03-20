@@ -10,11 +10,18 @@
 #include "DateTimeCharacteristicCallbacks.h"
 #include "SwitchCharacteristicCallbacks.h"
 
+#include <CircularBuffer.hpp>
+
 #include "Definitions.h"
 #include "Helpers.h"
 
 const std::string deviveName{"BTBLE"};
 auto unique_device_name = get_unique_device_name(deviveName);
+
+// https://github.com/rlogiacco/CircularBuffer
+CircularBuffer<TemperatureData, BUFFER_SIZE> temperatures;
+
+float last_temperature{0.0};
 
 RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
@@ -50,12 +57,12 @@ void setup()
     pinMode(SWITCH_LED, OUTPUT);
     status.value = false;
     digitalWrite(SWITCH_LED, status.value);
-    
+
     pinMode(STATUS_LED, OUTPUT);
-    
+
     temperature_sensors.begin();
     Serial.printf("Found %d temperature sensor devices\n", temperature_sensors.getDeviceCount());
-    
+
     if (!rtc.begin())
     {
         Serial.printf("Couldn't find RTC\n");
@@ -144,8 +151,15 @@ void loop()
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");
-    print_temperature(temperature);
-    print_status_value(status);
+    print_temperature(last_temperature, temperature, " ");
+    if (!are_equal(last_temperature, temperature))
+    {
+        temperatures.push({temperature, now});
+    }
+    last_temperature = temperature;
+    print_buffer_ratio(temperatures, " ");
+    print_buffer_values(temperatures, " ");
+    print_status_value(status, " ");
 
     // Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
     auto connectedDevices = pServer->getPeerDevices(true);
