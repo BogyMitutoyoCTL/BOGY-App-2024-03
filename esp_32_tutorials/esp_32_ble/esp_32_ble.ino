@@ -22,6 +22,8 @@ auto unique_device_name = get_unique_device_name(deviveName);
 CircularBuffer<TemperatureData, BUFFER_SIZE> temperatures;
 
 float last_temperature{0.0};
+long values_read{0};
+long values_changed{0};
 
 RTC_DS3231 rtc;
 OneWire oneWire(ONE_WIRE_BUS);
@@ -148,6 +150,7 @@ void loop()
     // read the sensor values
     temperature_sensors.requestTemperatures();
     float temperature = temperature_sensors.getTempCByIndex(0);
+    values_read++;
 
     DateTime now = rtc.now();
     print_date_time(now, "Now -> ");
@@ -155,9 +158,11 @@ void loop()
     if (!are_equal(last_temperature, temperature))
     {
         temperatures.push({temperature, now});
+        values_changed++;
     }
     last_temperature = temperature;
     print_buffer_ratio(temperatures, " ");
+    print_values_read_changed(values_read, values_changed, " ");
     print_buffer_values(temperatures, " ");
     print_status_value(status, " ");
 
