@@ -1,3 +1,4 @@
+import 'package:bluetemp/Store.dart';
 import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,7 +14,8 @@ class BlueTempApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var languageChanger = ChangeNotifierProvider(
       create: (context) => globalState.appSettingsChanger,
-      child: Consumer<AppSettingsChanger>(builder: (context, localeModel, child) {
+      child:
+          Consumer<AppSettingsChanger>(builder: (context, localeModel, child) {
         return MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -22,7 +24,7 @@ class BlueTempApp extends StatelessWidget {
           theme: globalState.theme,
           darkTheme: globalState.darkTheme,
           themeMode: globalState.selectedTheme,
-          home: const SplashScreenWidget(),
+          home: SplashScreenWidget(),
         );
       }),
     );
