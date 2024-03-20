@@ -42,19 +42,60 @@ DateTime get_date_time(uint8_t *ptr, uint size)
 
 void print_date_time(const DateTime dt, const String prefix)
 {
-    Serial.printf("%s DateTime: %.4u/%.2u/%.2u %.2u:%.2u:%.2u\n", prefix, dt.year(), dt.month(), dt.day(), dt.hour(), dt.minute(), dt.second());
+    Serial.printf("%sDateTime: %.4u/%.2u/%.2u %.2u:%.2u:%.2u\n", prefix, dt.year(), dt.month(), dt.day(), dt.hour(), dt.minute(), dt.second());
     Serial.flush();
 }
 
 void print_temperature(const float temp, const String prefix)
 {
-    Serial.printf("%s Temperature: %.2f°C\n", prefix, temp);
+    Serial.printf("%sTemperature: %.2f°C\n", prefix, temp);
+    Serial.flush();
+}
+
+void print_temperature(const float temp1, const float temp2, const String prefix)
+{
+    if (are_equal(temp1, temp2))
+    {
+        Serial.printf("%sEqual: %.2f Celsius\n", prefix, temp1);
+    }
+    else
+    {
+        Serial.printf("%sTempdiff: %.2f Grad / %.2f C / %.2f C\n", prefix, fabs(temp1 - temp2), temp1, temp2);
+    }
     Serial.flush();
 }
 
 void print_status_value(const BinaryValue &bv, const String prefix)
 {
-    Serial.printf("%s Binary Value: %s\n", prefix, bv.value ? "true" : "false");
+    Serial.printf("%sBinary Value: %s\n", prefix, bv.value ? "true" : "false");
+    Serial.flush();
+}
+
+void print_buffer_ratio(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String prefix)
+{
+    printf("%sBuffer: %d/%d Used/Free Ratio\n", prefix, temperatures.size(), temperatures.available());
+    Serial.flush();
+}
+
+void print_buffer_values(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String prefix)
+{
+    if (temperatures.isEmpty())
+    {
+        Serial.printf("%sBuffer is empty!\n", prefix);
+    }
+    else
+    {
+        Serial.printf("%sValues [", prefix);
+        for (auto i = 0; i < temperatures.size(); i++)
+        {
+            Serial.printf("%.2f", temperatures[i].temperature);
+            if (i != temperatures.size() - 1)
+            {
+                Serial.printf(", ");
+            }
+        }
+        Serial.printf("]\n");
+    }
     Serial.flush();
 }
 
@@ -76,4 +117,9 @@ std::string get_unique_device_name(const std::string &name)
     sprintf(baseChr, "%02X%02X%02X", baseMac[3], baseMac[4], baseMac[5]);
     std::string unique_name{name + " " + baseChr};
     return unique_name;
+}
+
+bool are_equal(float a, float b)
+{
+    return fabs(a - b) < EPSILON;
 }
