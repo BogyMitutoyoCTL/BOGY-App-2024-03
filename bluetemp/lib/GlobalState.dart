@@ -71,7 +71,7 @@ class GlobalState {
     if (Einheit == "°Rø") {
       return (Grad_Celsius * 21 / 40) + 7.5;
     }
-    if (Einheit == "°Hr") {
+    /* if (Einheit == "°Hr") {
       return (Grad_Celsius + 273.15) * 1.8;
     }
     if (Einheit == "°RD") {
@@ -82,7 +82,8 @@ class GlobalState {
     }
     if (Einheit == "°T_c") {
       return (Grad_Celsius + 273.15) * 1.081 * m.pow(10, 30);
-    } else {
+    }*/
+    else {
       return Grad_Celsius;
     }
   }
@@ -110,7 +111,7 @@ class GlobalState {
     if (Einheit == "°°Rø") {
       return (Minimum * 21 / 40) + 7.5;
     }
-    if (Einheit == "°Hr") {
+    /* if (Einheit == "°Hr") {
       return (Minimum + 273.15) * 1.8;
     }
     if (Einheit == "°RD") {
@@ -121,7 +122,8 @@ class GlobalState {
     }
     if (Einheit == "°T_c") {
       return (Minimum + 273.15) * 1.081 * m.pow(10, 30);
-    } else {
+    } */
+    else {
       return Minimum;
     }
   }
@@ -146,10 +148,10 @@ class GlobalState {
     if (Einheit == "°De") {
       return (100 - Maximum) * 3.2;
     }
-    if (Einheit == "°°Rø") {
+    if (Einheit == "°Rø") {
       return (Maximum * 21 / 40) + 7.5;
     }
-    if (Einheit == "°Hr") {
+    /* if (Einheit == "°Hr") {
       return (Maximum + 273.15) * 1.8;
     }
     if (Einheit == "°RD") {
@@ -160,7 +162,8 @@ class GlobalState {
     }
     if (Einheit == "°T_c") {
       return (Maximum + 273.15) * 1.081 * m.pow(10, 30);
-    } else {
+    }*/
+    else {
       return Maximum;
     }
   }
@@ -185,10 +188,10 @@ class GlobalState {
     if (Einheit == "°De") {
       return (100 - Durchschnitt) * 3.2;
     }
-    if (Einheit == "°°Rø") {
+    if (Einheit == "°Rø") {
       return (Durchschnitt * 21 / 40) + 7.5;
     }
-    if (Einheit == "°Hr") {
+    /* if (Einheit == "°Hr") {
       return (Durchschnitt + 273.15) * 1.8;
     }
     if (Einheit == "°RD") {
@@ -199,7 +202,8 @@ class GlobalState {
     }
     if (Einheit == "°T_c") {
       return (Durchschnitt + 273.15) * 1.081 * m.pow(10, 30);
-    } else {
+    }*/
+    else {
       return Durchschnitt;
     }
   }
