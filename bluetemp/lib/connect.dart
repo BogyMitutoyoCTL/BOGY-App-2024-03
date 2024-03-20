@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Connect extends StatefulWidget {
   const Connect({super.key});
@@ -16,43 +17,30 @@ class Connect extends StatefulWidget {
 class ConnectState extends State<Connect> {
   BluetoothAdapterState adapterState = BluetoothAdapterState.unknown;
 
-  late StreamSubscription<BluetoothAdapterState> adapterStateStateSubscription;
+  late StreamSubscription<BluetoothAdapterState> adapterStateSubscription;
 
   @override
   void initState() {
     super.initState();
-    adapterStateStateSubscription =
-        FlutterBluePlus.adapterState.listen((state) {
-      adapterState = state;
-      if (mounted) {
-        fetch();
-        setState(() {});
-      }
-    });
+    adapterStateSubscription =
+        FlutterBluePlus.adapterState.listen(onStageChange);
+  }
+
+  void onStageChange(BluetoothAdapterState state) {
+    adapterState = state;
+    if (mounted) {
+      refreshBluetoothDeviceList();
+      setState(() {});
+    }
   }
 
   @override
   void dispose() {
-    adapterStateStateSubscription.cancel();
+    adapterStateSubscription.cancel();
     super.dispose();
   }
 
-  List<BluetoothDevice> bluetoothDeviceList = [
-    /*
-    DeviceData(
-        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
-        isConnected: true,
-        deviceName: "0"),
-    DeviceData(
-        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
-        isConnected: true,
-        deviceName: "1"),
-    DeviceData(
-        bluetoothDevice: BluetoothDevice(remoteId: DeviceIdentifier("test")),
-        isConnected: true,
-        deviceName: "2")
-  */
-  ];
+  List<BluetoothDevice> bluetoothDeviceList = [];
 
   Row createListEntry(
       BuildContext context, List<BluetoothDevice> list, int index) {
@@ -66,7 +54,8 @@ class ConnectState extends State<Connect> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ElevatedButton(
-            onPressed: () => connect(index), child: Text(list[index].advName)),
+            onPressed: () => toggleConnection(index),
+            child: Text(list[index].advName)),
         iconShowConnected
       ],
     );
@@ -82,17 +71,18 @@ class ConnectState extends State<Connect> {
         });
 
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Connect")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).connect_title)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          //TODO: Implement Connect
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Geräteliste"),
-                IconButton(onPressed: fetch, icon: Icon(Icons.refresh_rounded))
+                Text(AppLocalizations.of(context).device_list),
+                IconButton(
+                    onPressed: refreshBluetoothDeviceList,
+                    icon: Icon(Icons.refresh_rounded))
               ],
             ),
             Expanded(child: deviceListWidgets),
@@ -102,7 +92,7 @@ class ConnectState extends State<Connect> {
     );
   }
 
-  fetch() async {
+  refreshBluetoothDeviceList() async {
     bluetoothDeviceList.clear();
 
     var subscription = FlutterBluePlus.onScanResults.listen(
@@ -120,20 +110,19 @@ class ConnectState extends State<Connect> {
 
   void scanCallback(results) {
     if (results.isNotEmpty) {
-      for (ScanResult r in results) {
-        if (!bluetoothDeviceList.contains(r.device)) {
-          bluetoothDeviceList.add(r.device);
+      setState(() {
+        for (ScanResult r in results) {
+          if (!bluetoothDeviceList.contains(r.device)) {
+            bluetoothDeviceList.add(r.device);
+          }
         }
-      }
-      setState(() {});
+      });
     } else {
       print("no devices found");
     }
   }
 
-  connect(int btnIndex) async {
-    print("Button $btnIndex was pressed");
-
+  toggleConnection(int btnIndex) async {
     BluetoothDevice device = bluetoothDeviceList[btnIndex];
 
     // Connect to device if disconnected
