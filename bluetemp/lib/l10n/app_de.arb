@@ -29,5 +29,6 @@
   "settings_item_units": "Einheiten",
   "alarms_text": "Alarme verwalten",
   "back_button": "Zurück",
-  "current_alarms": "Hier ist eine Liste mit deinen Alarmen:"
+  "current_alarms": "Hier ist eine Liste mit deinen Alarmen:",
+  "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!"
 }

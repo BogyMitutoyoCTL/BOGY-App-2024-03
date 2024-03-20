@@ -13,12 +13,13 @@ class alarms extends StatefulWidget {
 }
 
 class _alarmsState extends State<alarms> {
+  var message = "";
   Row createListEntry(BuildContext context, List<dynamic> list, int index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ElevatedButton(
-            onPressed: () => manage_alarms(list[index].value),
+            onPressed: () => manage_alarms(list[index]),
             child: Row(
               children: [
                 Text(list[index].value.toString()),
@@ -56,6 +57,10 @@ class _alarmsState extends State<alarms> {
             ],
           ),
           Text(AppLocalizations.of(context).current_alarms),
+          Text(
+            message,
+            style: TextStyle(fontSize: 18, color: Colors.red),
+          ),
           Expanded(child: alarmListWidgets),
           Padding(
             padding: const EdgeInsets.all(120.0),
@@ -77,5 +82,36 @@ class _alarmsState extends State<alarms> {
     Navigator.of(context).pop();
   }
 
-  manage_alarms(int? value) {}
+  void manage_alarms(var value) {
+    globalState.Alarms.remove(value);
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 200,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(AppLocalizations.of(context).delete_alarm_message),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
+                        child: Text(AppLocalizations.of(context).close_button),
+                        onPressed: () => setState(() {
+                          Navigator.pop(context);
+                        }),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
 }
