@@ -97,10 +97,10 @@
   },
   "time_scale": "Time in °C",
   "@time_scale": {
-   "description": "Time Scala for the Graph"
+    "description": "Time Scala for the Graph"
   },
   "nextRefresh": "Next refresh in {seconds} seconds.",
-  "@nextRefresh":{
+  "@nextRefresh": {
     "description": "Current values: next refresh time",
     "placeholders": {
       "seconds": {
@@ -128,7 +128,7 @@
   "@back_button": {
     "description": "A simple Back Button Text"
   },
-  "current_alarms": "Here is a list with your current alarms. To delete an Alarm just click on it!",
+  "current_alarms": "Here is a list with your current alarms:",
   "@current_alarms": {
     "description": "Text in manage alarms menu"
   },
@@ -143,5 +143,13 @@
  "add_alarm_modal_text": "Please select the value and the typ for your alarm.",
    "@add_alarm_modal_text": {
     "description": "Text in the add an alarm Modal"
-   }
+   },
+  "device_list": "Device list",
+  "@device_list": {
+    "description": "Bluetooth connection: device list"
+  },
+  "connect_title": "Connect",
+  "@connect_title": {
+    "description": "Title of the connect screen"
+  }
 }
