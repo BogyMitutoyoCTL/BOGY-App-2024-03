@@ -32,6 +32,7 @@
   "current_alarms": "Hier ist eine Liste mit deinen Alarmen. Um einen Alarm zu löschen, klicke ihn einfach an!",
   "delete_alarm_message": "Der Alarm wurde erfolgreich gelöscht!",
   "add_alarm_button": "Alarm hinzufügen",
-  "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus."
+  "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus.",
+  "enter_temp_placeholder": "Gib hier die Temperatur ein."
 
 }

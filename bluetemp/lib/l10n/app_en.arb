@@ -143,5 +143,9 @@
  "add_alarm_modal_text": "Please select the value and the typ for your alarm.",
    "@add_alarm_modal_text": {
     "description": "Text in the add an alarm Modal"
-   }
+   },
+ "enter_temp_placeholder": "Enter the temperature here",
+ "@enter_temp_placeholder": {
+  "description": "Text in the Placeholder at manage alarms"
+}
 }

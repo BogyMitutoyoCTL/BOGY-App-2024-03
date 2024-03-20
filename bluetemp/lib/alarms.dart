@@ -1,9 +1,10 @@
 import 'package:bluetemp/AlarmSetting.dart';
 import 'package:bluetemp/GlobalState.dart';
 import 'package:bluetemp/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class alarms extends StatefulWidget {
   const alarms({super.key});
@@ -14,22 +15,43 @@ class alarms extends StatefulWidget {
 
 class _alarmsState extends State<alarms> {
   var text = "";
-  var icon;
+  var icon = Icons.delete;
+  String tempValue = "";
+  TextEditingController textController = TextEditingController();
 
-  AlarmType? selectedValue;
+  @override
+  void initState() {
+    textController.text = tempValue;
+    textController.addListener(() {
+      setState(() {
+        tempValue = textController.text;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  AlarmType selected_typ_value = AlarmType.lower;
   Container createListEntry(
       BuildContext context, List<dynamic> list, int index) {
     if (list[index].typ == AlarmType.lower) {
-      text = "Alarm < ${list[index].value}°C";
-      icon = Icons.brightness_7;
-    } else {
       text = "Alarm > ${list[index].value}°C";
-      icon = Icons.severe_cold;
+    } else {
+      text = "Alarm < ${list[index].value}°C";
     }
     return Container(
       margin: EdgeInsets.all(16),
       child: ElevatedButton(
-        onPressed: () => manage_alarms(list[index]),
+        onPressed: () {
+          manage_alarms(list[index]);
+          globalState.Alarms.remove(list[index]);
+          setState(() {});
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [Text(text), Icon(icon)],
@@ -91,16 +113,10 @@ class _alarmsState extends State<alarms> {
   }
 
   void goBack() {
-    globalState.Alarms.add(AlarmSetting(50, AlarmType.lower));
-    globalState.Alarms.add(AlarmSetting(70, AlarmType.higher));
-    globalState.Alarms.add(AlarmSetting(90, AlarmType.lower));
-    globalState.Alarms.map((e) => print(e.typ)).toList();
-
     Navigator.of(context).pop();
   }
 
   void manage_alarms(var value) {
-    globalState.Alarms.remove(value);
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -136,55 +152,84 @@ class _alarmsState extends State<alarms> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return Container(
-            height: 200,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.all(12),
-                      child: Text(
-                          AppLocalizations.of(context).add_alarm_modal_text)),
-                  DropdownButton(
-                      items: alarm_typ_item,
-                      onChanged: (AlarmType? newType) {
-                        setState(() {
-                          selectedValue = newType!;
-                        });
-                      },
-                      value: selectedValue),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          return StatefulBuilder(builder: build_alarm_type_modal);
+        });
+  }
+
+  Widget build_alarm_type_modal(BuildContext context, StateSetter setState) {
+    return Container(
+      height: 300,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+                margin: EdgeInsets.all(12),
+                child: Text(AppLocalizations.of(context).add_alarm_modal_text)),
+            DropdownButton(
+                items: alarm_typ_item,
+                onChanged: (AlarmType? newType) {
+                  setState(() {
+                    selected_typ_value = newType!;
+                  });
+                },
+                value: selected_typ_value),
+            TextField(
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              controller: textController,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  contentPadding:
+                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                  hintText:
+                      AppLocalizations.of(context).enter_temp_placeholder),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    add_alarm_to_list();
+                  },
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  child: Row(
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green),
-                        child: Row(
-                          children: [
-                            Icon(Icons.add),
-                            Text(AppLocalizations.of(context).add_alarm_button),
-                          ],
-                        ),
-                        onPressed: () => setState(() {
-                          Navigator.pop(context);
-                        }),
-                      ),
+                      Icon(Icons.add),
+                      Text(AppLocalizations.of(context).add_alarm_button),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        });
+          ],
+        ),
+      ),
+    );
+  }
+
+  add_alarm_to_list() {
+    var tempValueInt = int.parse(tempValue);
+    globalState.Alarms.add(AlarmSetting(tempValueInt, selected_typ_value));
+    globalState.Alarms.map((e) => print(e.typ)).toList();
+    setState(() {
+      Navigator.pop(context);
+      tempValue = "";
+    });
   }
 }
 
 List<DropdownMenuItem<AlarmType>> get alarm_typ_item {
   List<DropdownMenuItem<AlarmType>> menuItems = [
-    DropdownMenuItem(child: Text(">"), value: AlarmType.higher),
-    DropdownMenuItem(child: Text("<"), value: AlarmType.lower),
+    DropdownMenuItem(child: Text("Alarm >"), value: AlarmType.lower),
+    DropdownMenuItem(child: Text("Alarm <"), value: AlarmType.higher),
   ];
   return menuItems;
 }
