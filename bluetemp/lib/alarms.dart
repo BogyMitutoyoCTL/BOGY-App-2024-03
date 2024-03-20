@@ -64,7 +64,7 @@ class _alarmsState extends State<alarms> {
   @override
   Widget build(BuildContext context) {
     var alarmListWidgets = ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        physics: PageScrollPhysics(),
         itemCount: globalState.Alarms.length,
         itemBuilder: (context, index) {
           return createListEntry(context, Alarmlist, index);
