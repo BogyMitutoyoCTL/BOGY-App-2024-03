@@ -12,6 +12,12 @@ class Einheiten_Dialog extends StatefulWidget {
 class _Einheiten_DialogState extends State<Einheiten_Dialog> {
   String F = "°F";
   String C = "°C";
+  String Ra = "°Ra";
+  String Re = "°Ré";
+  String K = "°K";
+  String De = "°De";
+  String N = "°N";
+  String O = "°Rø";
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
         RadioListTile(
           value: C,
           groupValue: globalState.Einheit,
-          onChanged: Einheit_aenderungV,
+          onChanged: Einheit_aenderungC,
           title: Text("Celsius"),
         ),
         RadioListTile(
@@ -32,6 +38,42 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
           onChanged: Einheit_aenderungF,
           title: Text("Fahrenheit"),
         ),
+        RadioListTile(
+          value: Ra,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungR,
+          title: Text("Rankine"),
+        ),
+        RadioListTile(
+          value: Re,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungRe,
+          title: Text("Réaumur"),
+        ),
+        RadioListTile(
+          value: K,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungK,
+          title: Text("Kelvin"),
+        ),
+        RadioListTile(
+          value: N,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungN,
+          title: Text("Newton"),
+        ),
+        RadioListTile(
+          value: De,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungDe,
+          title: Text("Delisle"),
+        ),
+        RadioListTile(
+          value: O,
+          groupValue: globalState.Einheit,
+          onChanged: Einheit_aenderungO,
+          title: Text("Rømer"),
+        )
         // ElevatedButton(
         //   onPressed: nothing,  //--> Test für Einheiten (// bei void nothing auch entfernen
         //    child: Text("hhh"),
@@ -40,15 +82,59 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
     );
   }
 
-  void Einheit_aenderungV(String) {
+  void Einheit_aenderungC(String) {
     setState(() {
       globalState.Einheit = C;
+      print(globalState.Einheit);
     });
   }
 
   void Einheit_aenderungF(String) {
     setState(() {
       globalState.Einheit = F;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungR(String) {
+    setState(() {
+      globalState.Einheit = Ra;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungRe(String) {
+    setState(() {
+      globalState.Einheit = Re;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungK(String) {
+    setState(() {
+      globalState.Einheit = K;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungN(String) {
+    setState(() {
+      globalState.Einheit = N;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungDe(String) {
+    setState(() {
+      globalState.Einheit = De;
+      print(globalState.Einheit);
+    });
+  }
+
+  void Einheit_aenderungO(String) {
+    setState(() {
+      globalState.Einheit = O;
+      print(globalState.Einheit);
     });
   }
 
