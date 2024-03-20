@@ -25,6 +25,7 @@ class _Setting_ThemeState extends State<Setting_Theme> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
         child: DropdownButton(
+            isDense: true,
             isExpanded: true,
             items: dropdownItems(),
             onChanged: Theme_Mode,
