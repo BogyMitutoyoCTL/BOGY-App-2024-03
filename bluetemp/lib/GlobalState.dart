@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:bluetemp/AlarmSetting.dart';
 import 'package:bluetemp/LocaleChanger.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as m;
@@ -36,6 +39,7 @@ class GlobalState {
   double Maximum = 30;
   double Durchschnitt = 20;
   String Einheit = "°C";
+  var Alarms = []; //Usage Example: AlarmSetting(20, AlarmType.minimum)
 
   double Temperaturumrechnen(double Grad_Celsius) {
     if (Einheit == "°F") {
