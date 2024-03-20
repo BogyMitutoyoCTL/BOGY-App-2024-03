@@ -2,7 +2,6 @@ import 'package:bluetemp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class statistic extends StatefulWidget {
   const statistic({super.key});
@@ -68,9 +67,7 @@ class _statisticState extends State<statistic> {
                   "Maximum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text(
-                    "${globalState.Temperaturumrechner_Maximum(globalState.Maximum)}${globalState.Einheit}",
-                    style: TextStyle(fontSize: 25))
+                Text("${globalState.Temperaturumrechner_Maximum(globalState.Maximum)}${globalState.Einheit}", style: TextStyle(fontSize: 25))
               ],
             ),
           ),
@@ -83,9 +80,7 @@ class _statisticState extends State<statistic> {
                   "Minimum:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text(
-                    "${globalState.Temperaturumrechner_Minimum(globalState.Minimum)}${globalState.Einheit}",
-                    style: TextStyle(fontSize: 25))
+                Text("${globalState.Temperaturumrechner_Minimum(globalState.Minimum)}${globalState.Einheit}", style: TextStyle(fontSize: 25))
               ],
             ),
           ),
@@ -98,9 +93,7 @@ class _statisticState extends State<statistic> {
                   "Durchschnitt:",
                   style: TextStyle(fontSize: 25),
                 ),
-                Text(
-                    "${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)}${globalState.Einheit}",
-                    style: TextStyle(fontSize: 25))
+                Text("${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)}${globalState.Einheit}", style: TextStyle(fontSize: 25))
               ],
             ),
           ),
@@ -130,13 +123,11 @@ class _statisticState extends State<statistic> {
                     children: [
                       ElevatedButton(
                         child: Text(AppLocalizations.of(context).sure_button),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                         onPressed: delete_all_statistics,
                       ),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                         child: Text(AppLocalizations.of(context).close_button),
                         onPressed: () => Navigator.pop(context),
                       ),

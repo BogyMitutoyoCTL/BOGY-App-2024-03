@@ -22,5 +22,9 @@
   "sure_button":  "Sicher!",
   "close_button":  "Schließen",
   "current_phone_time" :  "Aktuelle Uhrzeit des Telefons:",
-  "current_sensor_time": "Aktuelle Uhrzeit des Sensors:"
+  "current_sensor_time": "Aktuelle Uhrzeit des Sensors:",
+  "settings_title": "Einstellungen",
+  "settings_item_language": "Sprache",
+  "settings_item_theme": "Theme",
+  "settings_item_units": "Einheiten"
 }
