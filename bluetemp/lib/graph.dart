@@ -27,44 +27,46 @@ class _graphsState extends State<graphs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("BlueTemp - Graphen")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            AppLocalizations.of(context).temperature_graph,
-            style: TextStyle(fontSize: 35),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(AppLocalizations.of(context).temp_scale),
-              ),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            width: double.infinity,
-            height: 300,
-            child: LineChart(
-              LineChartData(
-                  borderData: FlBorderData(show: false),
-                  lineBarsData: [
-                    LineChartBarData(spots: chartData),
-                  ]),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppLocalizations.of(context).temperature_graph,
+              style: TextStyle(fontSize: 35),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(10.0),
-                child: Text(AppLocalizations.of(context).time_scale),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(AppLocalizations.of(context).temp_scale),
+                ),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              height: 300,
+              child: LineChart(
+                LineChartData(
+                    borderData: FlBorderData(show: false),
+                    lineBarsData: [
+                      LineChartBarData(spots: chartData),
+                    ]),
               ),
-            ],
-          )
-        ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: Text(AppLocalizations.of(context).time_scale),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
