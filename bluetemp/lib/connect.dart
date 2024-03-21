@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -29,7 +30,7 @@ class ConnectState extends State<Connect> {
   void onStageChange(BluetoothAdapterState state) {
     adapterState = state;
     if (mounted) {
-      refreshBluetoothDeviceList();
+      //refreshBluetoothDeviceList();
       setState(() {});
     }
   }
@@ -63,6 +64,8 @@ class ConnectState extends State<Connect> {
     );
   }
 
+  bool refreshing = false;
+
   @override
   Widget build(BuildContext context) {
     var deviceListWidgets = ListView.builder(
@@ -82,9 +85,14 @@ class ConnectState extends State<Connect> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(AppLocalizations.of(context).device_list),
-                IconButton(
-                    onPressed: refreshBluetoothDeviceList,
-                    icon: Icon(Icons.refresh_rounded))
+                Visibility(
+                    visible: !refreshing,
+                    maintainSize: true,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    child: IconButton(
+                        onPressed: refreshBluetoothDeviceList,
+                        icon: Icon(Icons.refresh_rounded)))
               ],
             ),
             Expanded(child: deviceListWidgets),
@@ -96,6 +104,7 @@ class ConnectState extends State<Connect> {
 
   refreshBluetoothDeviceList() async {
     setState(() {
+      refreshing = true;
       clearDeviceList();
       List<BluetoothDevice> connectedDevices = FlutterBluePlus.connectedDevices;
       for (BluetoothDevice device in connectedDevices) {
@@ -103,16 +112,22 @@ class ConnectState extends State<Connect> {
       }
     });
 
-    var subscription = FlutterBluePlus.onScanResults.listen(onScanResult,
-        onError: (e) => print(e),
-        onDone: () => setState(() {}),
-        cancelOnError: true);
+    var subscription = FlutterBluePlus.onScanResults
+        .listen(onScanResult, onError: (e) => print(e));
 
     FlutterBluePlus.cancelWhenScanComplete(subscription);
 
-    await FlutterBluePlus.startScan(
-        withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
-        timeout: Duration(seconds: 15));
+    FlutterBluePlus.startScan(
+      withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
+      timeout: Duration(seconds: 5),
+    );
+    FlutterBluePlus.isScanning.listen((event) {
+      if (event == false) {
+        setState(() {
+          refreshing = false;
+        });
+      }
+    });
   }
 
   void clearDeviceList() {
