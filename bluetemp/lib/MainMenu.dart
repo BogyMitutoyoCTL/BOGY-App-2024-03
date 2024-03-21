@@ -25,19 +25,22 @@ class _MainMenuState extends State<MainMenu> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).appname),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            MainMenuButton(callback: verbindung, text: AppLocalizations.of(context).connect, iconData: Icons.wifi),
-            MainMenuButton(callback: aktuelle_daten, text: AppLocalizations.of(context).showCurrentData, iconData: Icons.bar_chart),
-            MainMenuButton(callback: statistik, text: AppLocalizations.of(context).showStatistics, iconData: Icons.moving_sharp),
-            MainMenuButton(callback: alarme, text: AppLocalizations.of(context).manageAlarms, iconData: Icons.alarm),
-            MainMenuButton(callback: time_sync, text: AppLocalizations.of(context).syncTime, iconData: Icons.hourglass_top),
-            MainMenuButton(callback: graph, text: AppLocalizations.of(context).showGraph, iconData: Icons.auto_graph),
-            MainMenuButton(callback: about, text: AppLocalizations.of(context).aboutUs, iconData: Icons.info),
-            MainMenuButton(callback: settings, text: AppLocalizations.of(context).settings, iconData: Icons.settings)
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MainMenuButton(callback: verbindung, text: AppLocalizations.of(context).connect, iconData: Icons.wifi),
+              MainMenuButton(callback: aktuelle_daten, text: AppLocalizations.of(context).showCurrentData, iconData: Icons.bar_chart),
+              MainMenuButton(callback: statistik, text: AppLocalizations.of(context).showStatistics, iconData: Icons.moving_sharp),
+              MainMenuButton(callback: alarme, text: AppLocalizations.of(context).manageAlarms, iconData: Icons.alarm),
+              MainMenuButton(callback: time_sync, text: AppLocalizations.of(context).syncTime, iconData: Icons.hourglass_top),
+              MainMenuButton(callback: graph, text: AppLocalizations.of(context).showGraph, iconData: Icons.auto_graph),
+              MainMenuButton(callback: about, text: AppLocalizations.of(context).aboutUs, iconData: Icons.info),
+              MainMenuButton(callback: settings, text: AppLocalizations.of(context).settings, iconData: Icons.settings)
+            ],
+          ),
         ),
       ),
     );

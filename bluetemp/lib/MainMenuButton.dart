@@ -10,7 +10,7 @@ class MainMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
       child: ElevatedButton(
         onPressed: callback,
         child: Row(
