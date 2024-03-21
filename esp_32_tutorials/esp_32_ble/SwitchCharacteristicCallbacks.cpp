@@ -8,7 +8,7 @@ void SwitchCharacteristicCallbacks::onRead(BLECharacteristic *pCharacteristic, e
 void SwitchCharacteristicCallbacks::onNotify(BLECharacteristic *pCharacteristic)
 {
     // Serial.printf("Callback function to support a Notify request.\n");
-    auto val = binary_value_.value;
+    auto val{binary_value_.value};
     pCharacteristic->setValue((uint8_t *)&val, 1);
 }
 
@@ -22,6 +22,6 @@ void SwitchCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, 
 {
     uint8_t *dataPtr = pCharacteristic->getData();
     size_t data_lenght = pCharacteristic->getLength();
-    bool value = static_cast<bool>(dataPtr[0]);
+    bool value{static_cast<bool>(dataPtr[0])};
     binary_value_.value = value;
 }

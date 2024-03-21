@@ -17,14 +17,19 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).languageSetting),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-        child: DropdownButton(
-          isExpanded: true,
-          value: globalState.Sprache,
-          items: dropdownItems(),
-          onChanged: Sprachanederung,
-        ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: DropdownButton(
+              isExpanded: true,
+              value: globalState.Sprache,
+              items: dropdownItems(),
+              onChanged: Sprachanederung,
+            ),
+          ),
+          ElevatedButton(onPressed: nnn, child: Text("hhh"))
+        ],
       ),
     );
   }
@@ -43,7 +48,11 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
   void Sprachanederung(String? value) {
     setState(() {
       globalState.Sprache = value!;
-      globalState.appSettingsChanger.refreshApp();
+      globalState.appSettingsChanger.setLanguage(value!);
     });
+  }
+
+  void nnn() {
+    print(globalState.Sprache);
   }
 }

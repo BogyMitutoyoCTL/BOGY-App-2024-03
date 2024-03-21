@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
@@ -23,32 +24,37 @@ class _current_dataState extends State<current_data> {
         title: Text(AppLocalizations.of(context).appname),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(AppLocalizations.of(context).current_data_last_measurement),
-          Text(globalState.DateOfLastMeasurement),
-          Text(globalState.TimeOfLastMeasurement),
-          Text(
-            "${double.parse((globalState.Temperaturumrechnen(globalState.Temperature)).toStringAsFixed(2))} ${globalState.Einheit}",
-            style: TextStyle(fontSize: 60),
+      body: Center(
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(AppLocalizations.of(context).current_data_last_measurement),
+              Text(globalState.DateOfLastMeasurement),
+              Text(globalState.TimeOfLastMeasurement),
+              Text(
+                "${double.parse((globalState.Temperaturumrechnen(globalState.Temperature)).toStringAsFixed(2))} ${globalState.Einheit}",
+                style: TextStyle(fontSize: 60),
+              ),
+              Countdown(
+                controller: _controller,
+                seconds: 60,
+                build: (BuildContext context, double time) => Text(
+                    AppLocalizations.of(context).nextRefresh(time.toInt())),
+                interval: Duration(milliseconds: 1000),
+                onFinished: refresh,
+              ),
+              Center(
+                  child: Padding(
+                padding: const EdgeInsets.all(80.0),
+                child: ElevatedButton(
+                    onPressed: refresh,
+                    child: Text(AppLocalizations.of(context).refresh)),
+              ))
+            ],
           ),
-          Countdown(
-            controller: _controller,
-            seconds: 60,
-            build: (BuildContext context, double time) =>
-                Text(AppLocalizations.of(context).nextRefresh(time.toInt())),
-            interval: Duration(milliseconds: 1000),
-            onFinished: refresh,
-          ),
-          Center(
-              child: Padding(
-            padding: const EdgeInsets.all(80.0),
-            child: ElevatedButton(
-                onPressed: refresh,
-                child: Text(AppLocalizations.of(context).refresh)),
-          ))
-        ],
+        ),
       ),
     );
   }

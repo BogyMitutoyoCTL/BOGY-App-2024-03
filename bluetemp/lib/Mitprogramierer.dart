@@ -15,9 +15,7 @@ class _MitprogramiererState extends State<Mitprogramierer> {
       appBar: AppBar(
         title: Center(child: Text("Us")),
       ),
-      body: CupertinoScrollbar(
-        controller: TrackingScrollController(),
-        thumbVisibility: true,
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset(
@@ -42,7 +40,7 @@ class _MitprogramiererState extends State<Mitprogramierer> {
             Container(
               height: 40,
             ),
-            Text("Tim ...")
+            Text("Tim P.")
           ],
         ),
       ),

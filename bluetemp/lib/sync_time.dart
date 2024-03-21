@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -21,63 +22,69 @@ class _sync_timeState extends State<sync_time> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("BlueTemp - Zeit Synchronisieren")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
+      body: Center(
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                AppLocalizations.of(context).current_phone_time,
-                style: TextStyle(fontSize: 25),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).current_phone_time,
+                    style: TextStyle(fontSize: 25),
+                  )
+                ],
+              ),
+              Container(
+                color: Colors.lightBlue[50],
+                child: Column(
+                  children: [
+                    Text(dayformatted),
+                    Text(hourformatted),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).current_sensor_time,
+                    style: TextStyle(fontSize: 25),
+                  )
+                ],
+              ),
+              Container(
+                color: Colors.lightBlue[50],
+                child: Column(
+                  children: [
+                    Text(
+                        "${dayformatted}"), //TODO: Implement current sensor time
+                    Text("${hourformatted}"),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: ElevatedButton(
+                    onPressed: sync_time_data,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [Text("Sync Time & Data"), Icon(Icons.sync)],
+                    )),
+              ),
+              Countdown(
+                controller: _controller,
+                seconds: 3,
+                build: (BuildContext context, double time) =>
+                    Text("Next refresh in ${time.toInt()} secounds"),
+                interval: Duration(milliseconds: 1000),
+                onFinished: timer_end,
+              ),
             ],
           ),
-          Container(
-            color: Colors.lightBlue[50],
-            child: Column(
-              children: [
-                Text(dayformatted),
-                Text(hourformatted),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppLocalizations.of(context).current_sensor_time,
-                style: TextStyle(fontSize: 25),
-              )
-            ],
-          ),
-          Container(
-            color: Colors.lightBlue[50],
-            child: Column(
-              children: [
-                Text("${dayformatted}"), //TODO: Implement current sensor time
-                Text("${hourformatted}"),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: ElevatedButton(
-                onPressed: sync_time_data,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Sync Time & Data"), Icon(Icons.sync)],
-                )),
-          ),
-          Countdown(
-            controller: _controller,
-            seconds: 3,
-            build: (BuildContext context, double time) =>
-                Text("Next refresh in ${time.toInt()} secounds"),
-            interval: Duration(milliseconds: 1000),
-            onFinished: timer_end,
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -19,29 +19,34 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          children: [
-            Text(
-                style: TextStyle(fontSize: 30),
-                AppLocalizations.of(context).welcome),
-            Container(
-              height: 50,
-            ),
-            Center(
-                child: Image.asset(
-                    height: 450, scale: 3, 'assets/Images/BlueTempAppIco.png')),
-            /*Container(
-              height: 40,
-            ),*/
-            ElevatedButton(
-                onPressed: Main_Menue,
-                child: Text(AppLocalizations.of(context).getStarted),
-                style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 3, 4, 8),
-                    backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                    elevation: 5,
-                    shadowColor: Colors.black)),
-          ],
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Column(
+            children: [
+              Text(
+                  style: TextStyle(fontSize: 30),
+                  AppLocalizations.of(context).welcome),
+              Container(
+                height: 50,
+              ),
+              Center(
+                  child: Image.asset(
+                      height: 450,
+                      scale: 3,
+                      'assets/Images/BlueTempAppIco.png')),
+              /*Container(
+                height: 40,
+              ),*/
+              ElevatedButton(
+                  onPressed: Main_Menue,
+                  child: Text(AppLocalizations.of(context).getStarted),
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: Color.fromARGB(255, 3, 4, 8),
+                      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                      elevation: 5,
+                      shadowColor: Colors.black)),
+            ],
+          ),
         ),
       ),
     );
