@@ -173,6 +173,8 @@ class _alarmsState extends State<alarms> {
                 child: Text(AppLocalizations.of(context).add_alarm_modal_text)),
             DropdownButton(
                 items: alarm_typ_item,
+                dropdownColor: Color.fromARGB(500, 211, 211, 211),
+                style: TextStyle(color: Colors.black),
                 onChanged: (AlarmType? newType) {
                   setState(() {
                     selected_typ_value = newType!;
@@ -222,8 +224,7 @@ class _alarmsState extends State<alarms> {
   }
 
   add_alarm_to_list() {
-    var tempValueInt = int.parse(tempValue);
-    globalState.Alarms.add(AlarmSetting(tempValueInt, selected_typ_value));
+    globalState.Alarms.add(AlarmSetting(tempValue, selected_typ_value));
     globalState.Alarms.map((e) => print(e.typ)).toList();
     setState(() {
       Navigator.pop(context);
