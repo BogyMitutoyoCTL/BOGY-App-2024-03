@@ -7,7 +7,7 @@ void status_led_blink()
     digitalWrite(STATUS_LED, false);
 }
 
-uint8_t *get_byte_array(DateTime dt) // return type- address of integer array
+uint8_t *get_byte_array(const DateTime &dt) // return type- address of integer array
 {
     static uint8_t DateTimeCharArray[7];       // array declared as static
     DateTimeCharArray[0] = dt.year() & 0x00FF; // LSB (0xE2) 2018 = 0x07E2
@@ -20,7 +20,23 @@ uint8_t *get_byte_array(DateTime dt) // return type- address of integer array
     return DateTimeCharArray;
 }
 
-DateTime get_date_time(uint8_t *ptr, uint size)
+uint8_t *get_byte_array(const TemperatureData& temp_data)
+{
+    // 4 bytes for the seconds (unsigned long)
+    // 4 bytes for temperature (float)
+    auto seconds{temp_data.secondstime};
+    auto temperature{temp_data.temperature};
+    static uint8_t data[sizeof(TemperatureData)];
+    memcpy(data, &seconds, sizeof(seconds));
+    memcpy(data + sizeof(seconds), &temperature, sizeof(temperature));
+    Serial.printf("   Notify Data!\n");
+    Serial.printf("   (UINT32 - Little Endian) Data Seconds: 0x%02X%02X%02X%02X Value: %d\n", data[0], data[1], data[2], data[3], seconds);
+    Serial.printf("   (Float - Little Endian) Data Temperature: 0x%02X%02X%02X%02X Value: %f\n", data[4], data[5], data[6], data[7], temperature);
+    Serial.flush();
+    return data;
+}
+
+DateTime get_date_time(uint8_t *ptr, const uint size)
 {
     if (size == 7)
     {
@@ -40,19 +56,19 @@ DateTime get_date_time(uint8_t *ptr, uint size)
     }
 }
 
-void print_date_time(const DateTime dt, const String prefix)
+void print_date_time(const DateTime &dt, const String &prefix)
 {
     Serial.printf("%sDateTime: %.4u/%.2u/%.2u %.2u:%.2u:%.2u\n", prefix, dt.year(), dt.month(), dt.day(), dt.hour(), dt.minute(), dt.second());
     Serial.flush();
 }
 
-void print_temperature(const float temp, const String prefix)
+void print_temperature(const float temp, const String &prefix)
 {
     Serial.printf("%sTemperature: %.2f°C\n", prefix, temp);
     Serial.flush();
 }
 
-void print_temperature(const float temp1, const float temp2, const String prefix)
+void print_temperature(const float temp1, const float temp2, const String &prefix)
 {
     if (are_equal(temp1, temp2))
     {
@@ -65,25 +81,25 @@ void print_temperature(const float temp1, const float temp2, const String prefix
     Serial.flush();
 }
 
-void print_status_value(const BinaryValue &bv, const String prefix)
+void print_status_value(const BinaryValue &bv, const String &prefix)
 {
     Serial.printf("%sBinary Value: %s\n", prefix, bv.value ? "true" : "false");
     Serial.flush();
 }
 
-void print_values_read_changed(const long read, const long changed, const String prefix)
+void print_values_read_changed(const long read, const long changed, const String &prefix)
 {
     Serial.printf("%sValues Read/Changed %d/%d\n", prefix, read, changed);
     Serial.flush();
 }
 
-void print_buffer_ratio(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String prefix)
+void print_buffer_ratio(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String &prefix)
 {
     printf("%sBuffer: %d/%d Used/Free Ratio\n", prefix, temperatures.size(), temperatures.available());
     Serial.flush();
 }
 
-void print_buffer_values(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String prefix)
+void print_buffer_values(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String &prefix)
 {
     if (temperatures.isEmpty())
     {
@@ -125,7 +141,7 @@ std::string get_unique_device_name(const std::string &name)
     return unique_name;
 }
 
-bool are_equal(float a, float b)
+bool are_equal(const float a, const float b)
 {
     return fabs(a - b) < EPSILON;
 }

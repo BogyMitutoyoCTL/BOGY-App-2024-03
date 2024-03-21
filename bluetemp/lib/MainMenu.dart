@@ -6,8 +6,8 @@ import 'package:bluetemp/statistics.dart';
 import 'package:bluetemp/alarms.dart';
 import 'package:bluetemp/graph.dart';
 import 'package:bluetemp/About_Dialog.dart';
-import 'package:bluetemp/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bluetemp/settings.dart';
 
 import 'MainMenuButton.dart';
 

@@ -192,11 +192,25 @@ void loop()
         pCharacteristicDateTime->setValue(get_byte_array(now), 7);
         pCharacteristicDateTime->notify();
 
-        pCharacteristicTemperature->setValue((uint8_t *)&temperature, 4);
+        pCharacteristicTemperature->setValue((uint8_t *)&temperature, sizeof(temperature));
         pCharacteristicTemperature->notify();
 
         pCharacteristicSwitch->notify();
 
         pCharacteristicGetData->notify();
+
+        // 4 bytes for the seconds (unsigned long)
+        // 4 bytes for temperature (float)
+        auto t{temperatures.last()};
+        uint8_t data[sizeof(TemperatureData)];
+        auto seconds{now.secondstime()};
+        memcpy(data, &seconds, sizeof(seconds));
+        memcpy(data + sizeof(seconds), &temperature, sizeof(temperature));
+        Serial.printf("   Notify Data!\n");
+        Serial.printf("   (UINT32 - Little Endian) Data Seconds: 0x%02X%02X%02X%02X Value: %d\n", data[0], data[1], data[2], data[3], seconds);
+        Serial.printf("   (Float - Little Endian) Data Temperature: 0x%02X%02X%02X%02X Value: %f\n", data[4], data[5], data[6], data[7], temperature);
+        Serial.flush();
+        pCharacteristicData->setValue(data, sizeof(TemperatureData));
+        pCharacteristicData->notify();
     }
 }
