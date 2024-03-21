@@ -13,7 +13,8 @@ class _StatisticPageState extends State<StatisticPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).statistics_title)),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context).statistics_title)),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -82,9 +83,15 @@ class _StatisticPageState extends State<StatisticPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text("${globalState.Temperaturumrechner_Maximum(globalState.Maximum)} ${globalState.Einheit}", style: TextStyle(fontSize: 25)),
-                    Text("${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)} ${globalState.Einheit}", style: TextStyle(fontSize: 25)),
-                    Text("${globalState.Temperaturumrechner_Minimum(globalState.Minimum)} ${globalState.Einheit}", style: TextStyle(fontSize: 25))
+                    Text(
+                        "${globalState.Temperaturumrechner_Maximum(globalState.Maximum)} ${getFromStorage("Einheit")}",
+                        style: TextStyle(fontSize: 25)),
+                    Text(
+                        "${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)} ${globalState.Einheit}",
+                        style: TextStyle(fontSize: 25)),
+                    Text(
+                        "${globalState.Temperaturumrechner_Minimum(globalState.Minimum)} ${globalState.Einheit}",
+                        style: TextStyle(fontSize: 25))
                   ],
                 )
               ],
@@ -118,13 +125,16 @@ class _StatisticPageState extends State<StatisticPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
                           onPressed: delete_all_statistics,
                           child: Text(AppLocalizations.of(context).sure_button),
                         ),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                          child: Text(AppLocalizations.of(context).close_button),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green),
+                          child:
+                              Text(AppLocalizations.of(context).close_button),
                           onPressed: () => Navigator.pop(context),
                         ),
                       ],
