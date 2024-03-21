@@ -36,7 +36,7 @@ class _Setting_ThemeState extends State<Setting_Theme> {
 
   List<DropdownMenuItem<ThemeMode>> dropdownItems() {
     List<DropdownMenuItem<ThemeMode>> menuItems = [
-      DropdownMenuItem(child: Text("Darkomde"), value: ThemeMode.dark),
+      DropdownMenuItem(child: Text("Darkmode"), value: ThemeMode.dark),
       DropdownMenuItem(
         child: Text("Lightmode"),
         value: ThemeMode.light,

@@ -1,6 +1,7 @@
 import 'package:bluetemp/Mitprogramierer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
@@ -29,24 +30,27 @@ class _About_DialogState extends State<About_Dialog> {
         ),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Container(
-              height: 30,
-            ),
-            Image.asset(
-                height: 450, scale: 2, 'assets/Images/BlueTempAppIco.png'),
-            Text(
-              AppLocalizations.of(context).appname,
-              style: TextStyle(fontSize: 25),
-            ),
-            Text(
-              "Version 1.0",
-              style: TextStyle(fontSize: 25),
-            ),
-            ElevatedButton(
-                onPressed: Mitprogramierende, child: Icon(Icons.person))
-          ],
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Column(
+            children: [
+              Container(
+                height: 30,
+              ),
+              Image.asset(
+                  height: 450, scale: 2, 'assets/Images/BlueTempAppIco.png'),
+              Text(
+                AppLocalizations.of(context).appname,
+                style: TextStyle(fontSize: 25),
+              ),
+              Text(
+                "Version 1.0",
+                style: TextStyle(fontSize: 25),
+              ),
+              ElevatedButton(
+                  onPressed: Mitprogramierende, child: Icon(Icons.person))
+            ],
+          ),
         ),
       ),
     );
