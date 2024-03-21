@@ -91,10 +91,8 @@ class GlobalState {
     Einheit = json["Einheit"];
     Sprache = json["language"];
     selectedTheme = ThemeMode.values.byName(json["selectedTheme"]);
-    Alarms = json["Alarms"]
-        .map((e) => AlarmSetting.fromJson(e))
-        .toList()
-        .cast<AlarmSetting>();
+    Alarms = List<AlarmSetting>.from(
+        json["Alarms"].map((e) => AlarmSetting.fromJson(e)));
   }
 
   double Temperaturumrechnen(double Temperature) {

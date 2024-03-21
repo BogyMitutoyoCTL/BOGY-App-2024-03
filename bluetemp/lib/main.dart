@@ -41,6 +41,10 @@ class SafeGlobalState {
 
   GlobalState getFromStorage() {
     var data_list = storage.getItem("GlobalState");
+    if (data_list == null) {
+      return GlobalState();
+    }
+
     print(data_list);
     for (var pair in data_list.entries) {
       print(pair.key);
