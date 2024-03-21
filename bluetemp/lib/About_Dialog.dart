@@ -23,28 +23,15 @@ class _About_DialogState extends State<About_Dialog> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Center(
-                  child: Text(AppLocalizations.of(context).appname +
-                      " - " +
-                      AppLocalizations.of(context).about_us_title))
-            ],
-          ),
-        ),
+        title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).about_us_title),
       ),
-      body: Center(
-        child: FittedBox(
-          fit: BoxFit.fill,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: 30,
-              ),
-              Image.asset(
-                  height: 450, scale: 2, 'assets/Images/BlueTempAppIco.png'),
+              Image.asset(scale: 4, 'assets/Images/BlueTempAppIco.png'),
               Text(
                 AppLocalizations.of(context).appname,
                 style: TextStyle(fontSize: 25),
@@ -53,8 +40,7 @@ class _About_DialogState extends State<About_Dialog> {
                 "Version 1.0",
                 style: TextStyle(fontSize: 25),
               ),
-              ElevatedButton(
-                  onPressed: Mitprogramierende, child: Icon(Icons.person))
+              ElevatedButton(onPressed: Mitprogramierende, child: Icon(Icons.person))
             ],
           ),
         ),
@@ -63,7 +49,6 @@ class _About_DialogState extends State<About_Dialog> {
   }
 
   void Mitprogramierende() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Mitprogramierer()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Mitprogramierer()));
   }
 }
