@@ -21,46 +21,53 @@ class _graphsState extends State<graphs> {
     FlSpot(6, 17),
     FlSpot(7, 15),
     FlSpot(8, 20),
+    FlSpot(8.1, 16),
+    FlSpot(8.2, 13),
+    FlSpot(8.3, 10),
+    FlSpot(9.3, 7),
+    FlSpot(20.4, 12),
+    FlSpot(25, 9),
+    FlSpot(26, 6),
+    FlSpot(27, 4),
+    FlSpot(28, 2),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("BlueTemp - Graphen")),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               AppLocalizations.of(context).temperature_graph,
-              style: TextStyle(fontSize: 35),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(AppLocalizations.of(context).temp_scale),
-                ),
+                Text(AppLocalizations.of(context).temp_scale),
               ],
             ),
             Container(
-              padding: const EdgeInsets.all(10),
               width: double.infinity,
               height: 300,
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: LineChart(
-                LineChartData(borderData: FlBorderData(show: false), lineBarsData: [
-                  LineChartBarData(spots: chartData),
-                ]),
+                LineChartData(
+                    borderData: FlBorderData(show: false),
+                    lineBarsData: [
+                      LineChartBarData(spots: chartData),
+                    ],
+                    titlesData: FlTitlesData(topTitles: AxisTitles(axisNameWidget: null), rightTitles: AxisTitles(axisNameWidget: null))),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: Text(AppLocalizations.of(context).time_scale),
-                ),
+                Text(AppLocalizations.of(context).time_scale),
               ],
             )
           ],
