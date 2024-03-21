@@ -99,10 +99,6 @@ class _alarmsState extends State<alarms> {
     );
   }
 
-  void goBack() {
-    Navigator.of(context).pop();
-  }
-
   void manage_alarms(var value) {
     showModalBottomSheet(
         context: context,
