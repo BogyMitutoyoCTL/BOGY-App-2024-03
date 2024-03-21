@@ -40,7 +40,7 @@ class _MitprogramiererState extends State<Mitprogramierer> {
             Container(
               height: 40,
             ),
-            Text("Tim P.")
+            Text("Tim Porger")
           ],
         ),
       ),
