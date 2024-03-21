@@ -21,18 +21,17 @@ class GlobalState {
   );
   // ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
   static var darkColor = ColorScheme(
-    brightness: Brightness.dark,
-    background: Colors.black45,
-    onBackground: Colors.white70,
-    error: Color.fromARGB(255, 180, 0, 0),
-    onError: Colors.white70,
-    primary: Color.fromARGB(255, 0, 106, 173),
-    onPrimary: Colors.white70,
-    secondary: Color.fromARGB(255, 45, 141, 68),
-    onSecondary: Colors.white70,
-    surface: Color.fromARGB(255, 128, 128, 128),
-    onSurface: Colors.white70,
-  );
+      brightness: Brightness.dark,
+      background: Colors.black45,
+      onBackground: Colors.white70,
+      error: Color.fromARGB(255, 180, 0, 0),
+      onError: Colors.white70,
+      primary: Color.fromARGB(255, 0, 106, 173),
+      onPrimary: Colors.white70,
+      secondary: Color.fromARGB(255, 45, 141, 68),
+      onSecondary: Colors.white70,
+      surface: Color.fromARGB(255, 128, 128, 128),
+      onSurface: Colors.white70);
 
   GlobalState() {
     appSettingsChanger.setLanguage(Sprache);
@@ -51,6 +50,8 @@ class GlobalState {
         style: ElevatedButton.styleFrom(
             foregroundColor: Color.fromARGB(255, 0, 0, 0))),
     scaffoldBackgroundColor: Color.fromARGB(255, 232, 244, 255),
+    dropdownMenuTheme: DropdownMenuThemeData(
+        textStyle: TextStyle(color: Colors.black), menuStyle: MenuStyle()),
     useMaterial3: true,
   );
 

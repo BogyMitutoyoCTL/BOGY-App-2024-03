@@ -40,7 +40,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
               onChanged: Sprachanederung,
               dropdownColor: Color.fromARGB(255, 211, 211, 211),
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: globalState.selectedTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Color.fromARGB(255, 0, 0, 0),
               ),
             ),
           ),
@@ -59,7 +61,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 onChanged: Theme_Mode,
                 dropdownColor: Color.fromARGB(255, 211, 211, 211),
                 style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: globalState.selectedTheme == ThemeMode.dark
+                      ? Colors.white
+                      : Color.fromARGB(255, 0, 0, 0),
                 ),
                 value: globalState.selectedTheme),
           ),
@@ -78,10 +82,12 @@ class _Setting_dialogState extends State<Setting_dialog> {
               onChanged: Einheits_aenderung,
               dropdownColor: Color.fromARGB(255, 211, 211, 211),
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: globalState.selectedTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Color.fromARGB(255, 0, 0, 0),
               ),
             ),
-          )
+          ),
         ])));
   }
 }
