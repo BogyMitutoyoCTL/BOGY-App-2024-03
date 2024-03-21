@@ -1,3 +1,4 @@
+import 'package:bluetemp/GlobalState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -116,6 +117,7 @@ List<DropdownMenuItem<String>> dropdownItems() {
 
 void Einheits_aenderung(String? value) {
   globalState.Einheit = value!;
+  safe.save();
   globalState.appSettingsChanger.refreshApp();
 }
 
@@ -152,5 +154,6 @@ List<DropdownMenuItem<String>> Sprachen_list() {
 
 void Sprachanederung(String? value) {
   globalState.Sprache = value!;
+  safe.save();
   globalState.appSettingsChanger.setLanguage(value!);
 }

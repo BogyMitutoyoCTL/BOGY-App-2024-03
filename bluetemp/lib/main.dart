@@ -11,9 +11,9 @@ import 'package:path_provider/path_provider.dart';
 import 'BlueTempApp.dart';
 
 late GlobalState globalState;
-
+late SafeGlobalState safe;
 Future<void> main() async {
-  SafeGlobalState safe = SafeGlobalState();
+  safe = SafeGlobalState();
   await safe.initalize();
   //globalState = GlobalState();
   //await safe.save();
@@ -22,6 +22,7 @@ Future<void> main() async {
   // TODO: maybe load the state from a file here
 
   await safe.save();
+  globalState.appSettingsChanger.setLanguage(globalState.Sprache);
   runApp(const BlueTempApp());
 }
 
