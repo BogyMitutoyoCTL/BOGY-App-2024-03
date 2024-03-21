@@ -24,3 +24,5 @@ constexpr uint8_t ONE_WIRE_BUS{4};
 
 constexpr uint8_t STATUS_LED{2};
 constexpr uint8_t SWITCH_LED{16};
+
+constexpr unsigned long BAUD_RATE{115200};

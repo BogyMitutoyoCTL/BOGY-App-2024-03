@@ -42,7 +42,7 @@ BLECharacteristic *pCharacteristicData{NULL};
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(BAUD_RATE);
     pinMode(SWITCH_LED, OUTPUT);
     status.value = false;
     digitalWrite(SWITCH_LED, status.value);
