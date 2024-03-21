@@ -49,11 +49,9 @@ class _graphsState extends State<graphs> {
               width: double.infinity,
               height: 300,
               child: LineChart(
-                LineChartData(
-                    borderData: FlBorderData(show: false),
-                    lineBarsData: [
-                      LineChartBarData(spots: chartData),
-                    ]),
+                LineChartData(borderData: FlBorderData(show: false), lineBarsData: [
+                  LineChartBarData(spots: chartData),
+                ]),
               ),
             ),
             Row(
@@ -69,9 +67,5 @@ class _graphsState extends State<graphs> {
         ),
       ),
     );
-  }
-
-  void goBack() {
-    Navigator.of(context).pop();
   }
 }
