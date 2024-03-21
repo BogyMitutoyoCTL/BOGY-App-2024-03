@@ -22,65 +22,40 @@ class _sync_timeState extends State<sync_time> {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).sync_time_title)),
       body: Center(
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context).current_phone_time,
-                    style: TextStyle(fontSize: 25),
-                  )
-                ],
-              ),
-              Container(
-                color: Colors.lightBlue[50],
-                child: Column(
-                  children: [
-                    Text(dayformatted),
-                    Text(hourformatted),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context).current_sensor_time,
-                    style: TextStyle(fontSize: 25),
-                  )
-                ],
-              ),
-              Container(
-                color: Colors.lightBlue[50],
-                child: Column(
-                  children: [
-                    Text("${dayformatted}"), //TODO: Implement current sensor time
-                    Text("${hourformatted}"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: ElevatedButton(
-                    onPressed: sync_time_data,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppLocalizations.of(context).current_phone_time,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text(dayformatted, style: Theme.of(context).textTheme.headlineSmall),
+            Text(hourformatted, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              AppLocalizations.of(context).current_sensor_time,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text("${dayformatted}", style: Theme.of(context).textTheme.headlineSmall), //TODO: Implement current sensor time
+            Text("${hourformatted}", style: Theme.of(context).textTheme.headlineSmall),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+              child: ElevatedButton(
+                  onPressed: sync_time_data,
+                  child: FittedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [Text("Sync Time & Data"), Icon(Icons.sync)],
-                    )),
-              ),
-              Countdown(
-                controller: _controller,
-                seconds: 3,
-                build: (BuildContext context, double time) => Text("Next refresh in ${time.toInt()} secounds"),
-                interval: Duration(milliseconds: 1000),
-                onFinished: timer_end,
-              ),
-            ],
-          ),
+                    ),
+                  )),
+            ),
+            Countdown(
+              controller: _controller,
+              seconds: 3,
+              build: (BuildContext context, double time) => Text("Next refresh in ${time.toInt()} secounds"),
+              interval: Duration(milliseconds: 1000),
+              onFinished: timer_end,
+            ),
+          ],
         ),
       ),
     );
