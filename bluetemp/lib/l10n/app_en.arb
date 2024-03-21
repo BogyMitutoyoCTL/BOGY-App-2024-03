@@ -167,5 +167,17 @@
 "edit_alarm_button": "Edit alarm!",
 "@edit_alarm_button": {
   "description": "Button to Edit an alarm when you click on an alarm"
-}
+},
+"sync_time_title": "Synchronise time",
+"@sync_time_title": {
+  "description": "Title of the Synchronise time section"
+},
+"current_data_title": "Current Data",
+"@current_data_title": {
+    "description": "Title of the Current Data section"
+  },
+"about_us_title": "About Us",
+"@about_us_title": {
+    "description": "Title of the About Us section"
+  }
 }

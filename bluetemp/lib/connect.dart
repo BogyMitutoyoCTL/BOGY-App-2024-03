@@ -76,7 +76,11 @@ class ConnectState extends State<Connect> {
         });
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).connect_title)),
+      appBar: AppBar(
+          centerTitle: true,
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).connect_title)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

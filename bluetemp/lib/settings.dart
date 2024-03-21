@@ -16,8 +16,11 @@ class _Setting_dialogState extends State<Setting_dialog> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Center(
-            child: Text(AppLocalizations.of(context).settings_title),
+            child: Text(AppLocalizations.of(context).appname +
+                " - " +
+                AppLocalizations.of(context).settings_title),
           ),
         ),
         body: SingleChildScrollView(

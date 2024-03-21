@@ -42,5 +42,8 @@
   "device_list": "Geräteliste",
   "connect_title": "Verbinden",
   "edit_alarm_text": "Hier kannst du den Alarm bearbeiten:",
-  "edit_alarm_button": "Alarm bearbeiten!"
+  "edit_alarm_button": "Alarm bearbeiten!",
+  "sync_time_title": "Zeit Synchronisieren",
+  "current_data_title": "Akutelle Daten",
+  "about_us_title": "Über Uns"
 }

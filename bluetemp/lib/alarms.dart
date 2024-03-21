@@ -82,6 +82,7 @@ class _alarmsState extends State<alarms> {
         });
     return Scaffold(
       appBar: AppBar(
+          centerTitle: true,
           title: Text(AppLocalizations.of(context).appname +
               " - " +
               AppLocalizations.of(context).alarms_text)),

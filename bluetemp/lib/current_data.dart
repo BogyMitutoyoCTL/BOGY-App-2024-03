@@ -21,7 +21,9 @@ class _current_dataState extends State<current_data> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).appname),
+        title: Text(AppLocalizations.of(context).appname +
+            " - " +
+            AppLocalizations.of(context).current_data_title),
         centerTitle: true,
       ),
       body: Center(
