@@ -36,16 +36,18 @@ class ConnectState extends State<Connect> {
 
   @override
   void dispose() {
+    clearDeviceList();
+
     adapterStateSubscription.cancel();
     super.dispose();
   }
 
-  List<BluetoothDevice> bluetoothDeviceList = [];
+  List<DeviceWithHandler> deviceList = [];
 
   Row createListEntry(
-      BuildContext context, List<BluetoothDevice> list, int index) {
+      BuildContext context, List<DeviceWithHandler> list, int index) {
     Icon iconShowConnected;
-    if (list[index].isConnected) {
+    if (list[index].device.isConnected) {
       iconShowConnected = Icon(Icons.bluetooth_connected_rounded);
     } else {
       iconShowConnected = Icon(Icons.bluetooth_disabled_rounded);
@@ -55,7 +57,7 @@ class ConnectState extends State<Connect> {
       children: [
         ElevatedButton(
             onPressed: () => toggleConnection(index),
-            child: Text(list[index].advName)),
+            child: Text(list[index].device.advName)),
         iconShowConnected
       ],
     );
@@ -65,9 +67,9 @@ class ConnectState extends State<Connect> {
   Widget build(BuildContext context) {
     var deviceListWidgets = ListView.builder(
         physics: ScrollPhysics(),
-        itemCount: bluetoothDeviceList.length,
+        itemCount: deviceList.length,
         itemBuilder: (context, index) {
-          return createListEntry(context, bluetoothDeviceList, index);
+          return createListEntry(context, deviceList, index);
         });
 
     return Scaffold(
@@ -93,27 +95,40 @@ class ConnectState extends State<Connect> {
   }
 
   refreshBluetoothDeviceList() async {
-    bluetoothDeviceList.clear();
+    setState(() {
+      clearDeviceList();
+      List<BluetoothDevice> connectedDevices = FlutterBluePlus.connectedDevices;
+      for (BluetoothDevice device in connectedDevices) {
+        deviceList.add(DeviceWithHandler(device, onConnectionChanged));
+      }
+    });
 
-    var subscription = FlutterBluePlus.onScanResults.listen(
-      scanCallback,
-      onError: (e) => print(e),
-    );
-
-    await FlutterBluePlus.startScan(
-      withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
-      timeout: Duration(seconds: 15),
-    );
+    var subscription = FlutterBluePlus.onScanResults.listen(onScanResult,
+        onError: (e) => print(e),
+        onDone: () => setState(() {}),
+        cancelOnError: true);
 
     FlutterBluePlus.cancelWhenScanComplete(subscription);
+
+    await FlutterBluePlus.startScan(
+        withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
+        timeout: Duration(seconds: 15));
   }
 
-  void scanCallback(results) {
+  void clearDeviceList() {
+    for (var handledDevice in deviceList) {
+      handledDevice.dispose();
+    }
+
+    deviceList.clear();
+  }
+
+  void onScanResult(List<ScanResult> results) {
     if (results.isNotEmpty) {
       setState(() {
         for (ScanResult r in results) {
-          if (!bluetoothDeviceList.contains(r.device)) {
-            bluetoothDeviceList.add(r.device);
+          if (!handledDeviceListContains(r.device)) {
+            deviceList.add(DeviceWithHandler(r.device, onConnectionChanged));
           }
         }
       });
@@ -123,25 +138,48 @@ class ConnectState extends State<Connect> {
   }
 
   toggleConnection(int btnIndex) async {
-    BluetoothDevice device = bluetoothDeviceList[btnIndex];
+    DeviceWithHandler handledDevice = deviceList[btnIndex];
 
-    // Connect to device if disconnected
-    var subscription =
-        device.connectionState.listen((BluetoothConnectionState state) async {
-      if (state == BluetoothConnectionState.disconnected) {
-        device.connect();
-        print("${device.disconnectReason}");
-      }
-    });
-
-    if (device.isConnected) {
-      await device.disconnect();
+    if (handledDevice.device.isConnected) {
+      await handledDevice.device.disconnect();
     } else {
-      await device.connect();
+      await handledDevice.device.connect();
     }
+  }
 
-    setState(() {});
+  void onConnectionChanged(bool isConnected, BluetoothDevice device) {
+    setState(() {
+      //Update the whole list
+    });
+  }
 
+  bool handledDeviceListContains(BluetoothDevice device) {
+    bool result = false;
+    for (DeviceWithHandler r in deviceList) {
+      if (r.device == device) {
+        result = true;
+        break;
+      }
+    }
+    return result;
+  }
+}
+
+class DeviceWithHandler {
+  late BluetoothDevice device;
+  late StreamSubscription<BluetoothConnectionState> subscription;
+  late void Function(bool, BluetoothDevice) callBack;
+
+  DeviceWithHandler(BluetoothDevice bluetoothDevice, this.callBack) {
+    device = bluetoothDevice;
+    subscription = device.connectionState.listen(onConnectionChange);
+  }
+
+  void onConnectionChange(BluetoothConnectionState state) {
+    callBack(state == BluetoothConnectionState.connected, device);
+  }
+
+  void dispose() {
     subscription.cancel();
   }
 }
