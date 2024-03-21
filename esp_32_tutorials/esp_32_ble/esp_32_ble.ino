@@ -165,7 +165,7 @@ void loop()
     print_temperature(last_temperature, temperature, " ");
     if (!are_equal(last_temperature, temperature))
     {
-        temperatures.push({temperature, now});
+        temperatures.push({temperature, now.secondstime()});
         values_changed++;
     }
     last_temperature = temperature;
