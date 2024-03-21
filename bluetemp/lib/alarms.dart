@@ -224,8 +224,7 @@ class _alarmsState extends State<alarms> {
   }
 
   add_alarm_to_list() {
-    var tempValueInt = int.parse(tempValue);
-    globalState.Alarms.add(AlarmSetting(tempValueInt, selected_typ_value));
+    globalState.Alarms.add(AlarmSetting(tempValue, selected_typ_value));
     globalState.Alarms.map((e) => print(e.typ)).toList();
     setState(() {
       Navigator.pop(context);
