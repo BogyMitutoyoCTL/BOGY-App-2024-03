@@ -66,7 +66,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Row(
-              children: [Icon(Icons.thermostat), Text(" Temperatureinheit")],
+              children: [Icon(Icons.thermostat), Text(" Temperatureinheit:")],
             ),
           ),
           Padding(
