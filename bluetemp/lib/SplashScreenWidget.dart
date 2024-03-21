@@ -19,41 +19,27 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
         centerTitle: true,
       ),
       body: Center(
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Column(
-            children: [
-              Text(
-                  style: TextStyle(fontSize: 30),
-                  AppLocalizations.of(context).welcome),
-              Container(
-                height: 50,
-              ),
-              Center(
-                  child: Image.asset(
-                      height: 450,
-                      scale: 3,
-                      'assets/Images/BlueTempAppIco.png')),
-              /*Container(
-                height: 40,
-              ),*/
-              ElevatedButton(
-                  onPressed: Main_Menue,
-                  child: Text(AppLocalizations.of(context).getStarted),
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: Color.fromARGB(255, 3, 4, 8),
-                      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                      elevation: 5,
-                      shadowColor: Colors.black)),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(style: TextStyle(fontSize: 30), AppLocalizations.of(context).welcome),
+            Image.asset(scale: 4, 'assets/Images/BlueTempAppIco.png'),
+            ElevatedButton(
+                onPressed: Main_Menue,
+                child: Text(AppLocalizations.of(context).getStarted),
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Color.fromARGB(255, 3, 4, 8),
+                    backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                    elevation: 5,
+                    shadowColor: Colors.black)),
+          ],
         ),
       ),
     );
   }
 
   void Main_Menue() {
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => MainMenu()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainMenu()));
   }
 }
