@@ -87,6 +87,9 @@ class ConnectState extends State<Connect> {
                 Text(AppLocalizations.of(context).device_list),
                 Visibility(
                     visible: !refreshing,
+                    maintainSize: true,
+                    maintainAnimation: true,
+                    maintainState: true,
                     child: IconButton(
                         onPressed: refreshBluetoothDeviceList,
                         icon: Icon(Icons.refresh_rounded)))
@@ -109,18 +112,22 @@ class ConnectState extends State<Connect> {
       }
     });
 
-    var subscription = FlutterBluePlus.onScanResults.listen(onScanResult,
-        onError: (e) => print(e),
-        onDone: () => setState(() {
-              refreshing = false;
-            }),
-        cancelOnError: true);
+    var subscription = FlutterBluePlus.onScanResults
+        .listen(onScanResult, onError: (e) => print(e));
 
     FlutterBluePlus.cancelWhenScanComplete(subscription);
 
-    await FlutterBluePlus.startScan(
-        withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
-        timeout: Duration(seconds: 5));
+    FlutterBluePlus.startScan(
+      withServices: [Guid("05811a0b-f418-488e-87b9-bf47ee64fda3")],
+      timeout: Duration(seconds: 5),
+    );
+    FlutterBluePlus.isScanning.listen((event) {
+      if (event == false) {
+        setState(() {
+          refreshing = false;
+        });
+      }
+    });
   }
 
   void clearDeviceList() {
