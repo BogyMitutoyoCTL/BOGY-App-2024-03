@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <BLEDevice.h>
 
-class TemperatureCharacteristicCallbacks : public BLECharacteristicCallbacks
+class DataCharacteristicCallbacks : public BLECharacteristicCallbacks
 {
     void onRead(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param) override;
     void onNotify(BLECharacteristic *pCharacteristic) override;

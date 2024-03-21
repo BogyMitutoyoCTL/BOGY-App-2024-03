@@ -3,7 +3,12 @@ Dieses Repository enthält Informationen und Code aus dem BOGY (Berufsorientieru
 
 Es handelt sich um ein erweitertes Praktikum. Das bedeutet, dass es neben der üblichen Praktikums-Woche noch sechs vorbereitende Nachmittage gibt. An diesen Nachmittagen bringen wir den Schülern die Grundlagen bei, damit in der Praktikumswoche auch ein sichtbares Produkt entstehen kann.
 
+## BOGY Woche, Donnerstag 21.3.2024
+
+Wir haben herausgefunden, warum das `LocalStorage` die Daten nicht speichern konnte. Die Erklärung haben wir in [DatenSpeichern (PowerPoint)](doc/DatenSpeicher.pptx) aufgeschrieben.
+
 ## BOGY Woche, Dienstag 19.3.2024
+
 Hier der Link zum Beispielcode (C++) wie man die DateTime Werte umrechnen kann:
 https://godbolt.org/z/K453oPdov
 

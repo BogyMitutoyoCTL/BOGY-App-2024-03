@@ -24,8 +24,8 @@ void DateTimeCharacteristicCallbacks::onStatus(BLECharacteristic *pCharacteristi
 void DateTimeCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, esp_ble_gatts_cb_param_t *param)
 {
     /* The Value from the Master as list of chars aka string */
-    uint8_t *dataPtr = pCharacteristic->getData();
-    auto dt = get_date_time(dataPtr, 7);
+    uint8_t *dataPtr{pCharacteristic->getData()};
+    auto dt{get_date_time(dataPtr, 7)};
     print_date_time(dt, "SetTime -> ");
     rtc_.adjust(dt);
 }

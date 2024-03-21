@@ -77,7 +77,14 @@ class GlobalState {
   double Maximum = 30;
   double Durchschnitt = 20;
   String Einheit = "°C";
-  var Alarms = []; //Usage Example: AlarmSetting(20, AlarmType.minimum)
+  var Alarms = []; //Usage Example: AlarmSetting(20, AlarmType.lower)
+
+  Map toJson() => {
+        'Alarms': Alarms,
+        'Einheit': Einheit,
+        'selectedTheme': selectedTheme.toString(),
+        'language': Sprache
+      };
 
   double Temperaturumrechnen(double Temperature) {
     if (Einheit == "°F") {

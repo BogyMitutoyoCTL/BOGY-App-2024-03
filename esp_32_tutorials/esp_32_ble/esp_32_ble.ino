@@ -10,6 +10,7 @@
 #include "TemperatureCharacteristicCallbacks.h"
 #include "DateTimeCharacteristicCallbacks.h"
 #include "SwitchCharacteristicCallbacks.h"
+#include "DataCharacteristicCallbacks.h"
 
 #include <CircularBuffer.hpp>
 
@@ -17,7 +18,7 @@
 #include "Helpers.h"
 
 const std::string deviveName{"BTBLE"};
-auto unique_device_name = get_unique_device_name(deviveName);
+auto unique_device_name{get_unique_device_name(deviveName)};
 
 // https://github.com/rlogiacco/CircularBuffer
 CircularBuffer<TemperatureData, BUFFER_SIZE> temperatures;
@@ -27,16 +28,17 @@ long values_read{0};
 long values_changed{0};
 
 RTC_DS3231 rtc;
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature temperature_sensors(&oneWire);
+OneWire oneWire{ONE_WIRE_BUS};
+DallasTemperature temperature_sensors{&oneWire};
 BinaryValue status{false};
 BinaryValue get_data{false};
 
-BLEServer *pServer = NULL;
-BLECharacteristic *pCharacteristicTemperature = NULL;
-BLECharacteristic *pCharacteristicDateTime = NULL;
-BLECharacteristic *pCharacteristicSwitch = NULL;
-BLECharacteristic *pCharacteristicGetData = NULL;
+BLEServer *pServer{NULL};
+BLECharacteristic *pCharacteristicTemperature{NULL};
+BLECharacteristic *pCharacteristicDateTime{NULL};
+BLECharacteristic *pCharacteristicSwitch{NULL};
+BLECharacteristic *pCharacteristicGetData{NULL};
+BLECharacteristic *pCharacteristicData{NULL};
 
 void setup()
 {
@@ -68,7 +70,7 @@ void setup()
     pServer->setCallbacks(new MyServerCallbacks());
 
     // #### Environmental Sensing Service
-    BLEService *pService = pServer->createService(SERVICE_ENVIRONMENTAL_SENSING_UUID);
+    BLEService *pService{pServer->createService(SERVICE_ENVIRONMENTAL_SENSING_UUID)};
     pCharacteristicTemperature = pService->createCharacteristic(
         CHARACTERISTIC_TEMPERATURE_UUID,
         BLECharacteristic::PROPERTY_READ |
@@ -90,7 +92,7 @@ void setup()
     // #### End Environmental Sensing Service
 
     // #### Switch Service (for LED)
-    BLEService *pServiceSwitch = pServer->createService(SERVICE_SWITCH_UUID);
+    BLEService *pServiceSwitch{pServer->createService(SERVICE_SWITCH_UUID)};
     pCharacteristicSwitch = pServiceSwitch->createCharacteristic(
         CHARACTERISTIC_SWITCH_UUID,
         BLECharacteristic::PROPERTY_READ |
@@ -104,7 +106,7 @@ void setup()
     // #### End Switch Service (for LED)
 
     // #### Get Data Service
-    BLEService *pServiceGetData = pServer->createService(SERVICE_GET_DATA_UUID);
+    BLEService *pServiceGetData{pServer->createService(SERVICE_GET_DATA_UUID)};
     pCharacteristicGetData = pServiceGetData->createCharacteristic(
         CHARACTERISTIC_GET_DATA_UUID,
         BLECharacteristic::PROPERTY_READ |
@@ -113,11 +115,17 @@ void setup()
             BLECharacteristic::PROPERTY_WRITE);
     pCharacteristicGetData->addDescriptor(new BLE2902());
     pCharacteristicGetData->setCallbacks(new SwitchCharacteristicCallbacks(get_data));
+    
+    pCharacteristicData = pServiceGetData->createCharacteristic(
+        CHARACTERISTIC_DATA_UUID,
+            BLECharacteristic::PROPERTY_NOTIFY);
+    pCharacteristicData->addDescriptor(new BLE2902());
+    pCharacteristicData->setCallbacks(new DataCharacteristicCallbacks());
 
     pServiceGetData->start();
     // #### End Get Data Service
 
-    BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
+    BLEAdvertising *pAdvertising{BLEDevice::getAdvertising()};
     pAdvertising->addServiceUUID(SERVICE_ENVIRONMENTAL_SENSING_UUID);
     pAdvertising->addServiceUUID(SERVICE_SWITCH_UUID);
 
@@ -133,14 +141,14 @@ void setup()
     Serial.flush();
 }
 
-unsigned long previousMillis = 0;
-const long interval = 1000;
+unsigned long previousMillis{0};
+const long interval{1000};
 
 void loop()
 {
     digitalWrite(SWITCH_LED, status.value);
     //?? TODO: Check for overflow
-    unsigned long currentMillis = millis();
+    unsigned long currentMillis{millis()};
     if (currentMillis - previousMillis < interval)
     {
         return;
@@ -149,10 +157,10 @@ void loop()
 
     // read the sensor values
     temperature_sensors.requestTemperatures();
-    float temperature = temperature_sensors.getTempCByIndex(0);
+    float temperature{temperature_sensors.getTempCByIndex(0)};
     values_read++;
 
-    DateTime now = rtc.now();
+    DateTime now{rtc.now()};
     print_date_time(now, "Now -> ");
     print_temperature(last_temperature, temperature, " ");
     if (!are_equal(last_temperature, temperature))
@@ -168,11 +176,11 @@ void loop()
     print_status_value(get_data, " GetData? -> ");
 
     // Serial.printf("Totally there are: %d connected\n", pServer->getConnectedCount());
-    auto connectedDevices = pServer->getPeerDevices(true);
+    auto connectedDevices{pServer->getPeerDevices(true)};
     for (auto item : connectedDevices)
     {
-        auto conn_status = item.second;
-        auto device = conn_status.peer_device;
+        auto conn_status{item.second};
+        auto device{conn_status.peer_device};
         //?? TODO: Check for the device mac address
         // Serial.printf("Peer device: %s\n", device);
     }
