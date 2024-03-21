@@ -38,7 +38,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
               value: globalState.Sprache,
               items: Sprachen_list(),
               onChanged: Sprachanederung,
-              dropdownColor: Color.fromARGB(255, 211, 211, 211),
+              dropdownColor: globalState.selectedTheme == ThemeMode.dark
+                  ? Colors.black
+                  : Color.fromARGB(255, 230, 242, 253),
               style: TextStyle(
                 color: globalState.selectedTheme == ThemeMode.dark
                     ? Colors.white
@@ -59,7 +61,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 isExpanded: true,
                 items: Themes_list(),
                 onChanged: Theme_Mode,
-                dropdownColor: Color.fromARGB(255, 211, 211, 211),
+                dropdownColor: globalState.selectedTheme == ThemeMode.dark
+                    ? Colors.black
+                    : Color.fromARGB(255, 230, 242, 253),
                 style: TextStyle(
                   color: globalState.selectedTheme == ThemeMode.dark
                       ? Colors.white
@@ -80,14 +84,16 @@ class _Setting_dialogState extends State<Setting_dialog> {
               value: globalState.Einheit,
               items: dropdownItems(),
               onChanged: Einheits_aenderung,
-              dropdownColor: Color.fromARGB(255, 211, 211, 211),
+              dropdownColor: globalState.selectedTheme == ThemeMode.dark
+                  ? Colors.black
+                  : Color.fromARGB(255, 230, 242, 253),
               style: TextStyle(
                 color: globalState.selectedTheme == ThemeMode.dark
                     ? Colors.white
                     : Color.fromARGB(255, 0, 0, 0),
               ),
             ),
-          ),
+          )
         ])));
   }
 }
@@ -108,7 +114,6 @@ List<DropdownMenuItem<String>> dropdownItems() {
 
 void Einheits_aenderung(String? value) {
   globalState.Einheit = value!;
-  SafeGlobalState().save();
   globalState.appSettingsChanger.refreshApp();
 }
 
@@ -129,7 +134,6 @@ List<DropdownMenuItem<ThemeMode>> Themes_list() {
 
 void Theme_Mode(ThemeMode? value) {
   globalState.selectedTheme = value!;
-  SafeGlobalState().save();
   globalState.appSettingsChanger.refreshApp();
 }
 
@@ -146,6 +150,5 @@ List<DropdownMenuItem<String>> Sprachen_list() {
 
 void Sprachanederung(String? value) {
   globalState.Sprache = value!;
-  SafeGlobalState().save();
   globalState.appSettingsChanger.setLanguage(value!);
 }
