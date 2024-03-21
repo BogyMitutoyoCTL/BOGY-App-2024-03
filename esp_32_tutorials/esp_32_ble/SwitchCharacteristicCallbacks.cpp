@@ -24,5 +24,4 @@ void SwitchCharacteristicCallbacks::onWrite(BLECharacteristic *pCharacteristic, 
     size_t data_lenght = pCharacteristic->getLength();
     bool value = static_cast<bool>(dataPtr[0]);
     binary_value_.value = value;
-    digitalWrite(SWITCH_LED, binary_value_.value);
 }
