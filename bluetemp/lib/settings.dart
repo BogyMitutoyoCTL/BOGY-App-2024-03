@@ -1,38 +1,45 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bluetemp/Setting_Sprachen.dart';
+import 'package:bluetemp/Settings_Theme.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'Setting_Einheiten.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bluetemp/GlobalState.dart';
 
-class Setting_Sprache extends StatefulWidget {
-  const Setting_Sprache({super.key});
+import 'SettingsButton.dart';
+import 'main.dart';
+
+class Setting_dialog extends StatefulWidget {
+  const Setting_dialog({super.key});
 
   @override
-  State<Setting_Sprache> createState() => _Setting_SpracheState();
+  State<Setting_dialog> createState() => _Setting_dialogState();
 }
 
-class _Setting_SpracheState extends State<Setting_Sprache> {
+class _Setting_dialogState extends State<Setting_dialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).languageSetting),
+          title: Center(
+            child: Text(AppLocalizations.of(context).settings_title),
+          ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-          child: DropdownButton(
+        body: SingleChildScrollView(
+            child: Column(children: [
+          DropdownButton(
             isExpanded: true,
             value: globalState.Sprache,
-            items: dropdownItems(),
+            items: Sprachen_list(),
             onChanged: Sprachanederung,
             dropdownColor: Color.fromARGB(255, 211, 211, 211),
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
-        ));
+        ])));
   }
 
-  List<DropdownMenuItem<String>> dropdownItems() {
+  List<DropdownMenuItem<String>> Sprachen_list() {
     List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(child: Text("Englisch"), value: "en"),
       DropdownMenuItem(
@@ -48,9 +55,5 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
       globalState.Sprache = value!;
       globalState.appSettingsChanger.setLanguage(value!);
     });
-  }
-
-  void nnn() {
-    print(globalState.Sprache);
   }
 }

@@ -29,6 +29,10 @@ class _Setting_ThemeState extends State<Setting_Theme> {
             isExpanded: true,
             items: dropdownItems(),
             onChanged: Theme_Mode,
+            dropdownColor: Color.fromARGB(255, 211, 211, 211),
+            style: TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
             value: globalState.selectedTheme),
       ),
     );

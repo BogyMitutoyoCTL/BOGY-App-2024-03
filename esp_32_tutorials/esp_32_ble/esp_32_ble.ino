@@ -10,6 +10,7 @@
 #include "TemperatureCharacteristicCallbacks.h"
 #include "DateTimeCharacteristicCallbacks.h"
 #include "SwitchCharacteristicCallbacks.h"
+#include "DataCharacteristicCallbacks.h"
 
 #include <CircularBuffer.hpp>
 
@@ -37,10 +38,11 @@ BLECharacteristic *pCharacteristicTemperature{NULL};
 BLECharacteristic *pCharacteristicDateTime{NULL};
 BLECharacteristic *pCharacteristicSwitch{NULL};
 BLECharacteristic *pCharacteristicGetData{NULL};
+BLECharacteristic *pCharacteristicData{NULL};
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(BAUD_RATE);
     pinMode(SWITCH_LED, OUTPUT);
     status.value = false;
     digitalWrite(SWITCH_LED, status.value);
@@ -113,6 +115,12 @@ void setup()
             BLECharacteristic::PROPERTY_WRITE);
     pCharacteristicGetData->addDescriptor(new BLE2902());
     pCharacteristicGetData->setCallbacks(new SwitchCharacteristicCallbacks(get_data));
+    
+    pCharacteristicData = pServiceGetData->createCharacteristic(
+        CHARACTERISTIC_DATA_UUID,
+            BLECharacteristic::PROPERTY_NOTIFY);
+    pCharacteristicData->addDescriptor(new BLE2902());
+    pCharacteristicData->setCallbacks(new DataCharacteristicCallbacks());
 
     pServiceGetData->start();
     // #### End Get Data Service
@@ -157,7 +165,7 @@ void loop()
     print_temperature(last_temperature, temperature, " ");
     if (!are_equal(last_temperature, temperature))
     {
-        temperatures.push({temperature, now});
+        temperatures.push({temperature, now.secondstime()});
         values_changed++;
     }
     last_temperature = temperature;
