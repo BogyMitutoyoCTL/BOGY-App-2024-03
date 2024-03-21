@@ -13,19 +13,14 @@ class sync_time extends StatefulWidget {
 }
 
 class _sync_timeState extends State<sync_time> {
-  final CountdownController _controller =
-      new CountdownController(autoStart: true);
+  final CountdownController _controller = new CountdownController(autoStart: true);
   DateTime now = DateTime.now();
   var dayformatted = DateFormat('dd.mm.yyyy').format(DateTime.now());
   var hourformatted = DateFormat('hh:mm:ss').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          title: Text(AppLocalizations.of(context).appname +
-              " - " +
-              AppLocalizations.of(context).sync_time_title)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).sync_time_title)),
       body: Center(
         child: FittedBox(
           fit: BoxFit.fill,
@@ -63,8 +58,7 @@ class _sync_timeState extends State<sync_time> {
                 color: Colors.lightBlue[50],
                 child: Column(
                   children: [
-                    Text(
-                        "${dayformatted}"), //TODO: Implement current sensor time
+                    Text("${dayformatted}"), //TODO: Implement current sensor time
                     Text("${hourformatted}"),
                   ],
                 ),
@@ -81,8 +75,7 @@ class _sync_timeState extends State<sync_time> {
               Countdown(
                 controller: _controller,
                 seconds: 3,
-                build: (BuildContext context, double time) =>
-                    Text("Next refresh in ${time.toInt()} secounds"),
+                build: (BuildContext context, double time) => Text("Next refresh in ${time.toInt()} secounds"),
                 interval: Duration(milliseconds: 1000),
                 onFinished: timer_end,
               ),

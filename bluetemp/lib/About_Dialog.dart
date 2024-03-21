@@ -22,7 +22,6 @@ class _About_DialogState extends State<About_Dialog> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).about_us_title),
       ),
       body: Padding(

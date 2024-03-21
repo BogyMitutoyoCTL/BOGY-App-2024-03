@@ -16,7 +16,6 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
       backgroundColor: Color.fromARGB(255, 84, 152, 215),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).appname),
-        centerTitle: true,
       ),
       body: Center(
         child: Column(

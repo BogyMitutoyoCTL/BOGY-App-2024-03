@@ -14,7 +14,6 @@ class _MitprogramiererState extends State<Mitprogramierer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).about_us_title),
       ),
       body: Padding(

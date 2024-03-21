@@ -80,7 +80,7 @@ class _alarmsState extends State<alarms> {
           return createListEntry(context, Alarmlist, index);
         });
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).alarms_text)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).alarms_text)),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

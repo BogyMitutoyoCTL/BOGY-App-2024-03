@@ -16,12 +16,7 @@ class _Setting_dialogState extends State<Setting_dialog> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
-          title: Center(
-            child: Text(AppLocalizations.of(context).appname +
-                " - " +
-                AppLocalizations.of(context).settings_title),
-          ),
+          title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).settings_title),
         ),
         body: SingleChildScrollView(
             child: Column(children: [
@@ -41,13 +36,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
               value: globalState.Sprache,
               items: Sprachen_list(),
               onChanged: Sprachanederung,
-              dropdownColor: globalState.selectedTheme == ThemeMode.dark
-                  ? Colors.black
-                  : Color.fromARGB(255, 230, 242, 253),
+              dropdownColor: globalState.selectedTheme == ThemeMode.dark ? Colors.black : Color.fromARGB(255, 230, 242, 253),
               style: TextStyle(
-                color: globalState.selectedTheme == ThemeMode.dark
-                    ? Colors.white
-                    : Color.fromARGB(255, 0, 0, 0),
+                color: globalState.selectedTheme == ThemeMode.dark ? Colors.white : Color.fromARGB(255, 0, 0, 0),
               ),
             ),
           ),
@@ -64,13 +55,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 isExpanded: true,
                 items: Themes_list(),
                 onChanged: Theme_Mode,
-                dropdownColor: globalState.selectedTheme == ThemeMode.dark
-                    ? Colors.black
-                    : Color.fromARGB(255, 230, 242, 253),
+                dropdownColor: globalState.selectedTheme == ThemeMode.dark ? Colors.black : Color.fromARGB(255, 230, 242, 253),
                 style: TextStyle(
-                  color: globalState.selectedTheme == ThemeMode.dark
-                      ? Colors.white
-                      : Color.fromARGB(255, 0, 0, 0),
+                  color: globalState.selectedTheme == ThemeMode.dark ? Colors.white : Color.fromARGB(255, 0, 0, 0),
                 ),
                 value: globalState.selectedTheme),
           ),
@@ -87,13 +74,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
               value: globalState.Einheit,
               items: dropdownItems(),
               onChanged: Einheits_aenderung,
-              dropdownColor: globalState.selectedTheme == ThemeMode.dark
-                  ? Colors.black
-                  : Color.fromARGB(255, 230, 242, 253),
+              dropdownColor: globalState.selectedTheme == ThemeMode.dark ? Colors.black : Color.fromARGB(255, 230, 242, 253),
               style: TextStyle(
-                color: globalState.selectedTheme == ThemeMode.dark
-                    ? Colors.white
-                    : Color.fromARGB(255, 0, 0, 0),
+                color: globalState.selectedTheme == ThemeMode.dark ? Colors.white : Color.fromARGB(255, 0, 0, 0),
               ),
             ),
           )

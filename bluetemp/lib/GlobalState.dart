@@ -41,32 +41,20 @@ class GlobalState {
     canvasColor: Color.fromARGB(255, 213, 58, 73),
     colorScheme: lightColor,
     brightness: Brightness.light,
-    radioTheme: RadioThemeData(
-        fillColor: MaterialStateColor.resolveWith(
-            (states) => Color.fromARGB(255, 7, 66, 234))),
-    appBarTheme: AppBarTheme(
-        backgroundColor: lightColor.primary,
-        foregroundColor: lightColor.onPrimary),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            foregroundColor: Color.fromARGB(255, 0, 0, 0))),
+    radioTheme: RadioThemeData(fillColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 7, 66, 234))),
+    appBarTheme: AppBarTheme(centerTitle: true, backgroundColor: lightColor.primary, foregroundColor: lightColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Color.fromARGB(255, 0, 0, 0))),
     scaffoldBackgroundColor: Color.fromARGB(255, 232, 244, 255),
-    dropdownMenuTheme: DropdownMenuThemeData(
-        textStyle: TextStyle(color: Colors.black), menuStyle: MenuStyle()),
+    dropdownMenuTheme: DropdownMenuThemeData(textStyle: TextStyle(color: Colors.black), menuStyle: MenuStyle()),
     useMaterial3: true,
   );
 
   var darkTheme = ThemeData(
     colorScheme: darkColor,
     brightness: Brightness.dark,
-    radioTheme: RadioThemeData(
-        fillColor: MaterialStateColor.resolveWith(
-            (states) => Color.fromARGB(255, 7, 66, 234))),
-    appBarTheme: AppBarTheme(
-        backgroundColor: darkColor.primary,
-        foregroundColor: darkColor.onPrimary),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
+    radioTheme: RadioThemeData(fillColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 7, 66, 234))),
+    appBarTheme: AppBarTheme(centerTitle: true, backgroundColor: darkColor.primary, foregroundColor: darkColor.onPrimary),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
     scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 78),
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: TextStyle(color: Colors.white, backgroundColor: Colors.purple),
@@ -75,10 +63,8 @@ class GlobalState {
         filled: true,
       ),
       menuStyle: MenuStyle(
-          backgroundColor: MaterialStateColor.resolveWith(
-              (states) => Color.fromARGB(255, 255, 0, 0)),
-          surfaceTintColor: MaterialStateColor.resolveWith(
-              (states) => Color.fromARGB(255, 255, 0, 0))),
+          backgroundColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 255, 0, 0)),
+          surfaceTintColor: MaterialStateColor.resolveWith((states) => Color.fromARGB(255, 255, 0, 0))),
     ),
     useMaterial3: true,
   );
@@ -93,18 +79,12 @@ class GlobalState {
   String Einheit = "°C";
   var Alarms = []; //Usage Example: AlarmSetting("20", AlarmType.lower)
 
-  Map toJson() => {
-        'Alarms': Alarms,
-        'Einheit': Einheit,
-        'selectedTheme': selectedTheme.name,
-        'language': Sprache
-      };
+  Map toJson() => {'Alarms': Alarms, 'Einheit': Einheit, 'selectedTheme': selectedTheme.name, 'language': Sprache};
   GlobalState.fromJson(Map<dynamic, dynamic> json) {
     Einheit = json["Einheit"];
     Sprache = json["language"];
     selectedTheme = ThemeMode.values.byName(json["selectedTheme"]);
-    Alarms = List<AlarmSetting>.from(
-        json["Alarms"].map((e) => AlarmSetting.fromJson(e)));
+    Alarms = List<AlarmSetting>.from(json["Alarms"].map((e) => AlarmSetting.fromJson(e)));
   }
 
   double Temperaturumrechnen(double Temperature) {
