@@ -14,13 +14,12 @@ class BlueTempApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var languageChanger = ChangeNotifierProvider(
       create: (context) => globalState.appSettingsChanger,
-      child:
-          Consumer<AppSettingsChanger>(builder: (context, localeModel, child) {
+      child: Consumer<AppSettingsChanger>(builder: (context, localeModel, child) {
         return MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
+          onGenerateTitle: (context) => AppLocalizations.of(context).apptitle,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: localeModel.locale,
-          title: "BlueTemp - the Bluetooth temperature monitoring app",
           theme: globalState.theme,
           darkTheme: globalState.darkTheme,
           themeMode: globalState.selectedTheme,
