@@ -157,8 +157,10 @@ class ConnectState extends State<Connect> {
 
     if (handledDevice.device.isConnected) {
       await handledDevice.device.disconnect();
+      handledDevice.printServices();
     } else {
       await handledDevice.device.connect();
+      handledDevice.addServices();
     }
   }
 
@@ -184,10 +186,24 @@ class DeviceWithHandler {
   late BluetoothDevice device;
   late StreamSubscription<BluetoothConnectionState> subscription;
   late void Function(bool, BluetoothDevice) callBack;
+  List<BluetoothService> services = [];
 
   DeviceWithHandler(BluetoothDevice bluetoothDevice, this.callBack) {
     device = bluetoothDevice;
     subscription = device.connectionState.listen(onConnectionChange);
+  }
+
+  Future<void> addServices() async {
+    if (device.isConnected) {
+      services.addAll(await device.discoverServices());
+    }
+  }
+
+  void printServices() {
+    services.forEach((service) {
+      print("Service");
+      print(service.serviceUuid);
+    });
   }
 
   void onConnectionChange(BluetoothConnectionState state) {
