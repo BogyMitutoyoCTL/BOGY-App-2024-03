@@ -35,7 +35,7 @@ class _graphsState extends State<graphs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Graphen")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).temperature_graph)),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

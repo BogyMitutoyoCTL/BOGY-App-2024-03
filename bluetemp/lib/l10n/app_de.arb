@@ -38,12 +38,14 @@
   "add_alarm_button": "Alarm hinzufügen",
   "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus.",
   "enter_temp_placeholder": "Gib hier die Temperatur ein.",
-  "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus.",
   "device_list": "Geräteliste",
   "connect_title": "Verbinden",
   "edit_alarm_text": "Hier kannst du den Alarm bearbeiten:",
   "edit_alarm_button": "Alarm bearbeiten!",
   "sync_time_title": "Zeit Synchronisieren",
   "current_data_title": "Akutelle Daten",
-  "about_us_title": "Über Uns"
+  "about_us_title": "Über Uns",
+  "temperature_graph": "Temperaturverlauf",
+  "temp_scale":  "Temperatur",
+  "time_scale": "Zeit"
 }
