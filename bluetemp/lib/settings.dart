@@ -102,6 +102,7 @@ List<DropdownMenuItem<String>> dropdownItems() {
 
 void Einheits_aenderung(String? value) {
   globalState.Einheit = value!;
+  SafeGlobalState().save();
   globalState.appSettingsChanger.refreshApp();
 }
 
@@ -122,6 +123,7 @@ List<DropdownMenuItem<ThemeMode>> Themes_list() {
 
 void Theme_Mode(ThemeMode? value) {
   globalState.selectedTheme = value!;
+  SafeGlobalState().save();
   globalState.appSettingsChanger.refreshApp();
 }
 
@@ -138,5 +140,6 @@ List<DropdownMenuItem<String>> Sprachen_list() {
 
 void Sprachanederung(String? value) {
   globalState.Sprache = value!;
+  SafeGlobalState().save();
   globalState.appSettingsChanger.setLanguage(value!);
 }

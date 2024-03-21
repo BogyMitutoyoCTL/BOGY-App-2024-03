@@ -19,11 +19,10 @@ Future<void> main() async {
   //await safe.save();
   globalState = safe.getFromStorage();
   print(globalState.Alarms);
-  globalState.Alarms.add(AlarmSetting("80", AlarmType.higher));
   // TODO: maybe load the state from a file here
 
   await safe.save();
-  //runApp(const BlueTempApp());
+  runApp(const BlueTempApp());
 }
 
 class SafeGlobalState {
@@ -56,9 +55,5 @@ class SafeGlobalState {
 
   setInStorage() async {
     await storage.setItem("GlobalState", globalState.toJson());
-  }
-
-  deleteStorage(var value) async {
-    await storage.deleteItem(value);
   }
 }
