@@ -55,12 +55,10 @@ class _StatisticPageState extends State<StatisticPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text("${globalState.Temperaturumrechner_Maximum(globalState.Maximum)} ${globalState.Einheit}",
+                      Text("${globalState.Temperaturumrechnen(globalState.Maximum)} ${globalState.Einheit}", style: Theme.of(context).textTheme.headlineLarge),
+                      Text("${globalState.Temperaturumrechnen(globalState.Durchschnitt)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineLarge),
-                      Text("${globalState.Temperaturumrechner_Durchschnitt(globalState.Durchschnitt)} ${globalState.Einheit}",
-                          style: Theme.of(context).textTheme.headlineLarge),
-                      Text("${globalState.Temperaturumrechner_Minimum(globalState.Minimum)} ${globalState.Einheit}",
-                          style: Theme.of(context).textTheme.headlineLarge)
+                      Text("${globalState.Temperaturumrechnen(globalState.Minimum)} ${globalState.Einheit}", style: Theme.of(context).textTheme.headlineLarge)
                     ],
                   )
                 ],
