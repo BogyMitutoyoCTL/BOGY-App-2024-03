@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bluetemp/AlarmSetting.dart';
 import 'package:bluetemp/AppSettingsChanger.dart';
+import 'package:bluetemp/SubscribedDevice.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as m;
 
@@ -19,6 +20,7 @@ class GlobalState {
     surface: Color.fromARGB(255, 149, 177, 183),
     onSurface: Colors.black,
   );
+
   // ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
   static var darkColor = ColorScheme(
       brightness: Brightness.dark,
@@ -99,6 +101,7 @@ class GlobalState {
         'selectedTheme': selectedTheme.name,
         'language': Sprache
       };
+
   GlobalState.fromJson(Map<dynamic, dynamic> json) {
     Einheit = json["Einheit"];
     Sprache = json["language"];
@@ -269,4 +272,6 @@ class GlobalState {
 
   String Sprache = "en";
   AppSettingsChanger appSettingsChanger = AppSettingsChanger();
+
+  SubscribedDevice? subscribedDevice;
 }
