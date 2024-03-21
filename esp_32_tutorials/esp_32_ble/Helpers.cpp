@@ -1,12 +1,5 @@
 #include "Helpers.h"
 
-void status_led_blink()
-{
-    digitalWrite(STATUS_LED, true);
-    delay(20);
-    digitalWrite(STATUS_LED, false);
-}
-
 uint8_t *get_byte_array(const DateTime &dt) // return type- address of integer array
 {
     static uint8_t DateTimeCharArray[7];       // array declared as static

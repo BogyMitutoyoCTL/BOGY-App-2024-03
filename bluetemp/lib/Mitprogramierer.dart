@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Mitprogramierer extends StatefulWidget {
   const Mitprogramierer({super.key});
@@ -13,7 +14,18 @@ class _MitprogramiererState extends State<Mitprogramierer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Us")),
+        centerTitle: true,
+        title: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Center(
+                  child: Text(AppLocalizations.of(context).appname +
+                      " - " +
+                      AppLocalizations.of(context).about_us_title))
+            ],
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -21,7 +21,11 @@ class _sync_timeState extends State<sync_time> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BlueTemp - Zeit Synchronisieren")),
+      appBar: AppBar(
+          centerTitle: true,
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).sync_time_title)),
       body: Center(
         child: FittedBox(
           fit: BoxFit.fill,
