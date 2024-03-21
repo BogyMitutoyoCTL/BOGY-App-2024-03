@@ -47,5 +47,11 @@
   "about_us_title": "Über Uns",
   "temperature_graph": "Temperaturverlauf",
   "temp_scale":  "Temperatur",
-  "time_scale": "Zeit"
+  "time_scale": "Zeit",
+  "setting_temperature_unit": "Temperatureinheit",
+  "setting_theme": "Theme",
+  "setting_language": "Sprache",
+  "setting_theme_dark": "Dunkel",
+  "setting_theme_light": "Hell",
+  "setting_theme_system": "Systemeinstellung"
 }
