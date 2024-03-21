@@ -51,8 +51,6 @@ class _alarmsState extends State<alarms> {
       child: ElevatedButton(
         onPressed: () {
           manage_alarms(list[index]);
-          globalState.Alarms.remove(list[index]);
-          SafeGlobalState().save();
           setState(() {});
         },
         child: Row(
@@ -137,6 +135,16 @@ class _alarmsState extends State<alarms> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red),
+                        child: Text(AppLocalizations.of(context).sure_button),
+                        onPressed: () => setState(() {
+                          globalState.Alarms.remove(value);
+                          SafeGlobalState().save();
+                          Navigator.pop(context);
+                        }),
+                      ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green),
