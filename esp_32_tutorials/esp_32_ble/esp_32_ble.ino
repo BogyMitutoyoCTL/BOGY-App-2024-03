@@ -51,6 +51,7 @@ void setup()
 
     temperature_sensors.begin();
     Serial.printf("Found %d temperature sensor devices\n", temperature_sensors.getDeviceCount());
+    temperature_sensors.requestTemperatures();
 
     if (!rtc.begin())
     {
@@ -115,10 +116,10 @@ void setup()
             BLECharacteristic::PROPERTY_WRITE);
     pCharacteristicGetData->addDescriptor(new BLE2902());
     pCharacteristicGetData->setCallbacks(new SwitchCharacteristicCallbacks(get_data));
-    
+
     pCharacteristicData = pServiceGetData->createCharacteristic(
         CHARACTERISTIC_DATA_UUID,
-            BLECharacteristic::PROPERTY_NOTIFY);
+        BLECharacteristic::PROPERTY_NOTIFY);
     pCharacteristicData->addDescriptor(new BLE2902());
     pCharacteristicData->setCallbacks(new DataCharacteristicCallbacks());
 
@@ -147,17 +148,20 @@ const long interval{1000};
 void loop()
 {
     digitalWrite(SWITCH_LED, status.value);
-    //?? TODO: Check for overflow
+    
+    // return if inverval has not reached...
     unsigned long currentMillis{millis()};
     if (currentMillis - previousMillis < interval)
     {
         return;
     }
+    
     previousMillis = currentMillis;
 
     // read the sensor values
-    temperature_sensors.requestTemperatures();
     float temperature{temperature_sensors.getTempCByIndex(0)};
+    // request already for next reading
+    temperature_sensors.requestTemperatures();
     values_read++;
 
     DateTime now{rtc.now()};
@@ -192,11 +196,25 @@ void loop()
         pCharacteristicDateTime->setValue(get_byte_array(now), 7);
         pCharacteristicDateTime->notify();
 
-        pCharacteristicTemperature->setValue((uint8_t *)&temperature, 4);
+        pCharacteristicTemperature->setValue((uint8_t *)&temperature, sizeof(temperature));
         pCharacteristicTemperature->notify();
 
         pCharacteristicSwitch->notify();
 
         pCharacteristicGetData->notify();
+
+        // 4 bytes for the seconds (unsigned long)
+        // 4 bytes for temperature (float)
+        auto t{temperatures.last()};
+        uint8_t data[sizeof(TemperatureData)];
+        auto seconds{now.secondstime()};
+        memcpy(data, &seconds, sizeof(seconds));
+        memcpy(data + sizeof(seconds), &temperature, sizeof(temperature));
+        Serial.printf("   Notify Data!\n");
+        Serial.printf("   (UINT32 - Little Endian) Data Seconds: 0x%02X%02X%02X%02X Value: %d\n", data[0], data[1], data[2], data[3], seconds);
+        Serial.printf("   (Float - Little Endian) Data Temperature: 0x%02X%02X%02X%02X Value: %f\n", data[4], data[5], data[6], data[7], temperature);
+        Serial.flush();
+        pCharacteristicData->setValue(data, sizeof(TemperatureData));
+        pCharacteristicData->notify();
     }
 }

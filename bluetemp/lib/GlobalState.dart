@@ -21,18 +21,17 @@ class GlobalState {
   );
   // ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 7, 66, 234));
   static var darkColor = ColorScheme(
-    brightness: Brightness.dark,
-    background: Colors.black45,
-    onBackground: Colors.white70,
-    error: Color.fromARGB(255, 180, 0, 0),
-    onError: Colors.white70,
-    primary: Color.fromARGB(255, 0, 106, 173),
-    onPrimary: Colors.white70,
-    secondary: Color.fromARGB(255, 45, 141, 68),
-    onSecondary: Colors.white70,
-    surface: Color.fromARGB(255, 128, 128, 128),
-    onSurface: Colors.white70,
-  );
+      brightness: Brightness.dark,
+      background: Colors.black45,
+      onBackground: Colors.white70,
+      error: Color.fromARGB(255, 180, 0, 0),
+      onError: Colors.white70,
+      primary: Color.fromARGB(255, 0, 106, 173),
+      onPrimary: Colors.white70,
+      secondary: Color.fromARGB(255, 45, 141, 68),
+      onSecondary: Colors.white70,
+      surface: Color.fromARGB(255, 128, 128, 128),
+      onSurface: Colors.white70);
 
   GlobalState() {
     appSettingsChanger.setLanguage(Sprache);
@@ -51,6 +50,8 @@ class GlobalState {
         style: ElevatedButton.styleFrom(
             foregroundColor: Color.fromARGB(255, 0, 0, 0))),
     scaffoldBackgroundColor: Color.fromARGB(255, 232, 244, 255),
+    dropdownMenuTheme: DropdownMenuThemeData(
+        textStyle: TextStyle(color: Colors.black), menuStyle: MenuStyle()),
     useMaterial3: true,
   );
 
@@ -77,14 +78,21 @@ class GlobalState {
   double Maximum = 30;
   double Durchschnitt = 20;
   String Einheit = "°C";
-  var Alarms = []; //Usage Example: AlarmSetting(20, AlarmType.lower)
+  var Alarms = []; //Usage Example: AlarmSetting("20", AlarmType.lower)
 
   Map toJson() => {
         'Alarms': Alarms,
         'Einheit': Einheit,
-        'selectedTheme': selectedTheme.toString(),
+        'selectedTheme': selectedTheme.name,
         'language': Sprache
       };
+  GlobalState.fromJson(Map<dynamic, dynamic> json) {
+    Einheit = json["Einheit"];
+    Sprache = json["language"];
+    selectedTheme = ThemeMode.values.byName(json["selectedTheme"]);
+    Alarms = List<AlarmSetting>.from(
+        json["Alarms"].map((e) => AlarmSetting.fromJson(e)));
+  }
 
   double Temperaturumrechnen(double Temperature) {
     if (Einheit == "°F") {
@@ -246,6 +254,6 @@ class GlobalState {
     }
   }
 
-  String Sprache = "de";
+  String Sprache = "en";
   AppSettingsChanger appSettingsChanger = AppSettingsChanger();
 }

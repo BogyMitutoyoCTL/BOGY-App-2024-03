@@ -23,7 +23,16 @@ class _Setting_dialogState extends State<Setting_dialog> {
         body: SingleChildScrollView(
             child: Column(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Row(
+              children: [
+                Icon(Icons.language),
+                Text("  Spracheinstellungen:"),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
             child: DropdownButton(
               isExpanded: true,
               value: globalState.Sprache,
@@ -31,8 +40,16 @@ class _Setting_dialogState extends State<Setting_dialog> {
               onChanged: Sprachanederung,
               dropdownColor: Color.fromARGB(255, 211, 211, 211),
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: globalState.selectedTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Color.fromARGB(255, 0, 0, 0),
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Row(
+              children: [Icon(Icons.brush), Text("  Themes:")],
             ),
           ),
           Padding(
@@ -44,9 +61,17 @@ class _Setting_dialogState extends State<Setting_dialog> {
                 onChanged: Theme_Mode,
                 dropdownColor: Color.fromARGB(255, 211, 211, 211),
                 style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: globalState.selectedTheme == ThemeMode.dark
+                      ? Colors.white
+                      : Color.fromARGB(255, 0, 0, 0),
                 ),
                 value: globalState.selectedTheme),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Row(
+              children: [Icon(Icons.thermostat), Text(" Temperatureinheit:")],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
@@ -57,10 +82,12 @@ class _Setting_dialogState extends State<Setting_dialog> {
               onChanged: Einheits_aenderung,
               dropdownColor: Color.fromARGB(255, 211, 211, 211),
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: globalState.selectedTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Color.fromARGB(255, 0, 0, 0),
               ),
             ),
-          )
+          ),
         ])));
   }
 }
@@ -81,6 +108,8 @@ List<DropdownMenuItem<String>> dropdownItems() {
 
 void Einheits_aenderung(String? value) {
   globalState.Einheit = value!;
+  SafeGlobalState().save();
+  globalState.appSettingsChanger.refreshApp();
 }
 
 List<DropdownMenuItem<ThemeMode>> Themes_list() {
@@ -100,6 +129,7 @@ List<DropdownMenuItem<ThemeMode>> Themes_list() {
 
 void Theme_Mode(ThemeMode? value) {
   globalState.selectedTheme = value!;
+  SafeGlobalState().save();
   globalState.appSettingsChanger.refreshApp();
 }
 
@@ -116,5 +146,6 @@ List<DropdownMenuItem<String>> Sprachen_list() {
 
 void Sprachanederung(String? value) {
   globalState.Sprache = value!;
+  SafeGlobalState().save();
   globalState.appSettingsChanger.setLanguage(value!);
 }

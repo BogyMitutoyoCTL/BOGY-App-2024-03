@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:localstorage/localstorage.dart';
 
 class alarms extends StatefulWidget {
   const alarms({super.key});
@@ -51,6 +52,7 @@ class _alarmsState extends State<alarms> {
         onPressed: () {
           manage_alarms(list[index]);
           globalState.Alarms.remove(list[index]);
+          SafeGlobalState().save();
           setState(() {});
         },
         child: Row(
@@ -223,8 +225,11 @@ class _alarmsState extends State<alarms> {
     );
   }
 
-  add_alarm_to_list() {
+  add_alarm_to_list() async {
     globalState.Alarms.add(AlarmSetting(tempValue, selected_typ_value));
+    SafeGlobalState().save();
+    /*final LocalStorage storage = LocalStorage('storage.json');
+    storage.setItem("GlobalState", globalState.toJson());*/
     globalState.Alarms.map((e) => print(e.typ)).toList();
     setState(() {
       Navigator.pop(context);
