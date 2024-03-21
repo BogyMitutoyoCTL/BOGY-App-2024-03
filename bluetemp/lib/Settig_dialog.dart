@@ -22,25 +22,39 @@ class _Setting_dialogState extends State<Setting_dialog> {
           child: Text(AppLocalizations.of(context).settings_title),
         ),
       ),
-      body: Column(
-        children: [
-          SettingsButton(callback: Sprachen_Settings, title: AppLocalizations.of(context).settings_item_language, iconData: Icons.language),
-          SettingsButton(callback: Theme_Setting, title: AppLocalizations.of(context).settings_item_theme, iconData: Icons.info_outline),
-          SettingsButton(callback: Einheiten_Settings, title: AppLocalizations.of(context).settings_item_units, iconData: Icons.send_rounded),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SettingsButton(
+                callback: Sprachen_Settings,
+                title: AppLocalizations.of(context).settings_item_language,
+                iconData: Icons.language),
+            SettingsButton(
+                callback: Theme_Setting,
+                title: AppLocalizations.of(context).settings_item_theme,
+                iconData: Icons.info_outline),
+            SettingsButton(
+                callback: Einheiten_Settings,
+                title: AppLocalizations.of(context).settings_item_units,
+                iconData: Icons.send_rounded),
+          ],
+        ),
       ),
     );
   }
 
   void Sprachen_Settings() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Setting_Sprache()));
   }
 
   void Theme_Setting() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Setting_Theme()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Setting_Theme()));
   }
 
   void Einheiten_Settings() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Einheiten_Dialog()));
   }
 }
