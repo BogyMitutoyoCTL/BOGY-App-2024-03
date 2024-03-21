@@ -152,7 +152,7 @@ class _alarmsState extends State<alarms> {
                         child: Text(AppLocalizations.of(context).sure_button),
                         onPressed: () => setState(() {
                           globalState.Alarms.remove(value);
-                          SafeGlobalState().save();
+                          safe.save();
                           Navigator.pop(context);
                         }),
                       ),
@@ -203,7 +203,7 @@ class _alarmsState extends State<alarms> {
                       ElevatedButton(
                         onPressed: () {
                           globalState.Alarms.remove(value);
-                          SafeGlobalState().save();
+                          safe.save();
                           setState(() {});
                           edit_alarm();
                         },
@@ -299,7 +299,7 @@ class _alarmsState extends State<alarms> {
 
   add_alarm_to_list() async {
     globalState.Alarms.add(AlarmSetting(tempValue, selected_typ_value));
-    SafeGlobalState().save();
+    safe.save();
     /*final LocalStorage storage = LocalStorage('storage.json');
     storage.setItem("GlobalState", globalState.toJson());*/
     globalState.Alarms.map((e) => print(e.typ)).toList();
@@ -311,7 +311,7 @@ class _alarmsState extends State<alarms> {
 
   edit_alarm() async {
     globalState.Alarms.add(AlarmSetting(editValue, selected_typ_value_edit));
-    SafeGlobalState().save();
+    safe.save();
     /*final LocalStorage storage = LocalStorage('storage.json');
     storage.setItem("GlobalState", globalState.toJson());*/
     globalState.Alarms.map((e) => print(e.typ)).toList();
