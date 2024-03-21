@@ -30,14 +30,14 @@ class _About_DialogState extends State<About_Dialog> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset(scale: 4, 'assets/Images/BlueTempAppIco.png'),
+              Image.asset(scale: 5, 'assets/Images/BlueTempAppIco.png'),
               Text(
                 AppLocalizations.of(context).appname,
-                style: TextStyle(fontSize: 25),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
                 "Version 1.0",
-                style: TextStyle(fontSize: 25),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               ElevatedButton(onPressed: Mitprogramierende, child: Icon(Icons.person))
             ],

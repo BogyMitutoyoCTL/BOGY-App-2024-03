@@ -40,25 +40,27 @@ class _StatisticPageState extends State<StatisticPage> {
                     children: [
                       Text(
                         AppLocalizations.of(context).statistics_maximum,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         AppLocalizations.of(context).statistics_average,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         AppLocalizations.of(context).statistics_minimum,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text("${globalState.Temperaturumrechnen(globalState.Maximum)} ${globalState.Einheit}", style: Theme.of(context).textTheme.headlineLarge),
-                      Text("${globalState.Temperaturumrechnen(globalState.Durchschnitt)} ${globalState.Einheit}",
-                          style: Theme.of(context).textTheme.headlineLarge),
-                      Text("${globalState.Temperaturumrechnen(globalState.Minimum)} ${globalState.Einheit}", style: Theme.of(context).textTheme.headlineLarge)
+                      Text("${globalState.Temperaturumrechnen(globalState.Maximum).toStringAsFixed(2)} ${globalState.Einheit}",
+                          style: Theme.of(context).textTheme.headlineMedium),
+                      Text("${globalState.Temperaturumrechnen(globalState.Durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
+                          style: Theme.of(context).textTheme.headlineMedium),
+                      Text("${globalState.Temperaturumrechnen(globalState.Minimum).toStringAsFixed(2)} ${globalState.Einheit}",
+                          style: Theme.of(context).textTheme.headlineMedium)
                     ],
                   )
                 ],

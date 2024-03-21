@@ -41,10 +41,6 @@ class _graphsState extends State<graphs> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              AppLocalizations.of(context).temperature_graph,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -53,7 +49,7 @@ class _graphsState extends State<graphs> {
             ),
             Container(
               width: double.infinity,
-              height: 300,
+              height: 250,
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: LineChart(
                 LineChartData(
