@@ -22,6 +22,8 @@ CircularBuffer<TemperatureData, BUFFER_SIZE> temperatures;
 // define this here because of the index_t type
 using index_t = decltype(temperatures)::index_t;
 
+InternalLedToggle internLed;
+
 const std::string deviveName{"BTBLE"};
 auto unique_device_name{get_unique_device_name(deviveName)};
 
@@ -80,7 +82,7 @@ void setup()
             BLECharacteristic::PROPERTY_NOTIFY |
             BLECharacteristic::PROPERTY_INDICATE);
     pCharacteristicTemperature->addDescriptor(new BLE2902());
-    pCharacteristicTemperature->setCallbacks(new TemperatureCharacteristicCallbacks());
+    pCharacteristicTemperature->setCallbacks(new TemperatureCharacteristicCallbacks(internLed));
 
     pCharacteristicDateTime = pService->createCharacteristic(
         CHARACTERISTIC_DATETIME_UUID,
@@ -196,6 +198,7 @@ void send_data()
 {
     for (index_t i = 0; i < temperatures.size(); i++)
     {
+        internLed();
         auto t{temperatures[i]};
         uint8_t data[sizeof(TemperatureData)];
         memcpy(data, &t.secondstime, sizeof(t.secondstime));
@@ -206,7 +209,7 @@ void send_data()
         Serial.printf("   (UINT32 - Little Endian) Data Seconds: 0x%02X%02X%02X%02X Value: %d\n", data[0], data[1], data[2], data[3], t.secondstime);
         Serial.printf("   (Float - Little Endian) Data Temperature: 0x%02X%02X%02X%02X Value: %f\n", data[4], data[5], data[6], data[7], t.temperature);
         Serial.flush();
-        delayMicroseconds(10);
+        delayMicroseconds(10000);
     }
 
     get_data.value = false;

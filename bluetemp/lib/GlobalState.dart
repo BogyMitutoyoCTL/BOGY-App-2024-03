@@ -38,6 +38,7 @@ class GlobalState {
   }
 
   var theme = ThemeData(
+    canvasColor: Color.fromARGB(255, 213, 58, 73),
     colorScheme: lightColor,
     brightness: Brightness.light,
     radioTheme: RadioThemeData(
@@ -67,10 +68,22 @@ class GlobalState {
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(foregroundColor: Colors.white70)),
     scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 78),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: TextStyle(color: Colors.white, backgroundColor: Colors.purple),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.red,
+        filled: true,
+      ),
+      menuStyle: MenuStyle(
+          backgroundColor: MaterialStateColor.resolveWith(
+              (states) => Color.fromARGB(255, 255, 0, 0)),
+          surfaceTintColor: MaterialStateColor.resolveWith(
+              (states) => Color.fromARGB(255, 255, 0, 0))),
+    ),
     useMaterial3: true,
   );
 
-  ThemeMode selectedTheme = ThemeMode.system;
+  ThemeMode selectedTheme = ThemeMode.dark;
   String DateOfLastMeasurement = "18.03.2024";
   String TimeOfLastMeasurement = "16:01:09";
   double Temperature = 24;

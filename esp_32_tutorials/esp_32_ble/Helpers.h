@@ -5,6 +5,16 @@
 #include <RTClib.h>
 #include "CircularBuffer.hpp"
 
+class InternalLedToggle {
+  private:
+    bool on_;
+  public:
+    void operator()() {
+      digitalWrite(STATUS_LED, on_);
+      on_ = on_ ? false : true;
+    }
+};
+
 struct BinaryValue
 {
   bool value;
@@ -18,7 +28,6 @@ struct TemperatureData
   uint32_t secondstime;
 };
 
-void status_led_blink();
 uint8_t *get_byte_array(const DateTime& dt);
 uint8_t *get_byte_array(const TemperatureData& temp_data);
 DateTime get_date_time(uint8_t *ptr, const uint size);
