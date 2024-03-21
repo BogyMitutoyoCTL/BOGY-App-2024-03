@@ -2,11 +2,13 @@
 
 import 'dart:async';
 
+import 'package:bluetemp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'SubscribedDevice.dart';
 
 class Connect extends StatefulWidget {
   const Connect({super.key});
@@ -23,13 +25,14 @@ class ConnectState extends State<Connect> {
   @override
   void initState() {
     super.initState();
-    adapterStateSubscription = FlutterBluePlus.adapterState.listen(onStageChange);
+    adapterStateSubscription =
+        FlutterBluePlus.adapterState.listen(onStageChange);
   }
 
   void onStageChange(BluetoothAdapterState state) {
     adapterState = state;
     if (mounted) {
-      //refreshBluetoothDeviceList();
+      refreshBluetoothDeviceList();
       setState(() {});
     }
   }
@@ -42,9 +45,10 @@ class ConnectState extends State<Connect> {
     super.dispose();
   }
 
-  List<DeviceWithHandler> deviceList = [];
+  List<SubscribedDevice> deviceList = [];
 
-  Row createListEntry(BuildContext context, List<DeviceWithHandler> list, int index) {
+  Row createListEntry(
+      BuildContext context, List<SubscribedDevice> list, int index) {
     Icon iconShowConnected;
     if (list[index].device.isConnected) {
       iconShowConnected = Icon(Icons.bluetooth_connected_rounded);
@@ -53,7 +57,12 @@ class ConnectState extends State<Connect> {
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [ElevatedButton(onPressed: () => toggleConnection(index), child: Text(list[index].device.advName)), iconShowConnected],
+      children: [
+        ElevatedButton(
+            onPressed: () => toggleConnection(index),
+            child: Text(list[index].device.advName)),
+        iconShowConnected
+      ],
     );
   }
 
@@ -69,7 +78,11 @@ class ConnectState extends State<Connect> {
         });
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).connect_title)),
+      appBar: AppBar(
+          centerTitle: true,
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).connect_title)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -83,7 +96,9 @@ class ConnectState extends State<Connect> {
                     maintainSize: true,
                     maintainAnimation: true,
                     maintainState: true,
-                    child: IconButton(onPressed: refreshBluetoothDeviceList, icon: Icon(Icons.refresh_rounded)))
+                    child: IconButton(
+                        onPressed: refreshBluetoothDeviceList,
+                        icon: Icon(Icons.refresh_rounded)))
               ],
             ),
             Expanded(child: deviceListWidgets),
@@ -99,11 +114,12 @@ class ConnectState extends State<Connect> {
       clearDeviceList();
       List<BluetoothDevice> connectedDevices = FlutterBluePlus.connectedDevices;
       for (BluetoothDevice device in connectedDevices) {
-        deviceList.add(DeviceWithHandler(device, onConnectionChanged));
+        deviceList.add(SubscribedDevice(device, onConnectionChanged));
       }
     });
 
-    var subscription = FlutterBluePlus.onScanResults.listen(onScanResult, onError: (e) => print(e));
+    var subscription = FlutterBluePlus.onScanResults
+        .listen(onScanResult, onError: (e) => print(e));
 
     FlutterBluePlus.cancelWhenScanComplete(subscription);
 
@@ -133,7 +149,7 @@ class ConnectState extends State<Connect> {
       setState(() {
         for (ScanResult r in results) {
           if (!handledDeviceListContains(r.device)) {
-            deviceList.add(DeviceWithHandler(r.device, onConnectionChanged));
+            deviceList.add(SubscribedDevice(r.device, onConnectionChanged));
           }
         }
       });
@@ -143,12 +159,14 @@ class ConnectState extends State<Connect> {
   }
 
   toggleConnection(int btnIndex) async {
-    DeviceWithHandler handledDevice = deviceList[btnIndex];
+    SubscribedDevice handledDevice = deviceList[btnIndex];
 
     if (handledDevice.device.isConnected) {
       await handledDevice.device.disconnect();
     } else {
       await handledDevice.device.connect();
+      globalState.subscribedDevice = handledDevice;
+      handledDevice.addServices();
     }
   }
 
@@ -160,31 +178,12 @@ class ConnectState extends State<Connect> {
 
   bool handledDeviceListContains(BluetoothDevice device) {
     bool result = false;
-    for (DeviceWithHandler r in deviceList) {
+    for (SubscribedDevice r in deviceList) {
       if (r.device == device) {
         result = true;
         break;
       }
     }
     return result;
-  }
-}
-
-class DeviceWithHandler {
-  late BluetoothDevice device;
-  late StreamSubscription<BluetoothConnectionState> subscription;
-  late void Function(bool, BluetoothDevice) callBack;
-
-  DeviceWithHandler(BluetoothDevice bluetoothDevice, this.callBack) {
-    device = bluetoothDevice;
-    subscription = device.connectionState.listen(onConnectionChange);
-  }
-
-  void onConnectionChange(BluetoothConnectionState state) {
-    callBack(state == BluetoothConnectionState.connected, device);
-  }
-
-  void dispose() {
-    subscription.cancel();
   }
 }
