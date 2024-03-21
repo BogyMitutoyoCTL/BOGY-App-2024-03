@@ -15,45 +15,22 @@ class _MitprogramiererState extends State<Mitprogramierer> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).about_us_title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                  child: Text(AppLocalizations.of(context).appname +
-                      " - " +
-                      AppLocalizations.of(context).about_us_title))
+              Image.asset(scale: 4, 'assets/Images/Picture_2.png'),
+              Text("Dieter Blocher"),
+              Text("Thomas Weller"),
+              Text("Simon Schlegel"),
+              Text("Aryan Saibel"),
+              Text("Tim Porger")
             ],
           ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-                height: 450, scale: 0.75, 'assets/Images/Picture_2.png'),
-            Text("Dieter Blocher"),
-
-            Container(
-              height: 40,
-            ),
-            Text("Thomas Weller"),
-
-            Container(
-              height: 40,
-            ),
-            Text("Simon Schlegel"),
-
-            /// TODO NAME EINTRAGEN
-            Container(
-              height: 40,
-            ),
-            Text("Aryan Saibel"),
-            Container(
-              height: 40,
-            ),
-            Text("Tim Porger")
-          ],
         ),
       ),
     );
