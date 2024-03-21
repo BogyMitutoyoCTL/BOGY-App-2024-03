@@ -14,24 +14,22 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context).languageSetting),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-            child: DropdownButton(
-              isExpanded: true,
-              value: globalState.Sprache,
-              items: dropdownItems(),
-              onChanged: Sprachanederung,
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context).languageSetting),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+          child: DropdownButton(
+            isExpanded: true,
+            value: globalState.Sprache,
+            items: dropdownItems(),
+            onChanged: Sprachanederung,
+            dropdownColor: Color.fromARGB(255, 211, 211, 211),
+            style: TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
-          ElevatedButton(onPressed: nnn, child: Text("hhh"))
-        ],
-      ),
-    );
+        ));
   }
 
   List<DropdownMenuItem<String>> dropdownItems() {

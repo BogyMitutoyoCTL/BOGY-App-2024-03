@@ -18,13 +18,17 @@ class _Einheiten_DialogState extends State<Einheiten_Dialog> {
       ),
       body: Column(children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-          child: DropdownButton(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+            child: DropdownButton(
               isExpanded: true,
               value: globalState.Einheit,
               items: dropdownItems(),
-              onChanged: Einheits_aenderung),
-        )
+              onChanged: Einheits_aenderung,
+              dropdownColor: Color.fromARGB(255, 211, 211, 211),
+              style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+            ))
       ]),
     );
   }
