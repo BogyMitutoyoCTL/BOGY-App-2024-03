@@ -159,5 +159,13 @@
  "enter_temp_placeholder": "Enter the temperature here",
  "@enter_temp_placeholder": {
   "description": "Text in the Placeholder at manage alarms"
+},
+"edit_alarm_text": "Here you can edit the Alarm:",
+"@edit_alarm_text": {
+  "description": "Text when you click on an alarm"
+},
+"edit_alarm_button": "Edit alarm!",
+"@edit_alarm_button": {
+  "description": "Button to Edit an alarm when you click on an alarm"
 }
 }

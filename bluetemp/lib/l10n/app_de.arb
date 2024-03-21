@@ -40,5 +40,7 @@
   "enter_temp_placeholder": "Gib hier die Temperatur ein.",
   "add_alarm_modal_text": "Bitte wähle eine Temperatur und einen typ für deinen Alarm aus.",
   "device_list": "Geräteliste",
-  "connect_title": "Verbinden"
+  "connect_title": "Verbinden",
+  "edit_alarm_text": "Hier kannst du den Alarm bearbeiten:",
+  "edit_alarm_button": "Alarm bearbeiten!"
 }
