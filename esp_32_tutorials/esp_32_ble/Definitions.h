@@ -18,9 +18,9 @@ constexpr char SERVICE_DATA_UUID[]{"6a7f7672-ef00-4e7c-bba1-46179b152ad9"};
 constexpr char CHARACTERISTIC_DATA_UUID[]{"db919837-6ddb-42e0-afd5-f4a46ca99c8f"};
 
 constexpr float EPSILON{0.01};
-constexpr int BUFFER_SIZE{10}; // 7000 possible
+constexpr size_t BUFFER_SIZE{10}; // 7000 possible
 // define the pin port where the temperature sensor is connected
-constexpr int ONE_WIRE_BUS{4};
+constexpr uint8_t ONE_WIRE_BUS{4};
 
-constexpr int STATUS_LED{2};
-constexpr int SWITCH_LED{16};
+constexpr uint8_t STATUS_LED{2};
+constexpr uint8_t SWITCH_LED{16};
