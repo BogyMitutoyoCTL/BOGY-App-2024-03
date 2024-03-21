@@ -77,14 +77,31 @@ class GlobalState {
   double Maximum = 30;
   double Durchschnitt = 20;
   String Einheit = "°C";
-  var Alarms = []; //Usage Example: AlarmSetting(20, AlarmType.lower)
+  var Alarms = [
+    AlarmSetting("20", AlarmType.lower)
+  ]; //Usage Example: AlarmSetting(20, AlarmType.lower)
 
   Map toJson() => {
         'Alarms': Alarms,
         'Einheit': Einheit,
-        'selectedTheme': selectedTheme.toString(),
+        'selectedTheme': selectedTheme.name,
         'language': Sprache
       };
+  GlobalState.fromJson(Map<dynamic, dynamic> json) {
+    Einheit = json["Einheit"];
+    Sprache = json["language"];
+    selectedTheme = ThemeMode.values.byName(json["selectedTheme"]);
+    List<dynamic> dynamics = json["Alarms"];
+    List<AlarmSetting> settings = [];
+    for (dynamic d in dynamics) {
+      Map<dynamic, dynamic> m = d;
+      String value = m["value"];
+      String typName = m["typ"];
+      var setting = AlarmSetting(value, AlarmType.values.byName(typName));
+      settings.add(setting);
+    }
+    Alarms = settings;
+  }
 
   double Temperaturumrechnen(double Temperature) {
     if (Einheit == "°F") {
