@@ -48,7 +48,7 @@ class _Setting_SpracheState extends State<Setting_Sprache> {
   void Sprachanederung(String? value) {
     setState(() {
       globalState.Sprache = value!;
-      globalState.appSettingsChanger.refreshApp();
+      globalState.appSettingsChanger.setLanguage(value!);
     });
   }
 
