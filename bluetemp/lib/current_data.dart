@@ -31,7 +31,7 @@ class _current_dataState extends State<current_data> {
       DateOfLastMeasurement = temperatureText;
       TimeOfLastMeasurement = temperatureText;
     } else {
-      double lastTemp = globalState.Temperaturumrechnen(maybeValue.value);
+      double lastTemp = globalState.Temperaturumrechnen(maybeValue.temperature);
       temperatureText = lastTemp.toStringAsFixed(2);
       DateOfLastMeasurement =
           "${DateFormat("dd.MM.yyyy").format(maybeValue.time)}";

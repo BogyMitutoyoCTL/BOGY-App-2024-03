@@ -1,10 +1,5 @@
 //import 'dart:js_interop';
 
-import 'dart:ffi';
-
-import 'package:bluetemp/GlobalState.dart';
-import 'package:bluetemp/MainMenu.dart';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:bluetemp/AlarmSetting.dart';
