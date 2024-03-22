@@ -39,6 +39,7 @@ BinaryValue get_data{false};
 
 BLEServer *pServer{NULL};
 BLECharacteristic *pCharacteristicTemperature{NULL};
+BLECharacteristic *pCharacteristicOwnTemperature{NULL};
 BLECharacteristic *pCharacteristicDateTime{NULL};
 BLECharacteristic *pCharacteristicSwitch{NULL};
 BLECharacteristic *pCharacteristicGetData{NULL};
@@ -89,6 +90,13 @@ void setup()
           BLECharacteristic::PROPERTY_INDICATE);
   pCharacteristicTemperature->addDescriptor(new BLE2902());
   pCharacteristicTemperature->setCallbacks(new TemperatureCharacteristicCallbacks(internLed));
+
+  pCharacteristicOwnTemperature = pService->createCharacteristic(
+    CHARACTERISTIC_OWN_TEMPERATURE_UUID,
+    BLECharacteristic::PROPERTY_READ |
+          BLECharacteristic::PROPERTY_NOTIFY |
+          BLECharacteristic::PROPERTY_INDICATE);
+  pCharacteristicOwnTemperature->addDescriptor(new BLE2902());
 
   pCharacteristicDateTime = pService->createCharacteristic(
       CHARACTERISTIC_DATETIME_UUID,
@@ -233,8 +241,11 @@ void do_normal_loop_cycle()
   {
     pCharacteristicDateTime->setValue(get_byte_array(now), 7);
     pCharacteristicDateTime->notify();
-    pCharacteristicTemperature->setValue((uint8_t *)&temperature, sizeof(temperature));
+    int temp_temp{temperature * 100};
+    pCharacteristicTemperature->setValue(temp_temp);
     pCharacteristicTemperature->notify();
+    pCharacteristicOwnTemperature->setValue(temperature);
+    pCharacteristicOwnTemperature->notify();
     pCharacteristicSwitch->notify();
     pCharacteristicGetData->notify();
   }

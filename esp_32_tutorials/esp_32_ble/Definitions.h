@@ -16,6 +16,7 @@ constexpr char SOFTWARE_REVISION_STRING[]{"01-01"};
 // https://www.bluetooth.com/specifications/assigned-numbers/
 constexpr char SERVICE_ENVIRONMENTAL_SENSING_UUID[]{"181A"};
 constexpr char CHARACTERISTIC_TEMPERATURE_UUID[]{"2A6E"};
+constexpr char CHARACTERISTIC_OWN_TEMPERATURE_UUID[]{"cbdbd6ac-977c-429f-993d-deca9a3a1b2d"};
 constexpr char CHARACTERISTIC_DATETIME_UUID[]{"2A08"};
 
 constexpr char SERVICE_SWITCH_UUID[]{"05811a0b-f418-488e-87b9-bf47ee64fda3"};
@@ -28,7 +29,7 @@ constexpr char CHARACTERISTIC_BUFFER_SIZE_UUID[]{"b7865b8e-8b37-4383-94f0-720168
 constexpr char CHARACTERISTIC_BUFFER_CAPACITY_UUID[]{"b7865b8e-8b37-4383-94f0-7201689e16ea"};
 
 constexpr float EPSILON{0.01};
-constexpr size_t BUFFER_CAPACITY{10800}; // 10802 was the max size 21.03.2024 high noon
+constexpr size_t BUFFER_CAPACITY{10798}; // 10802 was the max size 21.03.2024 high noon
 // define the pin port where the temperature sensor is connected
 constexpr uint8_t ONE_WIRE_BUS{4};
 
