@@ -7,6 +7,8 @@ import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as m;
 
+import 'MeasurementValue.dart';
+
 class GlobalState {
   static var lightColor = ColorScheme(
     brightness: Brightness.light,
@@ -91,7 +93,7 @@ class GlobalState {
   double Temperature = 24;
   double Minimum = 10;
   double Maximum = 30;
-  double Durchschnitt = 20;
+  var Durchschnitt;
   String Einheit = "°C";
   var Alarms = []; //Usage Example: AlarmSetting("20", AlarmType.lower)
   List<MeasurementValue> DataList = [];
@@ -153,147 +155,8 @@ class GlobalState {
     }
   }
 
-  double Temperaturumrechner_Minimum(double Minimum) {
-    if (Einheit == "°F") {
-      return Minimum * 1.8 + 32;
-    }
-    if (Einheit == "°Ra") {
-      return Minimum * 1.8 + 491.67;
-    }
-    if (Einheit == "°Ré") {
-      return Minimum * 0.8;
-    }
-    if (Einheit == "°K") {
-      return Minimum + 273.15;
-    }
-    if (Einheit == "N") {
-      return Minimum * 33 / 100;
-    }
-
-    if (Einheit == "°De") {
-      return (100 - Minimum) * 3.2;
-    }
-    if (Einheit == "°°Rø") {
-      return (Minimum * 21 / 40) + 7.5;
-    }
-    /* if (Einheit == "°Hr") {
-      return (Minimum + 273.15) * 1.8;
-    }
-    if (Einheit == "°RD") {
-      return (Minimum + 273.15) * 0.02;
-    }
-    if (Einheit == "°T_RS") {
-      return (Minimum + 273.15) * 2.61217 * m.pow(10, 30);
-    }
-    if (Einheit == "°T_c") {
-      return (Minimum + 273.15) * 1.081 * m.pow(10, 30);
-    } */
-    else {
-      return Minimum;
-    }
-  }
-
-  double Temperaturumrechner_Maximum(double Maximum) {
-    if (Einheit == "°F") {
-      return Maximum * 1.8 + 32;
-    }
-    if (Einheit == "°Ra") {
-      return Maximum * 1.8 + 491.67;
-    }
-    if (Einheit == "°Ré") {
-      return Maximum * 0.8;
-    }
-    if (Einheit == "°K") {
-      return Maximum + 273.15;
-    }
-    if (Einheit == "N") {
-      return Maximum * 33 / 100;
-    }
-
-    if (Einheit == "°De") {
-      return (100 - Maximum) * 3.2;
-    }
-    if (Einheit == "°Rø") {
-      return (Maximum * 21 / 40) + 7.5;
-    }
-    /* if (Einheit == "°Hr") {
-      return (Maximum + 273.15) * 1.8;
-    }
-    if (Einheit == "°RD") {
-      return (Maximum + 273.15) * 0.02;
-    }
-    if (Einheit == "°T_RS") {
-      return (Maximum + 273.15) * 2.61217 * m.pow(10, 30);
-    }
-    if (Einheit == "°T_c") {
-      return (Maximum + 273.15) * 1.081 * m.pow(10, 30);
-    }*/
-    else {
-      return Maximum;
-    }
-  }
-
-  double Temperaturumrechner_Durchschnitt(double Durchschnitt) {
-    if (Einheit == "°F") {
-      return Durchschnitt * 1.8 + 32;
-    }
-    if (Einheit == "°Ra") {
-      return Temperature * 1.8 + 491.67;
-    }
-    if (Einheit == "°Ré") {
-      return Durchschnitt * 0.8;
-    }
-    if (Einheit == "K") {
-      return Durchschnitt + 273.15;
-    }
-    if (Einheit == "°N") {
-      return Durchschnitt * 33 / 100;
-    }
-
-    if (Einheit == "°De") {
-      return (100 - Durchschnitt) * 3.2;
-    }
-    if (Einheit == "°Rø") {
-      return (Durchschnitt * 21 / 40) + 7.5;
-    }
-    /* if (Einheit == "°Hr") {
-      return (Durchschnitt + 273.15) * 1.8;
-    }
-    if (Einheit == "°RD") {
-      return (Durchschnitt + 273.15) * 0.02;
-    }
-    if (Einheit == "°T_RS") {
-      return (Durchschnitt + 273.15) * 2.61217 * m.pow(10, 30);
-    }
-    if (Einheit == "°T_c") {
-      return (Durchschnitt + 273.15) * 1.081 * m.pow(10, 30);
-    }*/
-    else {
-      return Durchschnitt;
-    }
-  }
-
   String Sprache = "en";
   AppSettingsChanger appSettingsChanger = AppSettingsChanger();
 
   SubscribedDevice? subscribedDevice;
-}
-
-class MeasurementValue {
-  late double value;
-  late DateTime time;
-  MeasurementValue(double a, DateTime b) {
-    value = a;
-    time = b;
-  }
-  Map toJson() => {'value': value, 'time': time.toString()};
-  MeasurementValue.fromJson(Map<dynamic, dynamic> m) {
-    value = m["value"]!;
-    String time_string = m["time"]!;
-    time = DateTime.parse(time_string);
-  }
-  @override
-  String toString() {
-    return "${this.value}, ${this.time}";
-  }
 }

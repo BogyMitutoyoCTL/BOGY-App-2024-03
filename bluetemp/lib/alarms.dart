@@ -8,6 +8,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:localstorage/localstorage.dart';
 
+import 'Safe_GlobalState.dart';
+
 class alarms extends StatefulWidget {
   const alarms({super.key});
 
@@ -52,9 +54,9 @@ class _alarmsState extends State<alarms> {
   Container createListEntry(
       BuildContext context, List<dynamic> list, int index) {
     if (list[index].typ == AlarmType.lower) {
-      text = "Alarm > ${list[index].value}${globalState.Einheit}";
+      text = "Alarm > ${list[index].temperature}${globalState.Einheit}";
     } else {
-      text = "Alarm < ${list[index].value}${globalState.Einheit}";
+      text = "Alarm < ${list[index].temperature}${globalState.Einheit}";
     }
     return Container(
       margin: EdgeInsets.all(16),

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'Safe_GlobalState.dart';
 import 'main.dart';
 
 class current_data extends StatefulWidget {
@@ -43,7 +44,7 @@ class _current_dataState extends State<current_data> {
               Text(DateOfLastMeasurement.toString()),
               Text(TimeOfLastMeasurement),
               Text(
-                "${double.parse((globalState.Temperaturumrechnen(globalState.DataList[globalState.DataList.length - 1].value)).toStringAsFixed(2))} ${globalState.Einheit}",
+                "${double.parse((globalState.Temperaturumrechnen(globalState.DataList[globalState.DataList.length - 1].temperature)).toStringAsFixed(2))} ${globalState.Einheit}",
                 style: TextStyle(fontSize: 60),
               ),
               Countdown(
