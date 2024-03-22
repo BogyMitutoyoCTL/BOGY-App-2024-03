@@ -13,14 +13,18 @@ class sync_time extends StatefulWidget {
 }
 
 class _sync_timeState extends State<sync_time> {
-  final CountdownController _controller = new CountdownController(autoStart: true);
+  final CountdownController _controller =
+      new CountdownController(autoStart: true);
   DateTime now = DateTime.now();
-  var dayformatted = DateFormat('dd.mm.yyyy').format(DateTime.now());
+  var dayformatted = DateFormat('dd.MM.yyyy').format(DateTime.now());
   var hourformatted = DateFormat('hh:mm:ss').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).sync_time_title)),
+      appBar: AppBar(
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).sync_time_title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,14 +33,20 @@ class _sync_timeState extends State<sync_time> {
               AppLocalizations.of(context).current_phone_time,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text(dayformatted, style: Theme.of(context).textTheme.headlineSmall),
-            Text(hourformatted, style: Theme.of(context).textTheme.headlineSmall),
+            Text(dayformatted,
+                style: Theme.of(context).textTheme.headlineSmall),
+            Text(hourformatted,
+                style: Theme.of(context).textTheme.headlineSmall),
             Text(
               AppLocalizations.of(context).current_sensor_time,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("${dayformatted}", style: Theme.of(context).textTheme.headlineSmall), //TODO: Implement current sensor time
-            Text("${hourformatted}", style: Theme.of(context).textTheme.headlineSmall),
+            Text("${dayformatted}",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall), //TODO: Implement current sensor time
+            Text("${hourformatted}",
+                style: Theme.of(context).textTheme.headlineSmall),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
               child: ElevatedButton(
@@ -51,7 +61,8 @@ class _sync_timeState extends State<sync_time> {
             Countdown(
               controller: _controller,
               seconds: 3,
-              build: (BuildContext context, double time) => Text("Next refresh in ${time.toInt()} secounds"),
+              build: (BuildContext context, double time) =>
+                  Text("Next refresh in ${time.toInt()} secounds"),
               interval: Duration(milliseconds: 1000),
               onFinished: timer_end,
             ),
@@ -64,7 +75,7 @@ class _sync_timeState extends State<sync_time> {
   void sync_time_data() {
     //TODO: Implement Sync Time fetaure
     setState(() {
-      dayformatted = DateFormat('dd.mm.yyyy').format(DateTime.now());
+      dayformatted = DateFormat('dd.MM.yyyy').format(DateTime.now());
       hourformatted = DateFormat('hh:mm:ss').format(DateTime.now());
     });
     _controller.restart();
@@ -72,7 +83,7 @@ class _sync_timeState extends State<sync_time> {
 
   timer_end() {
     setState(() {
-      dayformatted = DateFormat('dd.mm.yyyy').format(DateTime.now());
+      dayformatted = DateFormat('dd.MM.yyyy').format(DateTime.now());
       hourformatted = DateFormat('hh:mm:ss').format(DateTime.now());
     });
 
