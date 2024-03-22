@@ -43,6 +43,8 @@ BLECharacteristic *pCharacteristicDateTime{NULL};
 BLECharacteristic *pCharacteristicSwitch{NULL};
 BLECharacteristic *pCharacteristicGetData{NULL};
 BLECharacteristic *pCharacteristicData{NULL};
+BLECharacteristic *pCharacteristicBufferSize{NULL};
+BLECharacteristic *pCharacteristicBufferCapacity{NULL};
 BLECharacteristic *pCharacteristicManufacturerNameString{NULL};
 BLECharacteristic *pCharacteristicModelNumberString{NULL};
 BLECharacteristic *pCharacteristicFirmwareRevisionString{NULL};
@@ -131,6 +133,17 @@ void setup()
   pCharacteristicData->addDescriptor(new BLE2902());
   pCharacteristicData->setCallbacks(new DataCharacteristicCallbacks());
 
+  pCharacteristicBufferSize = pServiceGetData->createCharacteristic(
+      CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ);
+  pCharacteristicBufferSize->addDescriptor(new BLE2902());
+  int buffer_size = 0;
+  pCharacteristicBufferSize->setValue(buffer_size);
+
+  pCharacteristicBufferCapacity = pServiceGetData->createCharacteristic(
+      CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_NOTIFY);
+  pCharacteristicBufferCapacity->addDescriptor(new BLE2902());
+  auto buffer_capacity = BUFFER_SIZE;
+  pCharacteristicBufferCapacity->setValue(buffer_capacity);
   pServiceGetData->start();
   // #### End Get Data Service
 
@@ -143,18 +156,18 @@ void setup()
   pCharacteristicManufacturerNameString->setValue(MANUFACTURER_NAME_STRING);
 
   pCharacteristicModelNumberString = pServiceDeviceInformation->createCharacteristic(
-          CHARACTERISTIC_MODEL_NUMBER_STRING_UUID,
-          BLECharacteristic::PROPERTY_READ);
+      CHARACTERISTIC_MODEL_NUMBER_STRING_UUID,
+      BLECharacteristic::PROPERTY_READ);
   pCharacteristicModelNumberString->setValue(MODEL_NUMBER_STRING);
 
   pCharacteristicFirmwareRevisionString = pServiceDeviceInformation->createCharacteristic(
-          CHARACTERISTIC_FIRMWARE_REVISION_STRING_UUID,
-          BLECharacteristic::PROPERTY_READ);
+      CHARACTERISTIC_FIRMWARE_REVISION_STRING_UUID,
+      BLECharacteristic::PROPERTY_READ);
   pCharacteristicFirmwareRevisionString->setValue(FIRMWARE_REVISION_STRING);
 
   pCharacteristicSoftwareRevisionString = pServiceDeviceInformation->createCharacteristic(
-          CHARACTERISTIC_SOFTWARE_REVISION_STRING_UUID,
-          BLECharacteristic::PROPERTY_READ);
+      CHARACTERISTIC_SOFTWARE_REVISION_STRING_UUID,
+      BLECharacteristic::PROPERTY_READ);
   pCharacteristicSoftwareRevisionString->setValue(SOFTWARE_REVISION_STRING);
 
   pServiceDeviceInformation->start();
@@ -193,6 +206,9 @@ void do_normal_loop_cycle()
   if (!are_equal(last_temperature, temperature))
   {
     temperatures.push({temperature, now.secondstime()});
+    auto buffer_size = temperatures.size();
+    pCharacteristicBufferSize->setValue(buffer_size);
+    pCharacteristicBufferSize->notify();
     values_changed++;
   }
   last_temperature = temperature;
