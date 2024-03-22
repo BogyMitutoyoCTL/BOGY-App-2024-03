@@ -18,12 +18,12 @@ Future<void> main() async {
   //globalState = GlobalState();
   //await safe.save();
   globalState = safe.getFromStorage();
-  print(globalState.Alarms);
+  print(globalState.DataList);
   // TODO: maybe load the state from a file here
 
   await safe.save();
   globalState.appSettingsChanger.setLanguage(globalState.Sprache);
-  runApp(const BlueTempApp());
+  //runApp(const BlueTempApp());
 }
 
 class SafeGlobalState {
@@ -40,18 +40,12 @@ class SafeGlobalState {
   void load() {}
 
   GlobalState getFromStorage() {
-    var data_list = storage.getItem("GlobalState");
-    if (data_list == null) {
+    var globalStateString = storage.getItem("GlobalState");
+    if (globalStateString == null) {
       return GlobalState();
     }
-
-    print(data_list);
-    for (var pair in data_list.entries) {
-      print(pair.key);
-      print(pair.value);
-    }
     print("GLOBALSTATE STORED ON LOCALSTORAGE");
-    return GlobalState.fromJson(data_list);
+    return GlobalState.fromJson(globalStateString);
   }
 
   setInStorage() async {

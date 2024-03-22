@@ -108,6 +108,8 @@ class GlobalState {
     selectedTheme = ThemeMode.values.byName(json["selectedTheme"]);
     Alarms = List<AlarmSetting>.from(
         json["Alarms"].map((e) => AlarmSetting.fromJson(e)));
+    DataList = List<MeasurementValue>.from(
+        json["DataList"].map((e) => MeasurementValue.fromJson(e)));
   }
 
   double Temperaturumrechnen(double Temperature) {
@@ -282,6 +284,11 @@ class MeasurementValue {
   MeasurementValue(double a, DateTime b) {
     value = a;
     time = b;
+  }
+  MeasurementValue.fromJson(Map<dynamic, dynamic> m) {
+    value = m["value"]!;
+    String time_string = m["time"]!;
+    time = DateTime.parse(time_string);
   }
   @override
   String toString() {
