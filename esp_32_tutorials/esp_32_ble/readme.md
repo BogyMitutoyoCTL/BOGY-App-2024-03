@@ -34,6 +34,10 @@ arduino-cli lib install "RTClib"
 arduino-cli lib install "CircularBuffer"
 ```
 
+## Online Hex Converter
+
+Here you find an online-hex-converter: https://www.scadacore.com/tools/programming-calculators/online-hex-converter/
+
 ## Circut
 
 ![Circut](./../assets/esp32_rtc_temp.svg)

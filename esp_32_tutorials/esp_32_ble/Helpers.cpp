@@ -86,13 +86,13 @@ void print_values_read_changed(const long read, const long changed, const String
     Serial.flush();
 }
 
-void print_buffer_ratio(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String &prefix)
+void print_buffer_ratio(const CircularBuffer<TemperatureData, BUFFER_CAPACITY> &temperatures, const String &prefix)
 {
     printf("%sBuffer: %d/%d Used/Free Ratio\n", prefix, temperatures.size(), temperatures.available());
     Serial.flush();
 }
 
-void print_buffer_values(const CircularBuffer<TemperatureData, BUFFER_SIZE> &temperatures, const String &prefix)
+void print_buffer_values(const CircularBuffer<TemperatureData, BUFFER_CAPACITY> &temperatures, const String &prefix)
 {
     if (temperatures.isEmpty())
     {
