@@ -49,7 +49,8 @@ class _alarmsState extends State<alarms> {
 
   AlarmType selected_typ_value = AlarmType.lower;
   AlarmType selected_typ_value_edit = AlarmType.lower;
-  Container createListEntry(BuildContext context, List<dynamic> list, int index) {
+  Container createListEntry(
+      BuildContext context, List<dynamic> list, int index) {
     if (list[index].typ == AlarmType.lower) {
       text = "Alarm > ${list[index].value}${globalState.Einheit}";
     } else {
@@ -80,7 +81,10 @@ class _alarmsState extends State<alarms> {
           return createListEntry(context, Alarmlist, index);
         });
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).alarms_text)),
+      appBar: AppBar(
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).alarms_text)),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -91,7 +95,10 @@ class _alarmsState extends State<alarms> {
             ElevatedButton(
                 onPressed: add_alarm,
                 child: Row(
-                  children: [Icon(Icons.add), Text(AppLocalizations.of(context).add_alarm_button)],
+                  children: [
+                    Icon(Icons.add),
+                    Text(AppLocalizations.of(context).add_alarm_button)
+                  ],
                 ))
           ],
         ),
@@ -115,7 +122,8 @@ class _alarmsState extends State<alarms> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red),
                         child: Text(AppLocalizations.of(context).sure_button),
                         onPressed: () => setState(() {
                           globalState.Alarms.remove(value);
@@ -124,7 +132,8 @@ class _alarmsState extends State<alarms> {
                         }),
                       ),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
                         child: Text(AppLocalizations.of(context).close_button),
                         onPressed: () => setState(() {
                           Navigator.pop(context);
@@ -150,15 +159,19 @@ class _alarmsState extends State<alarms> {
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     controller: editController,
-                    inputFormatters: [FilteringTextInputFormatter.allow(new RegExp("^-?\\d*"))],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(new RegExp("^-?\\d*"))
+                    ],
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         errorBorder: InputBorder.none,
                         disabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                        hintText: editValue),
+                        contentPadding: EdgeInsets.only(
+                            left: 15, bottom: 11, top: 11, right: 15),
+                        hintText: AppLocalizations.of(context)
+                            .enter_temp_placeholder),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -170,11 +183,13 @@ class _alarmsState extends State<alarms> {
                           setState(() {});
                           edit_alarm();
                         },
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
                         child: Row(
                           children: [
                             Icon(Icons.edit),
-                            Text(AppLocalizations.of(context).edit_alarm_button),
+                            Text(
+                                AppLocalizations.of(context).edit_alarm_button),
                           ],
                         ),
                       ),
@@ -203,7 +218,9 @@ class _alarmsState extends State<alarms> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(margin: EdgeInsets.all(12), child: Text(AppLocalizations.of(context).add_alarm_modal_text)),
+            Container(
+                margin: EdgeInsets.all(12),
+                child: Text(AppLocalizations.of(context).add_alarm_modal_text)),
             DropdownButton(
                 items: alarm_typ_item,
                 dropdownColor: Color.fromARGB(500, 211, 211, 211),
@@ -218,15 +235,19 @@ class _alarmsState extends State<alarms> {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               controller: textController,
-              inputFormatters: [FilteringTextInputFormatter.allow(new RegExp("^-?\\d*"))],
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(new RegExp("^-?\\d*"))
+              ],
               decoration: InputDecoration(
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                  hintText: AppLocalizations.of(context).enter_temp_placeholder),
+                  contentPadding:
+                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                  hintText:
+                      AppLocalizations.of(context).enter_temp_placeholder),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -235,7 +256,8 @@ class _alarmsState extends State<alarms> {
                   onPressed: () {
                     add_alarm_to_list();
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   child: Row(
                     children: [
                       Icon(Icons.add),
@@ -252,6 +274,9 @@ class _alarmsState extends State<alarms> {
   }
 
   add_alarm_to_list() async {
+    if (tempValue == "") {
+      return Navigator.pop(context);
+    }
     globalState.Alarms.add(AlarmSetting(tempValue, selected_typ_value));
     safe.save();
     /*final LocalStorage storage = LocalStorage('storage.json');
