@@ -12,6 +12,7 @@ class StatisticPage extends StatefulWidget {
 }
 
 class _StatisticPageState extends State<StatisticPage> {
+  var durchschnitt = globalState.Durchschnitt;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +69,7 @@ class _StatisticPageState extends State<StatisticPage> {
                           "${globalState.Temperaturumrechnen(globalState.Maximum).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
-                          "${globalState.Temperaturumrechnen(globalState.Durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
                           "${globalState.Temperaturumrechnen(globalState.Minimum).toStringAsFixed(2)} ${globalState.Einheit}",
@@ -132,6 +133,7 @@ class _StatisticPageState extends State<StatisticPage> {
   void delete_all_statistics() {
     globalState.DataList.removeRange(0, globalState.DataList.length);
     safe.save();
+    setState(() {});
     Navigator.pop(context);
   }
 }
