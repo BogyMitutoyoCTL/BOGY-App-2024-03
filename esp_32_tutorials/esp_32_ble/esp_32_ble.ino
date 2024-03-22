@@ -18,7 +18,7 @@
 #include "Helpers.h"
 
 // https://github.com/rlogiacco/CircularBuffer
-CircularBuffer<TemperatureData, BUFFER_SIZE> temperatures;
+CircularBuffer<TemperatureData, BUFFER_CAPACITY> temperatures;
 // define this here because of the index_t type
 using index_t = decltype(temperatures)::index_t;
 
@@ -142,7 +142,7 @@ void setup()
   pCharacteristicBufferCapacity = pServiceGetData->createCharacteristic(
       CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ);
   pCharacteristicBufferCapacity->addDescriptor(new BLE2902());
-  auto buffer_capacity = BUFFER_SIZE;
+  auto buffer_capacity = BUFFER_CAPACITY;
   pCharacteristicBufferCapacity->setValue(buffer_capacity);
   pServiceGetData->start();
   // #### End Get Data Service
