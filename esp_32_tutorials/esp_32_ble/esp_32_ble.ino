@@ -150,7 +150,7 @@ void setup()
   pCharacteristicFirmwareRevisionString = pServiceDeviceInformation->createCharacteristic(
           CHARACTERISTIC_FIRMWARE_REVISION_STRING_UUID,
           BLECharacteristic::PROPERTY_READ);
-  pCharacteristicModelNumberString->setValue(FIRMWARE_REVISION_STRING);
+  pCharacteristicFirmwareRevisionString->setValue(FIRMWARE_REVISION_STRING);
 
   pCharacteristicSoftwareRevisionString = pServiceDeviceInformation->createCharacteristic(
           CHARACTERISTIC_SOFTWARE_REVISION_STRING_UUID,

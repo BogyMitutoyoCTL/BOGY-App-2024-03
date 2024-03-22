@@ -28,7 +28,7 @@ constexpr char CHARACTERISTIC_BUFFER_SIZE_UUID[]{"b7865b8e-8b37-4383-94f0-720168
 constexpr char CHARACTERISTIC_BUFFER_CAPACITY_UUID[]{"b7865b8e-8b37-4383-94f0-7201689e16ea"};
 
 constexpr float EPSILON{0.01};
-constexpr size_t BUFFER_SIZE{10802}; // 10802 was the max size 21.03.2024 high noon
+constexpr size_t BUFFER_SIZE{10800}; // 10802 was the max size 21.03.2024 high noon
 // define the pin port where the temperature sensor is connected
 constexpr uint8_t ONE_WIRE_BUS{4};
 
