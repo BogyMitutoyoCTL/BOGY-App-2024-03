@@ -2,10 +2,6 @@
 #include <Arduino.h>
 #include <BLEDevice.h>
 
-constexpr char SERVICE_GENERIC_ACCESS_UUID[]{"1800"};
-constexpr char CHARACTERISTIC_DEVICE_NAME_UUID[]{"2A00"};
-constexpr char DEVICE_NAME_STRING[]{"BOGY Temperature Sensoring Device"};
-
 constexpr char SERVICE_DEVICE_INFORMATION_UUID[]{"180A"};
 constexpr char CHARACTERISTIC_MANUFACTURER_NAME_STRING_UUID[]{"2A29"};
 constexpr char MANUFACTURER_NAME_STRING[]{"Mitutoyo CTL Germany GmbH"};
