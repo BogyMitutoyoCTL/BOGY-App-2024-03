@@ -281,4 +281,8 @@ class MeasurementValue {
     value = a;
     time = b;
   }
+  @override
+  String toString() {
+    return "${this.value}, ${this.time}";
+  }
 }
