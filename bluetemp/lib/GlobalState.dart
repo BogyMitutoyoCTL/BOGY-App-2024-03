@@ -93,12 +93,14 @@ class GlobalState {
   double Durchschnitt = 20;
   String Einheit = "°C";
   var Alarms = []; //Usage Example: AlarmSetting("20", AlarmType.lower)
+  List<MeasurementValue> DataList = [];
 
   Map toJson() => {
         'Alarms': Alarms,
         'Einheit': Einheit,
         'selectedTheme': selectedTheme.name,
-        'language': Sprache
+        'language': Sprache,
+        'DataList': DataList
       };
   GlobalState.fromJson(Map<dynamic, dynamic> json) {
     Einheit = json["Einheit"];
