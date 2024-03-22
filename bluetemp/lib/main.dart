@@ -58,3 +58,8 @@ DateTime minimum_Time(List<MeasurementValue> c) {
   if (c.isEmpty) return DateTime(2000, 0, 0, 0, 0, 0, 0);
   return c.first.time;
 }
+
+DateTime maximum_Time(List<MeasurementValue> c) {
+  if (c.isEmpty) return DateTime(2000, 0, 0, 0, 0, 0, 0);
+  return c.last.time;
+}
