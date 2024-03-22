@@ -1,6 +1,7 @@
 import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import 'Safe_GlobalState.dart';
 
@@ -12,6 +13,11 @@ class StatisticPage extends StatefulWidget {
 }
 
 class _StatisticPageState extends State<StatisticPage> {
+  var maximum = maximum_sort(globalState.DataList);
+  var minimum = minimum_sort(globalState.DataList);
+  var average = durchschnitt(globalState.DataList);
+  var starttime = minimum_Time(globalState.DataList);
+  var endtime = maximum_Time(globalState.DataList);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +33,7 @@ class _StatisticPageState extends State<StatisticPage> {
               AppLocalizations.of(context).starttime,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("16.03.2024 14:00 Uhr",
+            Text("${DateFormat("dd.MM.yyyy  hh:mm").format(starttime)} Uhr",
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall), //TODO: Implement real Start Time
@@ -35,7 +41,7 @@ class _StatisticPageState extends State<StatisticPage> {
               AppLocalizations.of(context).endtime,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("18.03.2024 14:25 Uhr",
+            Text("${DateFormat("dd.MM.yyyy  hh:mm").format(endtime)} Uhr",
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall), //TODO: Implement real End Time
@@ -65,13 +71,13 @@ class _StatisticPageState extends State<StatisticPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                          "${globalState.Temperaturumrechnen(globalState.Maximum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(maximum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
-                          "${globalState.Temperaturumrechnen(globalState.Durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(average).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
-                          "${globalState.Temperaturumrechnen(globalState.Minimum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(minimum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium)
                     ],
                   )
@@ -132,6 +138,10 @@ class _StatisticPageState extends State<StatisticPage> {
   void delete_all_statistics() {
     globalState.DataList.removeRange(0, globalState.DataList.length);
     safe.save();
+    maximum = maximum_sort(globalState.DataList);
+    minimum = minimum_sort(globalState.DataList);
+    average = durchschnitt(globalState.DataList);
+    setState(() {});
     Navigator.pop(context);
   }
 }
