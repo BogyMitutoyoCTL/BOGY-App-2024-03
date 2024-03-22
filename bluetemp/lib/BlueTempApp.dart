@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'AppSettingsChanger.dart';
+import 'Safe_GlobalState.dart';
 import 'SplashScreenWidget.dart';
 
 class BlueTempApp extends StatelessWidget {
@@ -14,7 +15,8 @@ class BlueTempApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var languageChanger = ChangeNotifierProvider(
       create: (context) => globalState.appSettingsChanger,
-      child: Consumer<AppSettingsChanger>(builder: (context, localeModel, child) {
+      child:
+          Consumer<AppSettingsChanger>(builder: (context, localeModel, child) {
         return MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           onGenerateTitle: (context) => AppLocalizations.of(context).apptitle,
