@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:bluetemp/AlarmSetting.dart';
 import 'package:bluetemp/AppSettingsChanger.dart';
+import 'package:bluetemp/Safe_GlobalState.dart';
 import 'package:bluetemp/SubscribedDevice.dart';
 import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'dart:math' as m;
 
 import 'MeasurementValue.dart';
@@ -91,8 +93,8 @@ class GlobalState {
   String DateOfLastMeasurement = "18.03.2024";
   String TimeOfLastMeasurement = "16:01:09";
   double Temperature = 24;
-  double Minimum = 10;
-  double Maximum = 30;
+  MeasurementValue Minimum = MeasurementValue(23, DateTime.now());
+  MeasurementValue Maximum = MeasurementValue(23, DateTime.now());
   var Durchschnitt;
   String Einheit = "°C";
   var Alarms = []; //Usage Example: AlarmSetting("20", AlarmType.lower)
