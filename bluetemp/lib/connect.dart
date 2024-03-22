@@ -96,7 +96,7 @@ class ConnectState extends State<Connect> {
               ],
             ),
             Expanded(child: deviceListWidgets),
-            ElevatedButton(onPressed: testingMethod, child: Text("TurnOnLamp"))
+            ElevatedButton(onPressed: testingMethod, child: Text("Test"))
           ],
         ),
       ),
@@ -106,7 +106,7 @@ class ConnectState extends State<Connect> {
   void testingMethod() {
     for (SubscribedDevice entry in deviceList) {
       if (entry.device.isConnected) {
-        entry.printTempCharacteristic();
+        entry.listenToTempCharacteristic();
       }
     }
   }
