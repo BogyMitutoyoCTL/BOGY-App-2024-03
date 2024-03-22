@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'Safe_GlobalState.dart';
 import 'main.dart';
 
 class graphs extends StatefulWidget {
@@ -16,6 +17,7 @@ class _graphsState extends State<graphs> {
 
   @override
   Widget build(BuildContext context) {
+    addData();
     return Scaffold(
       appBar:
           AppBar(title: Text(AppLocalizations.of(context).temperature_graph)),
@@ -56,12 +58,13 @@ class _graphsState extends State<graphs> {
       ),
     );
   }
-}
 
-addData(list) {
-  double x = 0;
-  for (var entries in globalState.DataList) {
-    list.add(FlSpot(x, entries.value));
-    x++;
+  addData() {
+    for (var entrie in globalState.DataList) {
+      DateTime a = globalState.DataList[0].time;
+      DateTime b = entrie.time;
+      double delta = b.difference(a).inSeconds.toDouble();
+      chartData.add(FlSpot(delta, entrie.temperature));
+    }
   }
 }

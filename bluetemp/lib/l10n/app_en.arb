@@ -99,7 +99,7 @@
   "@temp_scale": {
     "description": "Temp Scala for the Graph"
   },
-  "time_scale": "Time",
+  "time_scale": "Δ Time",
   "@time_scale": {
     "description": "Time Scala for the Graph"
   },
