@@ -27,6 +27,15 @@ class _current_dataState extends State<current_data> {
       "${DateFormat("hh.mm.ss").format(globalState.DataList[globalState.DataList.length - 1].time)}";
   @override
   Widget build(BuildContext context) {
+    var lastOrNull2 = globalState.DataList.lastOrNull;
+    String Temptext = "";
+    double lastTemp;
+    if (lastOrNull2 == null)
+      Temptext = "There is currently no data";
+    else {
+      lastTemp = globalState.Temperaturumrechnen(lastOrNull2.value);
+      Temptext = lastTemp.toStringAsFixed(2);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).appname +
@@ -43,7 +52,7 @@ class _current_dataState extends State<current_data> {
               Text(DateOfLastMeasurement.toString()),
               Text(TimeOfLastMeasurement),
               Text(
-                "${double.parse((globalState.Temperaturumrechnen(globalState.DataList[globalState.DataList.length - 1].value)).toStringAsFixed(2))} ${globalState.Einheit}",
+                "${Temptext} ${globalState.Einheit}",
                 style: TextStyle(fontSize: 60),
               ),
               Countdown(
