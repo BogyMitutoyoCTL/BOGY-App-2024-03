@@ -285,6 +285,7 @@ class MeasurementValue {
     value = a;
     time = b;
   }
+  Map toJson() => {'value': value, 'time': time.toString()};
   MeasurementValue.fromJson(Map<dynamic, dynamic> m) {
     value = m["value"]!;
     String time_string = m["time"]!;
