@@ -134,13 +134,13 @@ void setup()
   pCharacteristicData->setCallbacks(new DataCharacteristicCallbacks());
 
   pCharacteristicBufferSize = pServiceGetData->createCharacteristic(
-      CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ);
+      CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_NOTIFY);
   pCharacteristicBufferSize->addDescriptor(new BLE2902());
   int buffer_size = 0;
   pCharacteristicBufferSize->setValue(buffer_size);
 
   pCharacteristicBufferCapacity = pServiceGetData->createCharacteristic(
-      CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_NOTIFY);
+      CHARACTERISTIC_GET_DATA_UUID, BLECharacteristic::PROPERTY_READ);
   pCharacteristicBufferCapacity->addDescriptor(new BLE2902());
   auto buffer_capacity = BUFFER_SIZE;
   pCharacteristicBufferCapacity->setValue(buffer_capacity);
