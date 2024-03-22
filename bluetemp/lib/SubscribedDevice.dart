@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:bluetemp/MeasurementValue.dart';
+import 'package:bluetemp/Safe_GlobalState.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'dart:convert';
 
@@ -62,7 +64,8 @@ class SubscribedDevice {
         .where((service) => service.serviceUuid.str == "181a")
         .forEach((service) async {
       service.characteristics
-          .where((characteristic) => characteristic.uuid.str == "2a6e")
+          .where((characteristic) =>
+              characteristic.uuid.str == "cbdbd6ac-977c-429f-993d-deca9a3a1b2d")
           .forEach((characteristic) async {
         print(characteristic.toString());
         final subscription = characteristic.onValueReceived.listen((value) {
@@ -78,7 +81,8 @@ class SubscribedDevice {
 
   convertRecievedValToFloat(List<int> recievedList) {
     Int8List bytes = Int8List.fromList(recievedList.reversed.toList());
-    double float = ByteData.view(bytes.buffer).getFloat32(0);
+    double float = ByteData.view(bytes.buffer).getFloat64(0);
+    globalState.DataList.add(MeasurementValue(float, DateTime.now()));
     print(float);
   }
 

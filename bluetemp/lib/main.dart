@@ -55,11 +55,11 @@ double durchschnitt(List<MeasurementValue> l) {
 }
 
 DateTime minimum_Time(List<MeasurementValue> c) {
-  if (c.isEmpty) return DateTime(2000, 0, 0, 0, 0, 0, 0);
+  if (c.isEmpty) return DateTime(2000, 1, 1, 0, 0, 0, 0);
   return c.first.time;
 }
 
 DateTime maximum_Time(List<MeasurementValue> c) {
-  if (c.isEmpty) return DateTime(2000, 0, 0, 0, 0, 0, 0);
+  if (c.isEmpty) return DateTime(2000, 1, 1, 0, 0, 0, 0);
   return c.last.time;
 }
