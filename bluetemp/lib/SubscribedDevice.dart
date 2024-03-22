@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'dart:convert';
 
@@ -75,13 +76,10 @@ class SubscribedDevice {
     });
   }
 
-  convertRecievedValToFloat(List<int> value) {
-    String hexValue = "";
-    for (int number in value) {
-      hexValue += number.toRadixString(16);
-    }
-
-    print(hexValue);
+  convertRecievedValToFloat(List<int> recievedList) {
+    Int8List bytes = Int8List.fromList(recievedList.reversed.toList());
+    double float = ByteData.view(bytes.buffer).getFloat32(0);
+    print(float);
   }
 
   void onConnectionChange(BluetoothConnectionState state) {
