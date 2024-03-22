@@ -1,4 +1,5 @@
 //import 'dart:js_interop';
+import 'dart:math';
 
 import 'package:bluetemp/MeasurementValue.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:bluetemp/AlarmSetting.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'BlueTempApp.dart';
-import 'dart:math';
 
 import 'Safe_GlobalState.dart';
 
@@ -35,14 +35,23 @@ Future<void> main() async {
 
 MeasurementValue minimum_sort(List<MeasurementValue> c) {
   if (c.isEmpty) return MeasurementValue(0, DateTime(2000, 0, 0, 0, 0, 0, 0));
-  c.sort((a, b) => a.temperature.compareTo(b.temperature));
-  return c.first;
+  /*c.sort((a, b) => a.temperature.compareTo(b.temperature));*/
+  return c.reduce((value, element) {
+    if (value.temperature < element.temperature)
+      return value;
+    else
+      return element;
+  });
 }
 
 MeasurementValue maximum_sort(List<MeasurementValue> l) {
   if (l.isEmpty) return MeasurementValue(0, DateTime(2000, 0, 0, 0, 0, 0, 0));
-  l.sort((b, a) => a.temperature.compareTo(b.temperature));
-  return l.first;
+  return l.reduce((value, element) {
+    if (value.temperature > element.temperature)
+      return value;
+    else
+      return element;
+  });
 }
 
 double durchschnitt(List<MeasurementValue> l) {
