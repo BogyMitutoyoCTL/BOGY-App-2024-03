@@ -1,7 +1,9 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,12 +17,21 @@ class current_data extends StatefulWidget {
 }
 
 class _current_dataState extends State<current_data> {
-  final CountdownController _controller = new CountdownController(autoStart: true);
+  final CountdownController _controller =
+      new CountdownController(autoStart: true);
+  //var DateOfLastMeasurement = DateTime.parse(globalState.DataList[globalState.DataList.length - 1].time);
+  DateTime ctime = globalState.DataList[globalState.DataList.length - 1].time;
+  String DateOfLastMeasurement =
+      "${DateFormat("dd.MM.yyyy").format(globalState.DataList[globalState.DataList.length - 1].time)}";
+  String TimeOfLastMeasurement =
+      "${DateFormat("hh.mm.ss").format(globalState.DataList[globalState.DataList.length - 1].time)}";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).current_data_title),
+        title: Text(AppLocalizations.of(context).appname +
+            " - " +
+            AppLocalizations.of(context).current_data_title),
       ),
       body: Center(
         child: FittedBox(
@@ -29,23 +40,26 @@ class _current_dataState extends State<current_data> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(AppLocalizations.of(context).current_data_last_measurement),
-              Text(globalState.DateOfLastMeasurement),
-              Text(globalState.TimeOfLastMeasurement),
+              Text(DateOfLastMeasurement.toString()),
+              Text(TimeOfLastMeasurement),
               Text(
-                "${double.parse((globalState.Temperaturumrechnen(globalState.Temperature)).toStringAsFixed(2))} ${globalState.Einheit}",
+                "${double.parse((globalState.Temperaturumrechnen(globalState.DataList[globalState.DataList.length - 1].value)).toStringAsFixed(2))} ${globalState.Einheit}",
                 style: TextStyle(fontSize: 60),
               ),
               Countdown(
                 controller: _controller,
                 seconds: 60,
-                build: (BuildContext context, double time) => Text(AppLocalizations.of(context).nextRefresh(time.toInt())),
+                build: (BuildContext context, double time) => Text(
+                    AppLocalizations.of(context).nextRefresh(time.toInt())),
                 interval: Duration(milliseconds: 1000),
                 onFinished: refresh,
               ),
               Center(
                   child: Padding(
                 padding: const EdgeInsets.all(80.0),
-                child: ElevatedButton(onPressed: refresh, child: Text(AppLocalizations.of(context).refresh)),
+                child: ElevatedButton(
+                    onPressed: refresh,
+                    child: Text(AppLocalizations.of(context).refresh)),
               ))
             ],
           ),
@@ -60,8 +74,8 @@ class _current_dataState extends State<current_data> {
       // TODO: replace fake data by real data
       DateTime now = new DateTime.now();
       globalState.DateOfLastMeasurement = "${now.day}.${now.month}.${now.year}";
-      globalState.TimeOfLastMeasurement = "${now.hour}:${now.minute}:${now.second}";
-      globalState.Temperature += rng.nextDouble() * 6 - 3;
+      globalState.TimeOfLastMeasurement =
+          "${now.hour}:${now.minute}:${now.second}";
       _controller.restart();
     });
   }

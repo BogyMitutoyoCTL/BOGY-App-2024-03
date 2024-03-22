@@ -22,6 +22,7 @@ Future<void> main() async {
   // TODO: maybe load the state from a file here
   await safe.save();
   globalState.appSettingsChanger.setLanguage(globalState.Sprache);
+
   runApp(const BlueTempApp());
 }
 

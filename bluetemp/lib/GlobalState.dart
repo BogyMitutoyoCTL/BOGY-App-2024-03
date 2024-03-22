@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bluetemp/AlarmSetting.dart';
 import 'package:bluetemp/AppSettingsChanger.dart';
 import 'package:bluetemp/SubscribedDevice.dart';
+import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as m;
 
