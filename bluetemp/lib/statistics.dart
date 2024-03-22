@@ -17,6 +17,7 @@ class _StatisticPageState extends State<StatisticPage> {
   var minimum = minimum_sort(globalState.DataList);
   var average = durchschnitt(globalState.DataList);
   var starttime = minimum_Time(globalState.DataList);
+  var endtime = maximum_Time(globalState.DataList);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +41,7 @@ class _StatisticPageState extends State<StatisticPage> {
               AppLocalizations.of(context).endtime,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("18.03.2024 14:25 Uhr",
+            Text("${DateFormat("dd.MM.yyyy  hh:mm").format(endtime)} Uhr",
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall), //TODO: Implement real End Time
