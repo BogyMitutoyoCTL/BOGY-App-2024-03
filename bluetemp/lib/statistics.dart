@@ -14,7 +14,7 @@ class StatisticPage extends StatefulWidget {
 class _StatisticPageState extends State<StatisticPage> {
   var maximum = maximum_sort(globalState.DataList);
   var minimum = minimum_sort(globalState.DataList);
-  var durchschnitt = maximum_sort(globalState.DataList);
+  var average = durchschnitt(globalState.DataList);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +71,7 @@ class _StatisticPageState extends State<StatisticPage> {
                           "${globalState.Temperaturumrechnen(maximum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
-                          "${globalState.Temperaturumrechnen(durchschnitt.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(average).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
                           "${globalState.Temperaturumrechnen(minimum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
@@ -137,7 +137,7 @@ class _StatisticPageState extends State<StatisticPage> {
     safe.save();
     maximum = maximum_sort(globalState.DataList);
     minimum = minimum_sort(globalState.DataList);
-    durchschnitt = maximum_sort(globalState.DataList);
+    average = durchschnitt(globalState.DataList);
     setState(() {});
     Navigator.pop(context);
   }
