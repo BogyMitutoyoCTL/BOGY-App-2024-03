@@ -56,6 +56,20 @@ class SubscribedDevice {
     });
   }
 
+  void printTempCharacteristic() {
+    services
+        .where((service) =>
+            service.serviceUuid.str == "06e2d59b-8087-4338-b347-1b6322b5d8be")
+        .forEach((service) async {
+      service.characteristics
+          .where((characteristic) =>
+              characteristic.uuid.str == "4df03e85-818b-4f41-b26c-71d68b24814f")
+          .forEach((characteristic) {
+        print(characteristic.toString() + "\n");
+      });
+    });
+  }
+
   void onConnectionChange(BluetoothConnectionState state) {
     callBack(state == BluetoothConnectionState.connected, this);
   }
