@@ -7,6 +7,7 @@ class SubscribedDevice {
   late StreamSubscription<BluetoothConnectionState> subscription;
   late void Function(bool, SubscribedDevice) callBack;
   List<BluetoothService> services = [];
+  int lampVal = 0;
 
   SubscribedDevice(BluetoothDevice bluetoothDevice, this.callBack) {
     device = bluetoothDevice;
@@ -15,23 +16,23 @@ class SubscribedDevice {
 
   void dispose() {
     subscription.cancel();
-    // TODO: Disconnect?
+    disconnect();
   }
 
-  connect() {
-    device.connect();
+  connect() async {
+    await device.connect();
     addServices();
   }
 
-  disconnect() {
-    device.disconnect();
+  disconnect() async {
+    await device.disconnect();
   }
 
   bool represents(BluetoothDevice btDevice) {
     return device == btDevice;
   }
 
-  Future<void> addServices() async {
+  addServices() async {
     if (device.isConnected) {
       services.addAll(await device.discoverServices());
     }
@@ -44,9 +45,13 @@ class SubscribedDevice {
   }
 
   void toggleLamp() {
-    services.where((service) => service.serviceUuid.str == "05811a0b-f418-488e-87b9-bf47ee64fda3").forEach((service) async {
+    lampVal = lampVal ^ 1;
+    services
+        .where((service) =>
+            service.serviceUuid.str == "05811a0b-f418-488e-87b9-bf47ee64fda3")
+        .forEach((service) async {
       for (BluetoothCharacteristic c in service.characteristics) {
-        await c.write([0x01]);
+        await c.write([lampVal]);
       }
     });
   }

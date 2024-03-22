@@ -25,7 +25,8 @@ class ConnectState extends State<Connect> {
   @override
   void initState() {
     super.initState();
-    adapterStateSubscription = FlutterBluePlus.adapterState.listen(onStageChange);
+    adapterStateSubscription =
+        FlutterBluePlus.adapterState.listen(onStageChange);
   }
 
   void onStageChange(BluetoothAdapterState state) {
@@ -43,7 +44,8 @@ class ConnectState extends State<Connect> {
     super.dispose();
   }
 
-  Row createListEntry(BuildContext context, List<SubscribedDevice> list, int index) {
+  Row createListEntry(
+      BuildContext context, List<SubscribedDevice> list, int index) {
     Icon iconShowConnected;
     if (list[index].device.isConnected) {
       iconShowConnected = Icon(Icons.bluetooth_connected_rounded);
@@ -52,7 +54,12 @@ class ConnectState extends State<Connect> {
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [ElevatedButton(onPressed: () => toggleConnection(index), child: Text(list[index].device.advName)), iconShowConnected],
+      children: [
+        ElevatedButton(
+            onPressed: () => toggleConnection(index),
+            child: Text(list[index].device.advName)),
+        iconShowConnected
+      ],
     );
   }
 
@@ -66,7 +73,10 @@ class ConnectState extends State<Connect> {
         });
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).connect_title)),
+      appBar: AppBar(
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).connect_title)),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -80,14 +90,25 @@ class ConnectState extends State<Connect> {
                     maintainSize: true,
                     maintainAnimation: true,
                     maintainState: true,
-                    child: IconButton(onPressed: refreshBluetoothDeviceList, icon: Icon(Icons.refresh_rounded)))
+                    child: IconButton(
+                        onPressed: refreshBluetoothDeviceList,
+                        icon: Icon(Icons.refresh_rounded)))
               ],
             ),
             Expanded(child: deviceListWidgets),
+            ElevatedButton(onPressed: toggleLamp, child: Text("TurnOnLamp"))
           ],
         ),
       ),
     );
+  }
+
+  void toggleLamp() {
+    for (SubscribedDevice entry in deviceList) {
+      if (entry.device.isConnected) {
+        entry.toggleLamp();
+      }
+    }
   }
 
   refreshBluetoothDeviceList() async {
@@ -96,7 +117,8 @@ class ConnectState extends State<Connect> {
       clearDeviceList(Clear.keepConnected);
     });
 
-    var subscription = FlutterBluePlus.onScanResults.listen(onScanResult, onError: (e) => debugPrint(e));
+    var subscription = FlutterBluePlus.onScanResults
+        .listen(onScanResult, onError: (e) => debugPrint(e));
 
     FlutterBluePlus.cancelWhenScanComplete(subscription);
 
