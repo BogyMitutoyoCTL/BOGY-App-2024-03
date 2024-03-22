@@ -203,7 +203,7 @@ const long interval{1000};
 void do_normal_loop_cycle()
 {
   // read the sensor values and round it to 1 decimal place
-  float temperature{round(temperature_sensors.getTempCByIndex(0) * 10.0 / 10.0)};
+  float temperature{round(temperature_sensors.getTempCByIndex(0) * 10.0) / 10.0};
   // request already for next reading
   temperature_sensors.requestTemperatures();
   values_read++;

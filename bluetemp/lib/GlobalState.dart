@@ -127,7 +127,7 @@ class GlobalState {
     if (Einheit == "°Ré") {
       return Temperature * 0.8;
     }
-    if (Einheit == "°K") {
+    if (Einheit == "K") {
       return Temperature + 273.15;
     }
     if (Einheit == "N") {
