@@ -1,8 +1,5 @@
 //import 'dart:js_interop';
 
-import 'package:bluetemp/GlobalState.dart';
-import 'package:bluetemp/MainMenu.dart';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:bluetemp/AlarmSetting.dart';
@@ -11,44 +8,29 @@ import 'package:path_provider/path_provider.dart';
 import 'BlueTempApp.dart';
 import 'dart:math';
 
-late GlobalState globalState;
-late SafeGlobalState safe;
+import 'Safe_GlobalState.dart';
+
 Future<void> main() async {
   safe = SafeGlobalState();
   await safe.initalize();
   //globalState = GlobalState();
   //await safe.save();
   globalState = safe.getFromStorage();
-  // TODO: maybe load the state from a file here
-  await safe.save();
+  double a_values = 0;
+  for (var pair in globalState.DataList) {
+    a_values = a_values + pair.temperature;
+  }
+  globalState.Durchschnitt = a_values / globalState.DataList.length;
+  print(globalState.DataList.length);
+  print(globalState.Durchschnitt);
+
+  var l = await safe.save();
   globalState.appSettingsChanger.setLanguage(globalState.Sprache);
 
   runApp(const BlueTempApp());
 }
 
-class SafeGlobalState {
-  final LocalStorage storage = LocalStorage('storage.json');
-  initalize() async {
-    await WidgetsFlutterBinding.ensureInitialized();
-    await storage.ready;
-  }
-
-  Future<void> save() async {
-    await setInStorage();
-  }
-
-  void load() {}
-
-  GlobalState getFromStorage() {
-    var globalStateString = storage.getItem("GlobalState");
-    if (globalStateString == null) {
-      return GlobalState();
-    }
-    print("GLOBALSTATE STORED ON LOCALSTORAGE");
-    return GlobalState.fromJson(globalStateString);
-  }
-
-  setInStorage() async {
-    await storage.setItem("GlobalState", globalState.toJson());
-  }
+int minimum_sort(List<int> l) {
+  l.sort((a, b) => a.compareTo(b));
+  return l.first;
 }

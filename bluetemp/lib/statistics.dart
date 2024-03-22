@@ -2,6 +2,8 @@ import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'Safe_GlobalState.dart';
+
 class StatisticPage extends StatefulWidget {
   const StatisticPage({super.key});
 

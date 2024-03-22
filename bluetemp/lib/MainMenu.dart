@@ -9,6 +9,8 @@ import 'package:bluetemp/About_Dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bluetemp/settings.dart';
 import 'dart:math';
+import 'MeasurementValue.dart';
+import 'Safe_GlobalState.dart';
 import 'main.dart';
 import 'GlobalState.dart';
 
@@ -118,7 +120,7 @@ class _MainMenuState extends State<MainMenu> {
   }
 
   Future<void> generate_fake_data() async {
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < 10; i++) {
       var random = Random();
       int randomInt = random.nextInt(50);
       double randTemp = random.nextDouble() * randomInt;

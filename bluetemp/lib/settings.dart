@@ -2,6 +2,7 @@ import 'package:bluetemp/GlobalState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'Safe_GlobalState.dart';
 import 'main.dart';
 
 class Setting_dialog extends StatefulWidget {
@@ -20,58 +21,74 @@ class _Setting_dialogState extends State<Setting_dialog> {
     var horizontalSpacing = Container(
       width: 14,
     );
-    var dropdownBackground = globalState.selectedTheme == ThemeMode.dark ? Colors.black : Color.fromARGB(255, 230, 242, 253);
+    var dropdownBackground = globalState.selectedTheme == ThemeMode.dark
+        ? Colors.black
+        : Color.fromARGB(255, 230, 242, 253);
     var dropdownForeground = TextStyle(
-      color: globalState.selectedTheme == ThemeMode.dark ? Colors.white : Color.fromARGB(255, 0, 0, 0),
+      color: globalState.selectedTheme == ThemeMode.dark
+          ? Colors.white
+          : Color.fromARGB(255, 0, 0, 0),
     );
     return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).appname + " - " + AppLocalizations.of(context).settings_title),
+          title: Text(AppLocalizations.of(context).appname +
+              " - " +
+              AppLocalizations.of(context).settings_title),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Row(
-              children: [
-                Icon(Icons.language),
-                horizontalSpacing,
-                Text(AppLocalizations.of(context).setting_language),
-              ],
-            ),
-            DropdownButton(
-              isExpanded: true,
-              value: globalState.Sprache,
-              items: buildLanguages(),
-              onChanged: onChangeLanguage,
-              dropdownColor: dropdownBackground,
-              style: dropdownForeground,
-            ),
-            verticalSpacing,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Icon(Icons.brush), horizontalSpacing, Text(AppLocalizations.of(context).setting_theme)],
-            ),
-            DropdownButton(
-                isExpanded: true,
-                items: buildThemes(),
-                onChanged: onChangeTheme,
-                dropdownColor: dropdownBackground,
-                style: dropdownForeground,
-                value: globalState.selectedTheme),
-            verticalSpacing,
-            Row(
-              children: [Icon(Icons.thermostat), horizontalSpacing, Text(AppLocalizations.of(context).setting_temperature_unit)],
-            ),
-            DropdownButton(
-              isExpanded: true,
-              value: globalState.Einheit,
-              items: buildUnits(),
-              onChanged: onChangeUnit,
-              dropdownColor: dropdownBackground,
-              style: dropdownForeground,
-            )
-          ])),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                Row(
+                  children: [
+                    Icon(Icons.language),
+                    horizontalSpacing,
+                    Text(AppLocalizations.of(context).setting_language),
+                  ],
+                ),
+                DropdownButton(
+                  isExpanded: true,
+                  value: globalState.Sprache,
+                  items: buildLanguages(),
+                  onChanged: onChangeLanguage,
+                  dropdownColor: dropdownBackground,
+                  style: dropdownForeground,
+                ),
+                verticalSpacing,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.brush),
+                    horizontalSpacing,
+                    Text(AppLocalizations.of(context).setting_theme)
+                  ],
+                ),
+                DropdownButton(
+                    isExpanded: true,
+                    items: buildThemes(),
+                    onChanged: onChangeTheme,
+                    dropdownColor: dropdownBackground,
+                    style: dropdownForeground,
+                    value: globalState.selectedTheme),
+                verticalSpacing,
+                Row(
+                  children: [
+                    Icon(Icons.thermostat),
+                    horizontalSpacing,
+                    Text(AppLocalizations.of(context).setting_temperature_unit)
+                  ],
+                ),
+                DropdownButton(
+                  isExpanded: true,
+                  value: globalState.Einheit,
+                  items: buildUnits(),
+                  onChanged: onChangeUnit,
+                  dropdownColor: dropdownBackground,
+                  style: dropdownForeground,
+                )
+              ])),
         ));
   }
 
@@ -97,7 +114,9 @@ class _Setting_dialogState extends State<Setting_dialog> {
 
   List<DropdownMenuItem<ThemeMode>> buildThemes() {
     List<DropdownMenuItem<ThemeMode>> menuItems = [
-      DropdownMenuItem(child: Text(AppLocalizations.of(context).setting_theme_dark), value: ThemeMode.dark),
+      DropdownMenuItem(
+          child: Text(AppLocalizations.of(context).setting_theme_dark),
+          value: ThemeMode.dark),
       DropdownMenuItem(
         child: Text(AppLocalizations.of(context).setting_theme_light),
         value: ThemeMode.light,

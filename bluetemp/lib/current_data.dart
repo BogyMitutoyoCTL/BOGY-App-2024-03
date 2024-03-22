@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'main.dart';
+import 'Safe_GlobalState.dart';
 
 class current_data extends StatefulWidget {
   const current_data({super.key});
@@ -31,7 +31,7 @@ class _current_dataState extends State<current_data> {
       DateOfLastMeasurement = temperatureText;
       TimeOfLastMeasurement = temperatureText;
     } else {
-      double lastTemp = globalState.Temperaturumrechnen(maybeValue.value);
+      double lastTemp = globalState.Temperaturumrechnen(maybeValue.temperature);
       temperatureText = lastTemp.toStringAsFixed(2);
       DateOfLastMeasurement =
           "${DateFormat("dd.MM.yyyy").format(maybeValue.time)}";
