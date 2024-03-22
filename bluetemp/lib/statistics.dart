@@ -12,7 +12,9 @@ class StatisticPage extends StatefulWidget {
 }
 
 class _StatisticPageState extends State<StatisticPage> {
-  var durchschnitt = globalState.Durchschnitt;
+  var maximum = maximum_sort(globalState.DataList);
+  var minimum = minimum_sort(globalState.DataList);
+  var durchschnitt = maximum_sort(globalState.DataList);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,13 +68,13 @@ class _StatisticPageState extends State<StatisticPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                          "${globalState.Temperaturumrechnen(globalState.Maximum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(maximum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
-                          "${globalState.Temperaturumrechnen(durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(durchschnitt.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text(
-                          "${globalState.Temperaturumrechnen(globalState.Minimum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
+                          "${globalState.Temperaturumrechnen(minimum.temperature).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium)
                     ],
                   )
@@ -133,6 +135,9 @@ class _StatisticPageState extends State<StatisticPage> {
   void delete_all_statistics() {
     globalState.DataList.removeRange(0, globalState.DataList.length);
     safe.save();
+    maximum = maximum_sort(globalState.DataList);
+    minimum = minimum_sort(globalState.DataList);
+    durchschnitt = maximum_sort(globalState.DataList);
     setState(() {});
     Navigator.pop(context);
   }
