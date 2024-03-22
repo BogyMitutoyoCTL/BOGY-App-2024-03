@@ -13,7 +13,8 @@ class _StatisticPageState extends State<StatisticPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).statistics_title)),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context).statistics_title)),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -24,12 +25,18 @@ class _StatisticPageState extends State<StatisticPage> {
               AppLocalizations.of(context).starttime,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("16.03.2024 14:00 Uhr", style: Theme.of(context).textTheme.headlineSmall), //TODO: Implement real Start Time
+            Text("16.03.2024 14:00 Uhr",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall), //TODO: Implement real Start Time
             Text(
               AppLocalizations.of(context).endtime,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("18.03.2024 14:25 Uhr", style: Theme.of(context).textTheme.headlineSmall), //TODO: Implement real End Time
+            Text("18.03.2024 14:25 Uhr",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall), //TODO: Implement real End Time
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
               child: Row(
@@ -55,11 +62,14 @@ class _StatisticPageState extends State<StatisticPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text("${globalState.Temperaturumrechnen(globalState.Maximum).toStringAsFixed(2)} ${globalState.Einheit}",
+                      Text(
+                          "${globalState.Temperaturumrechnen(globalState.Maximum).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
-                      Text("${globalState.Temperaturumrechnen(globalState.Durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
+                      Text(
+                          "${globalState.Temperaturumrechnen(globalState.Durchschnitt).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium),
-                      Text("${globalState.Temperaturumrechnen(globalState.Minimum).toStringAsFixed(2)} ${globalState.Einheit}",
+                      Text(
+                          "${globalState.Temperaturumrechnen(globalState.Minimum).toStringAsFixed(2)} ${globalState.Einheit}",
                           style: Theme.of(context).textTheme.headlineMedium)
                     ],
                   )
@@ -95,13 +105,16 @@ class _StatisticPageState extends State<StatisticPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
                           onPressed: delete_all_statistics,
                           child: Text(AppLocalizations.of(context).sure_button),
                         ),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                          child: Text(AppLocalizations.of(context).close_button),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green),
+                          child:
+                              Text(AppLocalizations.of(context).close_button),
                           onPressed: () => Navigator.pop(context),
                         ),
                       ],
@@ -115,7 +128,8 @@ class _StatisticPageState extends State<StatisticPage> {
   }
 
   void delete_all_statistics() {
-    //TODO: Delete all statistics
+    globalState.DataList.removeRange(0, globalState.DataList.length);
+    safe.save();
     Navigator.pop(context);
   }
 }
