@@ -53,3 +53,8 @@ double durchschnitt(List<MeasurementValue> l) {
   }
   return a_values / l.length;
 }
+
+DateTime minimum_Time(List<MeasurementValue> c) {
+  if (c.isEmpty) return DateTime(2000, 0, 0, 0, 0, 0, 0);
+  return c.first.time;
+}
