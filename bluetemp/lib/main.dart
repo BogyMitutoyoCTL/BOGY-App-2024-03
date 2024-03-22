@@ -18,16 +18,12 @@ Future<void> main() async {
   //globalState = GlobalState();
   //await safe.save();
   globalState = safe.getFromStorage();
-  double a_values = 0;
-  for (var pair in globalState.DataList) {
-    a_values = a_values + pair.temperature;
-  }
+
   globalState.Minimum = minimum_sort(globalState.DataList);
   print(globalState.Minimum);
   globalState.Maximum = maximum_sort(globalState.DataList);
   print(globalState.Maximum);
 
-  globalState.Durchschnitt = a_values / globalState.DataList.length;
   print(globalState.DataList.length);
   print(globalState.Durchschnitt);
 
@@ -47,4 +43,13 @@ MeasurementValue maximum_sort(List<MeasurementValue> l) {
   if (l.isEmpty) return MeasurementValue(0, DateTime(2000, 0, 0, 0, 0, 0, 0));
   l.sort((b, a) => a.temperature.compareTo(b.temperature));
   return l.first;
+}
+
+double durchschnitt(List<MeasurementValue> l) {
+  if (l.isEmpty) return 0;
+  double a_values = 0;
+  for (var pair in l) {
+    a_values = a_values + pair.temperature;
+  }
+  return a_values / l.length;
 }
