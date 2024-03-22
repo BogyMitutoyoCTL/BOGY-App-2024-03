@@ -1,6 +1,7 @@
 import 'dart:async';
-
+import 'dart:typed_data';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'dart:convert';
 
 class SubscribedDevice {
   late BluetoothDevice device;
@@ -54,6 +55,31 @@ class SubscribedDevice {
         await c.write([lampVal]);
       }
     });
+  }
+
+  void listenToTempCharacteristic() {
+    services
+        .where((service) => service.serviceUuid.str == "181a")
+        .forEach((service) async {
+      service.characteristics
+          .where((characteristic) => characteristic.uuid.str == "2a6e")
+          .forEach((characteristic) async {
+        print(characteristic.toString());
+        final subscription = characteristic.onValueReceived.listen((value) {
+          convertRecievedValToFloat(value);
+        });
+
+        device.cancelWhenDisconnected(subscription);
+
+        await characteristic.setNotifyValue(true);
+      });
+    });
+  }
+
+  convertRecievedValToFloat(List<int> recievedList) {
+    Int8List bytes = Int8List.fromList(recievedList.reversed.toList());
+    double float = ByteData.view(bytes.buffer).getFloat32(0);
+    print(float);
   }
 
   void onConnectionChange(BluetoothConnectionState state) {
