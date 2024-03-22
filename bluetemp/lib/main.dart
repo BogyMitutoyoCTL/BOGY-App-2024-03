@@ -9,6 +9,7 @@ import 'package:bluetemp/AlarmSetting.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'BlueTempApp.dart';
+import 'dart:math';
 
 late GlobalState globalState;
 late SafeGlobalState safe;
@@ -18,11 +19,7 @@ Future<void> main() async {
   //globalState = GlobalState();
   //await safe.save();
   globalState = safe.getFromStorage();
-  globalState.DataList.add(MeasurementValue(2.5, DateTime.now()));
-  await safe.save();
-  print(globalState.DataList);
   // TODO: maybe load the state from a file here
-
   await safe.save();
   globalState.appSettingsChanger.setLanguage(globalState.Sprache);
   runApp(const BlueTempApp());
