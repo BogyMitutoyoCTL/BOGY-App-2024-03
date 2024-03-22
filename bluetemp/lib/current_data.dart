@@ -8,7 +8,6 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'Safe_GlobalState.dart';
-import 'main.dart';
 
 class current_data extends StatefulWidget {
   const current_data({super.key});
@@ -20,14 +19,25 @@ class current_data extends StatefulWidget {
 class _current_dataState extends State<current_data> {
   final CountdownController _controller =
       new CountdownController(autoStart: true);
-  //var DateOfLastMeasurement = DateTime.parse(globalState.DataList[globalState.DataList.length - 1].time);
-  DateTime ctime = globalState.DataList[globalState.DataList.length - 1].time;
-  String DateOfLastMeasurement =
-      "${DateFormat("dd.MM.yyyy").format(globalState.DataList[globalState.DataList.length - 1].time)}";
-  String TimeOfLastMeasurement =
-      "${DateFormat("hh.mm.ss").format(globalState.DataList[globalState.DataList.length - 1].time)}";
+
   @override
   Widget build(BuildContext context) {
+    var maybeValue = globalState.DataList.lastOrNull;
+    String temperatureText = "";
+    String DateOfLastMeasurement = "";
+    String TimeOfLastMeasurement = "";
+    if (maybeValue == null) {
+      temperatureText = "There is currently no data";
+      DateOfLastMeasurement = temperatureText;
+      TimeOfLastMeasurement = temperatureText;
+    } else {
+      double lastTemp = globalState.Temperaturumrechnen(maybeValue.value);
+      temperatureText = lastTemp.toStringAsFixed(2);
+      DateOfLastMeasurement =
+          "${DateFormat("dd.MM.yyyy").format(maybeValue.time)}";
+      TimeOfLastMeasurement =
+          "${DateFormat("hh.mm.ss").format(maybeValue.time)}";
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).appname +
@@ -40,11 +50,20 @@ class _current_dataState extends State<current_data> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(AppLocalizations.of(context).current_data_last_measurement),
-              Text(DateOfLastMeasurement.toString()),
-              Text(TimeOfLastMeasurement),
               Text(
-                "${double.parse((globalState.Temperaturumrechnen(globalState.DataList[globalState.DataList.length - 1].temperature)).toStringAsFixed(2))} ${globalState.Einheit}",
+                AppLocalizations.of(context).current_data_last_measurement,
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                DateOfLastMeasurement,
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                TimeOfLastMeasurement,
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                "${temperatureText} ${globalState.Einheit}",
                 style: TextStyle(fontSize: 60),
               ),
               Countdown(

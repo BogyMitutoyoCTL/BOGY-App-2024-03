@@ -130,7 +130,8 @@ class _StatisticPageState extends State<StatisticPage> {
   }
 
   void delete_all_statistics() {
-    //TODO: Delete all statistics
+    globalState.DataList.removeRange(0, globalState.DataList.length);
+    safe.save();
     Navigator.pop(context);
   }
 }
