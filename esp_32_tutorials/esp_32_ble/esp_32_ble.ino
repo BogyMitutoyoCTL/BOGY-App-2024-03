@@ -244,7 +244,10 @@ void send_data()
 {
   for (index_t i = 0; i < temperatures.size(); i++)
   {
-    internLed();
+    if (i % 100 == 0)
+    { // toggle led after 100 items
+      internLed();
+    }
     auto t{temperatures[i]};
     uint8_t data[sizeof(TemperatureData)];
     memcpy(data, &t.secondstime, sizeof(t.secondstime));
@@ -255,7 +258,7 @@ void send_data()
     Serial.printf("   (UINT32 - Little Endian) Data Seconds: 0x%02X%02X%02X%02X Value: %d\n", data[0], data[1], data[2], data[3], t.secondstime);
     Serial.printf("   (Float - Little Endian) Data Temperature: 0x%02X%02X%02X%02X Value: %f\n", data[4], data[5], data[6], data[7], t.temperature);
     Serial.flush();
-    delayMicroseconds(10000);
+    delayMicroseconds(10);
   }
 
   get_data.value = false;
