@@ -1,6 +1,7 @@
 import 'package:bluetemp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import 'Safe_GlobalState.dart';
 
@@ -15,6 +16,7 @@ class _StatisticPageState extends State<StatisticPage> {
   var maximum = maximum_sort(globalState.DataList);
   var minimum = minimum_sort(globalState.DataList);
   var average = durchschnitt(globalState.DataList);
+  var starttime = minimum_Time(globalState.DataList);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,7 @@ class _StatisticPageState extends State<StatisticPage> {
               AppLocalizations.of(context).starttime,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("16.03.2024 14:00 Uhr",
+            Text("${DateFormat("dd.MM.yyyy  hh:mm").format(starttime)} Uhr",
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall), //TODO: Implement real Start Time
