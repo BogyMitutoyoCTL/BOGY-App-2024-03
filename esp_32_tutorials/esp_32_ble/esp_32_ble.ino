@@ -111,7 +111,7 @@ void setup()
     // #### End Switch Service (for LED)
 
     // #### Get Data Service
-    BLEService *pServiceGetData{pServer->createService(SERVICE_GET_DATA_UUID)};
+    BLEService *pServiceGetData{pServer->createService(SERVICE_DATA_UUID)};
     pCharacteristicGetData = pServiceGetData->createCharacteristic(
         CHARACTERISTIC_GET_DATA_UUID,
         BLECharacteristic::PROPERTY_READ |
